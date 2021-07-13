@@ -1,0 +1,74 @@
+<div @fadeInAnimation>
+	<!--section start-->
+	<section class="login-page section-b-space">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<h3>Login</h3>
+					<div class="theme-card">
+						<!-- <form class="theme-form">
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                      </div>
+                      <div class="form-group">
+                          <label for="review">Password</label>
+                          <input type="password" class="form-control" id="review"
+                                 placeholder="Enter your password" required="">
+                      </div>
+                      <a href="#" class="btn btn-solid">Login</a>
+                      <a href="forget_pwd.php" class="btn btn-solid">Forgot Password ?</a>
+                  </form> -->
+
+						<div class="jumbotron bg-transparent text-center">
+							<div *ngIf="!user" class="card text-center">
+								<h6 class="card-header">
+									<b>
+										Sign with Google
+									</b>
+								</h6>
+								<div class="card-block">
+									<h4 class="card-title">Not signed in</h4>
+									<p class="card-text">Sign in with</p>
+								</div>
+								<div class="card-block">
+									<button class="btn btn-social-icon btn-google" (click)="signInWithGoogle()">
+										<!-- <span class="fa fa-google"></span> -->
+										<img src="../../../../assets/images/google-login/btn_google_signin_dark_focus_web.png">
+									</button>
+								</div>
+							</div>
+							<div *ngIf="user" class="card text-center">
+								<h6 class="card-header">
+									<b>
+										Sign with Google
+									</b>
+								</h6>
+								<div class="card-block"></div>
+								<!-- <img class="card-img-top img-responsive photo" src="{{ user.photoUrl }}"> -->
+								<div class="card-block">
+									<h4 class="card-title">{{ user.name }}</h4>
+									<p class="card-text">{{ user.email }}</p>
+								</div>
+								<div class="card-block">
+									<button class="btn btn-danger" (click)="signOut()">Sign out</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 right-login">
+					<h3>New Customer</h3>
+					<div class="theme-card authentication-right">
+						<h6 class="title-font">Create A Account</h6>
+						<p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be
+							able to order from our shop. To start shopping click register.</p><a href="#"
+							class="btn btn-solid">Create
+							an Account</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--Section ends-->
+</div>

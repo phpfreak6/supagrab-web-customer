@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Heading Pro Trial';
+        src: url('../../assets/fonts/custom/HeadingProTrial-Bold.woff2') format('woff2'),
+         url('../../assets/fonts/custom/HeadingProTrial-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Sacramento';
+    src: url('../../assets/fonts/custom/Sacramento-Regular.woff2') format('woff2'),
+         url('../../assets/fonts/custom/Sacramento-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;    
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../assets/fonts/Poppins-Bold.woff2') format('woff2'),
+         url('../../assets/fonts/Poppins-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}

@@ -1,0 +1,174 @@
+<!-- header start -->
+<header class="supa_header">
+    <div class="mobile-fix-option"></div>
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="header-contact">
+                        <ul>
+                            <li>Welcome to Supagrab</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: +0 000 0 00000</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-end">
+                    <ul class="header-dropdown">
+                        <li class="mobile-wishlist"><a href="javascript:void(0);" [routerLink]="['/view/wish-list']"><i class="fa fa-heart"
+                                    aria-hidden="true"></i></a>
+                        </li>
+                        <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
+                            My Account
+                            <ul class="onhover-show-div">
+                                <li><a href="javacript:void(0);" [routerLink]="['/login']">Login</a></li>
+                                <!-- <li><a href="javacript:void(0);">Register</a></li> -->
+                                <li><a href="javacript:void(0);" [routerLink]="['/profile']">Profile</a></li>
+                                <li><a href="javacript:void(0);" [routerLink]="['/dashboard']">Dashboard</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="main-menu">
+                    <div class="menu-left">
+                        <div class="brand-logo">
+                            <a href="javascript:void(0);" [routerLink]="['/']">
+                                <img src="/assets/images/custom/supagrab-logo.png" class="img-fluid  " alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-right pull-right">
+                        <div>
+                            <nav id="main-nav">
+                                <div (click)="toggleHeader();" class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+
+                                <ul id="main-menu" class="sm pixelstrap sm-horizontal" [class]="classToggleHeader">
+                                    
+                                    <li>
+                                        <div (click)="toggleBackBtn();" class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2"
+                                                aria-hidden="true"></i></div>
+                                    </li>
+                                    <li>
+                                        <a href="#" [class]="classToggleHeaderHighlighted" (click)="addClassHighlighted()"><span class="sub-arrow"></span> COSMETICS</a>
+                                        <ul [class]="showHideMobileSubMenu" class="menu-list">
+                                            <li><a href='#'>three grid</a></li>
+                                            <li><a href='#'>six grid</a></li>
+                                            <li><a href='#'>list view</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><span class="sub-arrow"></span> BRACELETS</a>
+                                        <ul>
+                                            <li><a href='#'>top filter<span class="new-tag">new</span></a></li>
+                                            <li><a href='#'>modern<span class="new-tag">new</span></a></li>
+                                            <li><a href='#'>left sidebar</a></li>
+                                            <li><a href='#'>right sidebar</a></li>
+                                            <li><a href='#'>no sidebar</a></li>
+                                            <li><a href='#'>sidebar popup</a>
+                                            </li>
+                                            <li><a href='#'>metro</a></li>
+                                            <li><a href='#'>full width</a></li>
+                                            <li><a href='#'>infinite
+                                                    scroll</a></li>
+                                            <li><a href='#'>three grid</a></li>
+                                            <li><a href='#'>six grid</a></li>
+                                            <li><a href='#'>list view</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><span class="sub-arrow"></span> EARRINGS</a>
+                                        <ul>
+                                            <li><a href='#'>360 view <span class="new-tag">new</span></a></li>
+                                            <li><a href='#'>video
+                                                    thumbnail<span class="new-tag">new</span></a></li>
+                                            <li><a href='#'>four image</a></li>
+                                            <li><a href='#'>sticky</a></li>
+                                            <li><a href='#'>accordian</a></li>
+                                            <li><a href='#'>bundle</a></li>
+                                            <li><a href='#'>image swatch </a></li>
+                                            <li><a href='#'>vertical tab</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><span class="sub-arrow"></span> KIDS</a>
+                                        <ul>
+                                            <li><a href='#'>left sidebar</a></li>
+                                            <li><a href='#'>right sidebar</a></li>
+                                            <li><a href='#'>no sidebar</a></li>
+                                            <li><a href='#'>blog details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">OFFERS</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div>
+                            <div class="icon-nav">
+                                <ul>
+                                    <li class="onhover-div mobile-search">
+                                        <div><a href="javascript:void(0);" [routerLink]="['/category/earings']"><img src="/assets/images/icon/search.png" class="img-fluid  " alt=""> <i class="ti-search"></i></a></div>
+                                    </li>
+                                    <li class="onhover-div mobile-cart">
+                                        <div><img src="/assets/images/icon/cart.png" class="img-fluid  " alt=""> <i
+                                                class="ti-shopping-cart"></i></div>
+                                        <span class="cart_qty_cls">2</span>
+                                        <ul class="show-div shopping-cart">
+                                            <li>
+                                                <div class="media">
+                                                    <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']"><img alt="" class="me-3"
+                                                            src="/assets/images/custom/20210414_174357-min-1.jpg"></a>
+                                                    <div class="media-body">
+                                                        <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']">
+                                                            <h4>item name</h4>
+                                                        </a>
+                                                        <h4><span>1 x $ 299.00</span></h4>
+                                                    </div>
+                                                </div>
+                                                <div class="close-circle"><a href="#"><i class="fa fa-times"
+                                                            aria-hidden="true"></i></a></div>
+                                            </li>
+                                            <li>
+                                                <div class="media">
+                                                    <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']"><img alt="" class="me-3"
+                                                            src="/assets/images/custom/1-min-12.jpg"></a>
+                                                    <div class="media-body">
+                                                        <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']">
+                                                            <h4>item name</h4>
+                                                        </a>
+                                                        <h4><span>1 x $ 299.00</span></h4>
+                                                    </div>
+                                                </div>
+                                                <div class="close-circle">
+                                                    <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="total">
+                                                    <h5>subtotal : <span>$299.00</span></h5>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="buttons">
+                                                    <a href="javascript:void(0);" [routerLink]="['/view/cart']" class="view-cart">view cart</a>
+                                                    <a href="javascript:void(0);" [routerLink]="['/checkout']" class="checkout">checkout</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- header end -->

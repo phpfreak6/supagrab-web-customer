@@ -1,0 +1,17 @@
+@media only screen and (max-width: 767px){    
+    .footer-contant.footer-submenu {
+        display: block !important;
+    }
+    .desk_heading,
+    .footer-contant {
+        display: none;
+    }
+    .footer-title.footer-mobile-title {
+        min-height: 40px;
+        padding-top: 15px;
+    }
+    .footer-title .according-menu:before {        
+        top: 15px;
+    }
+
+}

@@ -1,0 +1,990 @@
+/*========== Custom Css Started Here ============*/
+select, input, button, select:focus, input:focus, button:focus, select:hover, input:hover, button:hover, select:active, input:active, button:active {
+    outline: 0 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none;
+}
+body > img.img-fluid.bg-img {
+    opacity: 0 !important;
+}
+
+
+/********** HOME PAGE TOP BANNER STARTED HERE *************/
+section.new_homebanner {
+    padding: 0;
+}
+section.new_homebanner .container {
+    background-image: url('assets/images/custom/Website-Banner-1Bg.jpg');
+    background-position: center;
+    padding: 51px 0 !important;
+    height: 600px !important;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.home-bnn_inner h2 {
+    width: 490px;
+    animation: typing 2s steps(22);
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    border-right: 20px solid transparent;
+    font-family: Sacramento;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    font-size: 92px;
+    position: relative;
+    z-index: 1;
+    margin: -30px 0 0px !important;
+    font-weight: 500;
+    word-spacing: 0px !important;
+    background-image: url('assets/images/custom/gold-textured-background-scaled.jpg');
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-size: contain;
+    line-height: normal !important;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 3px 0px #0000001f, 0px 2px 0px #53535300, 0px 2px 0px #dcb44f26, 0px 2px 0px #53535300;
+    -webkit-font-smoothing: antialiased;
+}
+.banner-content_home {
+    max-width: 485px;
+    margin: 0 auto;
+}
+.bgimg_button:hover, .bgimg_button:focus, .bgimg_button:active {
+    box-shadow: 0 0 10px #e5b974, 0 0 2px #e5b974, 0 0 2px #e5b974 !important;
+    text-shadow: 1px 1px 3px #ffffff4f !important;
+	border-color: transparent !important;
+}
+.bgimg_button {
+    transition: .5s linear;
+    color: #212529 !important;
+    background-image: url('assets/images/custom/gold-textured-background-scaled.jpg') !important;
+    border-radius: 0 !important;
+    background-size: cover;
+    padding: 5px;
+    font-family: 'Poppins';
+    height: 70px;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px #0000004f;
+    width: 200px;
+    font-size: 28px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.home-bnn_inner p {
+    font-family: Poppins;
+    font-weight: bold;
+    text-align: center;
+    font-size: 92px;
+    letter-spacing: 5px;
+    line-height: 90px;
+    margin-bottom: 40px;
+    margin-top: -30px;
+    color: #ffffff;
+    background: linear-gradient(to right, #ffffff 0, #8f8f8f 10%, #ffffff 20%);
+    background-position: 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s infinite linear;
+    animation-fill-mode: forwards;
+    -webkit-text-size-adjust: none;
+}
+.home-bnn_inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+section.new_homebanner div {
+    height: 100%;
+}
+.home-bnn_inner > div {
+    height: auto !important;
+    width: 100%;
+    text-align: center;
+}
+.banner_para_home {
+    max-width: 820px;
+}
+
+@-webkit-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 750px;
+  }
+  100% {
+    background-position: 750px;
+  }
+}
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 750px;
+  }
+  100% {
+    background-position: 750px;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+    border-right: 2px solid #ddac5f;
+  }
+  80%{
+    border-right: 2px solid #ddac5f; 
+  }
+  100% {
+     border-right: 2px solid #ddac5f00;
+  }
+}
+
+/********** HOME PAGE TOP BANNER END HERE *************/
+
+/*----- HOME CENTER BANNER STARTED HERE ------*/
+section.obsession_banner {
+    margin: 0 auto;
+	padding-top: 0 !important;
+    background: none !important;
+    max-width: 1440px;
+}
+section.obsession_banner .container {
+    position: relative;
+    background-image: url('assets/images/custom/Banner-min-1.jpg');
+    background-position: center left;
+    padding-top: 51px !important;
+    height: 700px !important;
+    padding-bottom: 51px !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+section.obsession_banner div {
+    height: 100% !important;
+}
+.obsession_main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+section.obsession_banner div.obsession_inner {
+    height: auto !important;
+    text-align: center;
+    max-width: 600px;
+}
+section.obsession_banner div.obsession_inner div {
+    height: auto !important;
+}
+section.obsession_banner .container:before {
+    display: none;
+    left: 0;
+    content: "";
+    background: #000000b5;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+}
+.obsession_heading h3 {
+    background: #fff !important;
+    color: #000 !important;
+    letter-spacing: 8px !important;
+    word-spacing: 2px !important;
+    font-size: 18px !important;
+    margin: 0px auto 30px !important;
+    height: 36px !important;
+    padding-left: 10px !important;
+    padding-right: 4px !important;
+    padding-top: 8px !important;
+    width: auto !important;
+    max-width: 350px !important;
+}
+.obsession_inner {
+    text-align: center;
+}
+.banner-content h2 {
+    color: #e6c194 !important;
+    text-transform: uppercase !important;
+    font-weight: bolder !important;
+    letter-spacing: 10px !important;
+    word-spacing: 2px !important;
+    line-height: 50px !important;
+    font-size: 41px !important;
+    margin-bottom: 30px !important;
+}
+.banner_para p, .banner_para span {
+    font-size: 20px !important;
+    max-width: 450px !important;
+    line-height: 25px;
+    margin: 0px auto 30px !important;
+    color: #ffffff !important;
+    letter-spacing: 2px !important;
+}
+.fullblack_button:hover, .fullblack_button:focus, .fullblack_button:active {
+    transition: all 0.5s cubic-bezier(0.41, 0.52, 0.83, 0.9) 0s !important;
+    background-color: transparent !important;
+    color: #e6c194 !important;
+}
+.fullblack_button {
+    border: 1px solid #ffffff !important;
+    padding: 0px 20px !important;
+    min-height: 60px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    font-weight: 400 !important;
+    min-width: 250px !important;
+    border-radius: 0px !important;
+    background-color: #ffffff !important;
+    transition: all 0.5s cubic-bezier(0.41, 0.52, 0.83, 0.9) 0s !important;
+    font-size: 18px !important;
+    color: #000000 !important;
+}
+/*----- HOME CENTER BANNER END HERE ------*/
+
+/*----- CATEGORY BANNER STARTED HERE -----*/
+.bnn_content {
+    position: absolute;
+    top: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cat_banner .container-fluid {
+    padding: 0 !important;   
+    overflow-x: hidden;
+}
+.cat_banner img.img-fluid.cat_bann_img {
+    width: 100%;
+    object-fit: cover;
+    min-height: 150px;
+}
+.bnn_content a {
+    color: var(--theme-deafult);
+}
+/*----- CATEGORY BANNER END HERE -----*/
+
+/*----- DASHBOARD CSS STARTED HERE ------*/
+.revi-pro-img img {
+    width: 100px;
+    margin-right: 10px;
+}
+.address-book_sec input,
+.address-book_sec select.form-control {
+    max-height: 38px !important;
+	margin-bottom: 0px !important;
+    padding: 5px 15px !important;
+}
+.address-section img {
+    width: 60px;
+    border-radius: 50%;
+	border: 2px solid #dddddd;
+    margin-right: 20px;
+}
+ul.address-section li {
+    width: 100%;
+}
+ul.address-section li .tag {
+    background: #999999;
+    padding: 2px 5px;
+    color: #fff;
+}
+.add_info p strong {
+    color: #222222;
+    margin-right: 5px;
+}
+.review_section form div > div.col-md-12,
+.address-book_sec .form-row.row> div {
+    margin-bottom: 10px;
+}
+span.error_span {    
+    color: red;
+    font-size: 12px;
+}
+.add_info p {
+    margin-bottom: 4px;
+    color: #999999;
+}
+ul.address-section li:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+ul.address-section li {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.dashboard .add_link a {
+    padding: 7px 15px;
+    font-weight: 400;
+    height: 35px !important;
+    font-size: 14px;
+    text-decoration: none !important;
+    font-family: poppins;
+    float: right;
+}
+.edit_trash_link i:hover, .edit_trash_link i:active, .edit_trash_link i:focus {
+    color: var(--theme-deafult);;
+}
+.edit_trash_link i {
+    font-size: 22px;
+    padding-left: 15px;
+	color: #999999;
+    transition: 0.2s ease-in-out;
+}
+.dashboard .product-order-detail {
+    border: 1px solid #f8f8f8!important;
+    align-items: flex-start;
+    padding: 10px 0;
+    background: #f8f8f8;
+    box-shadow: 0 0 2px 2px #f1f1f1;
+    margin: 20px 0;
+}
+.review_prod_list .order_detail {
+    justify-content: space-between;
+}
+.dashboard .product-order-detail a{
+    text-decoration: none !important;
+}
+.dashboard a {
+    text-decoration: underline !important;
+}
+.dashboard-left .block-content ul li:last-child{
+    border-bottom: 0px !important;
+}
+.dashboard-left .block-content ul li,
+.dashboard-left .block-content ul li a,
+.dashboard-left .block-content ul li:before{
+    height: auto !important;
+}
+.dashboard-left .block-content ul li {
+    border-bottom: 1px solid #dddddd;
+    padding: 15px 0 15px 0;    
+}
+.dashboard-left .block-content ul li.active:before, 
+.dashboard-left .block-content ul li.active a {
+    color: #fff !important;
+}
+.dashboard-left .block-content ul li.active {
+    border-bottom-color:  var(--theme-deafult) !important;
+    padding-left: 20px;
+    background:  var(--theme-deafult);
+    color: #fff;
+}
+.dashboard .box a {    
+    font-weight: 600;
+}
+.dashboard-left .block-content { 
+    padding: 0px;
+}
+.wish_btn {
+    justify-content: flex-end;
+}
+.product-order-detail:last-child {
+    margin-bottom: 0;
+}
+.review_prod_list .product-order-detail .order_detail .revi-pro-img{
+    padding-left: 0 !important;
+}
+.review_prod_list .product-order-detail .order_detail > div {
+    padding-left: 10px;
+}
+/*----- DASHBOARD CSS END HERE ------*/
+
+/*----- PRODUCT GRIDS CSS STARTED HERE --------*/
+.single_prod_pg .stock_sec {
+    margin-top: 20px;
+}
+.single_prod_pg .qty-box {
+    margin-top: 4px !important;
+}
+.single_prod_pg select.size_dropdown {
+    margin-bottom: 15px;
+    margin-top: 4px;
+    min-width: 40%;
+    width: 250px;
+    outline: 0 !important;
+    min-height: 38px;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+}
+.review-page .media img {
+    width: 60px;
+    border-radius: 50%;
+    border: 2px solid #dddddd;
+    margin-right: 20px;
+}
+.review-page .comment-section li:first-child {
+    margin-top: 0;
+    padding-top: 25px;
+    border-width: 1px !important;
+}
+.review-page .comment-section li:last-child {
+    padding-bottom: 25px;
+}
+.review-page .comment-section>li {
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin: 20px 0 0px 0;
+    border: 1px solid #f8f8f8!important;
+    box-shadow: 0 0 2px 2px #f1f1f1;
+}
+.product-box:hover .img-wrapper .back a:before {
+    content: "";
+    position: absolute;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+    width: 100%;
+    background: var(--theme-deafult);
+    opacity: 0.5;
+    left: 0;
+}
+.product-box:hover .img-wrapper .back a:after {
+    content: "View Product";
+    position: absolute;
+    word-spacing: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 2px;
+    padding: 8px 10px;
+    letter-spacing: 0.5px;
+    z-index: 9;
+    top: 45%;
+    text-align: center;
+    width: 120px;
+    background: var(--theme-deafult);
+    margin: auto;
+    color: #fff;
+    left: 0;
+    right: 0;
+}
+.stock.out-of-stock{
+    background: #a3a3a3;
+}
+.stock.in-stock {
+    background: #00a460;
+}
+.stock {
+    color: #ffffff !important;
+    font-size: 13px !important;
+    text-transform: uppercase;
+    background: #00a460;
+    min-height: 30px;
+    justify-content: center;
+    max-height: 30px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    letter-spacing: 0.5px;
+    margin: 5px 0 0 0 !important;
+    text-align: center;
+    border-radius: 25px;
+}
+.cart-info button i, .cart-info a i {    
+    background: #2d2a25;
+    margin: 0px 7px 7px;
+    border-radius: 50%;
+    padding: 8px !important;
+    font-size: 15px !important;
+    color: #fff !important;
+}
+.cart-info button:hover i, .cart-info a:hover  i{
+    background: var(--theme-deafult);
+}
+.cart-info button i,
+.product-box:hover .cart-info button:hover i,
+.cart-info button:hover i,
+.cart-info button i:hover {
+    -webkit-animation: ring 4s 0.7s ease-in-out infinite;
+    animation: ring 4s 0.2s ease-in-out infinite !important;    
+}
+/*-------- PRODUCT GRIDS CSS END HERE ----------*/
+
+/*========== CHECKOUT PAGE CSS STATED HERE ===========*/
+.apply_code_sec h2 {
+    font-size: 18px;
+    margin: 0;
+    padding: 15px 25px;
+    color: #000;
+    display: flex;
+    font-weight: 600;
+    align-items: center;
+    justify-content: flex-start;
+    letter-spacing: 2px;
+}
+.apply_code_sec {
+    border: 1px solid #e2e5e9;
+    margin-bottom: 25px;
+}
+.apply_code_sec .coupon_toogle {
+    padding: 25px !important;
+    border-radius: 0;
+    border-top: 1px solid #e2e5e9 !important;
+}
+.apply_code_sec h2 img{
+    margin-right: 15px;
+}
+.checkout-form {
+    background: #fff;
+    border: 0;
+    box-shadow: 0px 0px 15px 2px #dbdbdb8f;
+    display: inline-block;
+    padding: 45px 32px;
+}
+.apply_code_sec .coupon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.apply_code_sec .coupon input  {
+    width: 100% !important;
+    height: 40px !important;
+    top: 0px;
+    font-size: 16px;
+    margin: 0 !important;
+    min-height: 50px;
+    min-width: 145px !important;
+    border: 1px solid #ccc;
+    position: relative;
+    padding: .75em !important;
+}
+.apply_code_sec .coupon button{
+    margin: 0 !important;
+    min-height: 50px;
+    min-width: 145px !important;
+    width: auto !important;
+}
+.checkout-details {
+    background: transparent !important;
+    padding: 0 !important;
+}
+.checkout-details .order-box {
+    margin-bottom: 0 !important;
+}
+.checkout-details .order-box .title-box {
+    padding-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.checkout-details .payment-box {
+    background-color: #f8f8f8;
+    padding: 25px;
+    margin: 20px 0 0px 0;
+    border: 1px solid #f8f8f8!important;
+    box-shadow: 0 0 2px 2px #f1f1f1;
+}
+.checkout-details .payment-options {
+    margin: 0 !important;
+}
+/*============ CHECKOUT PAGE CSS END HERE ============*/
+
+/* =========== FAQ CSS STARTED HERE ==============*/
+.faq-page .card-header h5 button {
+    width: 100% !important;
+    background: transparent !important;
+    text-decoration: none !important;
+}
+
+.faq-page .card-header {
+    background: transparent !important;
+}
+
+.faq-page .card-body, .faq-page .card-body p {
+    padding-top: 0 !important;
+    font-size: 16px !important;
+}
+/* ============== FAQ CSS END HERE ================*/
+
+/*======== CHANGE COLOR THEME CSS STARTED HERE (GOBAL CSS) ==========*/
+a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
+    border-color: var(--theme-deafult);
+    background-image: linear-gradient(30deg, #060606 50%, transparent 50%);
+}
+.btn-solid:focus {
+    color: #fff;
+}
+.btn-solid:hover:focus {
+    color: var(--theme-deafult);
+}
+.tap-top,
+.cart_qty_cls{
+	background: var(--theme-deafult);
+}
+.theme-color-1 {
+    --theme-deafult: #060606;
+}
+.dashboard-left .block-content ul li.active ,
+.dashboard .box a , a,a:hover,
+.footer-social i:hover, .social-white i:hover,
+.top-header .header-contact li i {
+    color: var(--theme-deafult);
+}
+.theme-tab .tab-title li.current a, .theme-tab .tab-title2 li.current a {
+    border-bottom: 1px solid #060606;
+    padding-bottom: 5px;
+}
+.imm-grayfrm_box {
+    background-color: #f8f8f8;
+    padding: 25px;
+    margin: 20px 0 0px 0;
+    border: 1px solid #f8f8f8!important;
+    box-shadow: 0 0 2px 2px #f1f1f1;
+}
+/*========== CHANGE COLOR THEME CSS END HERE (GOBAL CSS) ===========*/
+
+/*========== COMMON CARD DESIGN STARTED HERE ==============*/
+.card_box_main {
+    border: 1px solid #ddd;
+    padding: 30px;
+}
+.card_box_main .product-card {
+    border: 1px solid #f8f8f8!important;
+    align-items: flex-start;
+    padding: 10px 0;
+    background: #f8f8f8;
+    box-shadow: 0 0 2px 2px #f1f1f1;
+    margin: 0px 0 20px 0;
+}
+.card_box_main .product-card h5 {
+    text-transform: capitalize;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+.card_box_main .order_detail {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.card_box_main .product-card:last-child {
+    margin-bottom: 0;
+}
+.cart-total-price {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+.cart-total-price h4 {
+    font-size: 16px;
+    padding-right: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: #000 !important;
+}
+.cart-total-price p {
+    font-size: 24px;
+    margin-bottom: 0;
+    padding-right: 0;
+    text-transform: capitalize;
+    font-weight: 700;
+    color: #000 !important;
+}
+.cart-section .cart-buttons > div:last-child, .wishlist-section .cart-buttons > div:last-child {
+    padding-right: calc(var(--bs-gutter-x) / 2);
+}
+/*========== COMMON CARD DESIGN END HERE ==============*/
+
+/**================================ RESPONSIVE CSS STARTED HERE ============================**/
+@media screen and (max-width: 1199px) {
+    .mob_hide {
+        display: none;
+    }
+    section.obsession_banner .container:before {
+        display: block !important;
+    }
+    body .bgimg_button {
+        height: 60px;
+        width: 180px;
+        letter-spacing: 3px;      
+        font-size: 28px;
+    }
+}
+@media screen and (min-width: 1025px) and (max-width: 1199px) {
+    body .home-bnn_inner h2 {
+        font-size: 75px;
+        border-right: 0;
+        margin: 0 auto !important;
+        width: 395px;
+    }
+    body .home-bnn_inner p {
+        font-size: 70px;
+        letter-spacing: 5px;
+        line-height: 70px;
+        margin-bottom: 30px;
+        margin-top: -25px;
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .tracking-page .order-map {
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+    .tracking-page .wrapper .arrow-steps .step {        
+        min-width: 140px;
+    }
+    section.obsession_banner .container {
+        height: 550px !important;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {      
+    body section.new_homebanner .container {
+        height: 450px !important;
+    }
+    body .home-bnn_inner h2 {
+        border-right: 0;
+        font-size: 55px;
+        width: 310px;
+        margin: 0px auto 0 !important;
+    }
+    body .home-bnn_inner p {
+        font-size: 55px;
+        letter-spacing: 5px;
+        line-height: 60px;
+        margin-bottom: 20px;
+        margin-top: -20px;
+    }
+}
+@media screen and (max-width: 991px){
+    body section.obsession_banner div.container {
+        height: 500px !important;
+    }    
+	.single_prod_pg .collection-wrapper .order-up {
+		order: unset !important;
+		-webkit-box-ordinal-group: unset;
+		-ms-flex-order: unset;
+	}
+    .dashboard-left {
+        width: 100% !important;
+        max-width: 220px !important;
+        padding: 0 10px;
+    }
+	.top-banner-wrapper ol {
+		padding: 0;
+	}
+	.top-banner-wrapper h1 {
+		font-size: 34px;
+	}    
+    .single_prod_pg .stock_sec p {
+        margin: 0 auto !important;
+    }
+    .single_prod_pg .product-title.size-text {
+        text-align: center !important;
+    }
+    .single_prod_pg select.size_dropdown {
+        margin: 0 auto 10px;
+    }
+}
+@media screen and (max-width: 767px) and (min-width: 576px){
+    .tracking-page .order-table.table-responsive-sm {
+        overflow-x: auto;
+    }
+    body .home-bnn_inner h2 {
+        font-size: 60px;
+        border-right: 0;
+        margin: 0px auto 0 !important;
+        width: 340px;
+    }
+    body .home-bnn_inner p {
+        font-size: 50px;
+        letter-spacing: 2px;
+        line-height: 60px;
+        margin-bottom: 20px;
+        margin-top: -20px;
+    }
+    body section.new_homebanner .container {
+        height: 400px !important;
+    }
+}
+@media screen and (max-width: 767px){    
+    .review_prod_list .product-order-detail {
+        width: 100% !important;
+    }
+    .review_prod_list .product-order-detail .order_detail  h5 {
+        margin: 10px 0 0px 0 !important;
+    }
+    .review_prod_list .product-order-detail .order_detail > div {
+        padding-left: 0px;
+    }
+    .review_prod_list .product-order-detail .order_detail {
+        flex-direction: column !important;
+    }
+    .obsession_heading h3 {
+        padding: 9px 15px!important;
+        font-size: 16px!important;
+        max-width: 280px!important;
+        letter-spacing: 5px !important;
+    }    
+    .banner-content h2 {
+        letter-spacing: 4px!important;
+        word-spacing: 0px!important;
+        line-height: 40px!important;
+        font-size: 35px!important;
+    }    
+	.top-banner-wrapper ol {
+		padding: 0;
+	}
+	.top-banner-wrapper h1,.top-banner-wrapper h2  {
+		font-size: 28px;
+	}
+	.footer-logo img {
+		width: 150px;
+	}	
+	.brand-logo img {
+		max-width: 220px;
+	}    
+    .tracking-page .arrow-steps.clearfix .step {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    section.pwd-page.section-b-space {
+        padding: 70px 0;
+    }
+    .card_box_main {     
+        padding: 10px;      
+    } 
+    .wishlist-dash-pg .product-order-detail{
+        margin-left: 4px;
+    }
+    .wishlist-dash-pg .product-order-detail,
+    .my_orders_pg .product-order-detail,
+    .product-card {
+        width: 700px;
+        overflow: hidden;
+    }   
+    .wishlist-dash-pg .product-order,
+    .my_orders_pg .product-order,
+    .card_box_main {  
+        width: 100%;
+        padding-bottom: 10px;
+        overflow-x: auto;
+    }    
+}
+@media screen and (max-width: 577px){
+    .main-menu .menu-right .icon-nav .mobile-setting .show-div.shopping-cart, .main-menu .menu-right .icon-nav .mobile-cart .show-div.shopping-cart, .main-menu .menu-right .icon-nav .mobile-search .show-div.shopping-cart {        
+        left: -145px !important;
+    }
+	.brand-logo img {
+		max-width: 180px !important;
+	}
+	.brand-logo {
+		position: relative;
+		padding: 0 0 !important;
+	}   
+    .top-header .header-dropdown .mobile-wishlist {
+        right: unset !important;
+        left: 32%;
+    }
+    .top-header .header-dropdown .mobile-account, .top-header .header-dropdown .mobile-wishlist {
+        right: 3%;     
+    }  
+    .main-menu .menu-right .icon-nav .mobile-cart {
+        right: 32%;
+    }
+    .main-menu .menu-right .icon-nav .mobile-search {
+        left: 3%;
+        right: unset !important;     
+    }
+}
+@media screen and (max-width: 575px){
+    .banner_para p {
+        font-size: 18px !important;
+    }
+    .banner_para_home {
+        max-width: 280px;
+    }
+    body section.new_homebanner .container {
+        background-image: url('assets/images/custom/Banner-BG.jpg');
+        height: 380px !important;
+        padding: 50px var(--bs-gutter-x, 0.75rem) !important;
+    } 
+    .dashboard-right .dashboard {
+        padding: 10px;
+    } 
+    .pwd-page h2 {
+        font-size: 20px;
+    }
+    .wishlist-section table.table.cart-table {
+        min-width: 400px;
+    }
+    .wishlist-section .table-responsive-xs {
+        overflow-x: auto;
+    }
+    body .bgimg_button {
+        height: 50px;
+        letter-spacing: 2px;
+        width: 150px;
+        font-size: 24px;
+    }
+    .addbk-main-pg h2 {
+        display: flex;
+        margin-bottom: 5px !important;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .addbk-main-pg span.add_link {
+        margin-top: 5px;
+    }
+    .addbk-main-pg .add_link a {  
+        padding: 2px 5px;   
+        height: 27px !important;
+        font-size: 14px;
+    }
+    section.addbk-main-pg .address-book_sec .media {
+        flex-direction: column;
+        position: relative;
+    }
+    section.addbk-main-pg .address-book_sec .edit_trash_link {
+        position: absolute;
+        right: 0;
+        top: 15px;
+    }
+    section.addbk-main-pg .address-book_sec .media-body {
+        margin-top: 10px;
+    }
+	body .home-bnn_inner h2 {
+        font-size: 38px;
+        margin: 0px auto 0 !important;
+        width: 220px;
+        border-right: 0;
+    }
+    .top-banner-wrapper h1 ,.top-banner-wrapper h2 {
+		font-size: 22px;
+	}
+	body .home-bnn_inner p {
+		font-size: 32px;
+		letter-spacing: 2px;
+		line-height: 40px;
+		margin-bottom: 20px;
+		margin-top: -15px;
+	}
+    .tracking-page .tracking-detail ul li .left {
+        width: 140px;
+    }
+}
+
+/**================================ RESPONSIVE CSS END HERE ============================**/
