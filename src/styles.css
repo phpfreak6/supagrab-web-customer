@@ -650,8 +650,9 @@ ul.address-section li {
     display: flex;
     justify-content: center;
 }
-.login_sec .theme-card.ng-tns-c68-0 {
+.login_sec .theme-card{
     box-shadow: none;
+    width: 515px;
 }
 .login_sec > img {
     width: 50%;
@@ -826,6 +827,9 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
     }
 }
 @media screen and (max-width: 991px){
+    .login_sec .theme-card {     
+        width: 100%;
+    }
     .login_sec {
         flex-direction: column;
     }       
@@ -977,6 +981,9 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
     }
 }
 @media screen and (max-width: 575px){
+    .login_google_sec h2 {
+        font-size: 16px;
+    }    
     .banner_para p {
         font-size: 18px !important;
     }
