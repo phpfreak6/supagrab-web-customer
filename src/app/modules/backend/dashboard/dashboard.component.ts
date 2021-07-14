@@ -10,10 +10,10 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 	]
 })
 export class DashboardComponent implements OnInit {
-
 	constructor() { }
 
 	ngOnInit(): void {
 	}
+
 
 }

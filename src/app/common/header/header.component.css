@@ -9,6 +9,21 @@
         display: block !important;
         width: auto;
     }    
+    nav#main-nav ul#main-menu li > a {
+        width: max-content;
+        position: unset;
+    }
+
+    nav#main-nav ul#main-menu li .sub-arrow {
+        position: absolute;
+        right: 0;
+        z-index: 999;
+        top: 20px;
+    }
+
+    nav#main-nav ul#main-menu li {
+        position: relative;
+    }
 }
 
 @media only screen and (min-width: 1200px){

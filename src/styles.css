@@ -614,6 +614,61 @@ ul.address-section li {
 }
 /* ============== FAQ CSS END HERE ================*/
 
+/* ============== LOGIN PAGE CSS STARTED HERE ===============*/
+.login-page h6 {
+    text-transform: uppercase;
+    color: #333333;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.login_google_sec h2 {
+    font-size: 18px;
+    text-transform: capitalize !important;
+    padding: 10px 30px;
+    background: #060606;
+    color: #fff;
+    margin: 0 auto 20px;
+    word-spacing: 2px;
+    width: fit-content;
+    letter-spacing: 1px;
+}
+.login_terms {
+    margin-top: 20px;
+}
+.login_terms p {
+    font-size: 14px;
+    word-spacing: 2px;
+}
+.google_content_btn span i {
+    padding-left: 10px;
+    font-size: 20px;
+}
+.google_content_btn span {
+    font-size: 18px;
+}
+.login_sec {
+    display: flex;
+    justify-content: center;
+}
+.login_sec .theme-card{
+    box-shadow: none;
+    width: 515px;
+}
+.login_sec > img {
+    width: 50%;
+}
+.login_google_sec {
+    height: 100%;
+}
+.login_google_btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+/* ============== LOGIN PAGE CSS END HERE ===============*/
+
 /*======== CHANGE COLOR THEME CSS STARTED HERE (GOBAL CSS) ==========*/
 a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
     border-color: var(--theme-deafult);
@@ -706,6 +761,9 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
 .cart-section .cart-buttons > div:last-child, .wishlist-section .cart-buttons > div:last-child {
     padding-right: calc(var(--bs-gutter-x) / 2);
 }
+.wish_btn button {
+    margin-left: 10px;
+}
 /*========== COMMON CARD DESIGN END HERE ==============*/
 
 /**================================ RESPONSIVE CSS STARTED HERE ============================**/
@@ -769,6 +827,15 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
     }
 }
 @media screen and (max-width: 991px){
+    .login_sec .theme-card {     
+        width: 100%;
+    }
+    .login_sec {
+        flex-direction: column;
+    }       
+    .login_sec > img {
+        width: 100%;
+    } 
     body section.obsession_banner div.container {
         height: 500px !important;
     }    
@@ -777,9 +844,13 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
 		-webkit-box-ordinal-group: unset;
 		-ms-flex-order: unset;
 	}
+    .dashboard-left.show-customer-sidebar {
+        left: 0;
+    }
     .dashboard-left {
         width: 100% !important;
         max-width: 220px !important;
+        left: -350px;
         padding: 0 10px;
     }
 	.top-banner-wrapper ol {
@@ -819,7 +890,7 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
         height: 400px !important;
     }
 }
-@media screen and (max-width: 767px){    
+@media screen and (max-width: 767px){       
     .review_prod_list .product-order-detail {
         width: 100% !important;
     }
@@ -910,6 +981,9 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
     }
 }
 @media screen and (max-width: 575px){
+    .login_google_sec h2 {
+        font-size: 16px;
+    }    
     .banner_para p {
         font-size: 18px !important;
     }
