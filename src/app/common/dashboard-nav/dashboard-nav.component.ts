@@ -24,12 +24,13 @@ export class DashboardNavComponent implements OnInit {
 		this.myOrdersNav = '';
 		this.myWishlist = '';
 
-		this.router.url == '/dasboard' ? this.dashboardNav = 'active' : '';
-		this.router.url == '/address-book-list' ? this.addressBookListNav = 'active' : '';
-		this.router.url == '/my-orders' ? this.myOrdersNav = 'active' : '';
-		this.router.url == '/my-wishlist' ? this.myWishlist = 'active' : '';
 		
 		this.router.events.subscribe((ev) => {
+
+			this.router.url == '/dashboard' ? this.dashboardNav = 'active' : '';
+			this.router.url == '/address-book-list' ? this.addressBookListNav = 'active' : '';
+			this.router.url == '/my-orders' ? this.myOrdersNav = 'active' : '';
+			this.router.url == '/my-wishlist' ? this.myWishlist = 'active' : '';
 
 			if (ev instanceof NavigationEnd) { /* Your code goes here on every router change */
 			  window.scrollTo(0, 0);
