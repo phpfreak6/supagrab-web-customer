@@ -840,9 +840,13 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
 		-webkit-box-ordinal-group: unset;
 		-ms-flex-order: unset;
 	}
+    .dashboard-left.show-customer-sidebar {
+        left: 0;
+    }
     .dashboard-left {
         width: 100% !important;
         max-width: 220px !important;
+        left: -350px;
         padding: 0 10px;
     }
 	.top-banner-wrapper ol {
