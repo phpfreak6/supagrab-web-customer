@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -18,6 +19,9 @@ import { FrontendComponent } from "./layout/frontend/frontend.component";
 
 import { SocialLoginModule,SocialAuthServiceConfig, FacebookLoginProvider } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
+
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
 
 const CLIENT_ID = '437214085485-j1ho294f1m9sedlq624omgu8nlt9rjte.apps.googleusercontent.com';
 
@@ -46,7 +50,9 @@ const googleLoginOptions = {
     RouterModule,
     BrowserAnimationsModule,
     FormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    NgxSpinnerModule,
+    HttpClientModule
   ],
   providers: [
     {
@@ -69,6 +75,7 @@ const googleLoginOptions = {
       } as SocialAuthServiceConfig
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
