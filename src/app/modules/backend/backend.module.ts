@@ -8,6 +8,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MyWishlistComponent } from './my-wishlist/my-wishlist.component';
 import { DashboardNavComponent } from "../../common/dashboard-nav/dashboard-nav.component";
 import { ProfileComponent } from './profile/profile.component';
+import { AddressBookListComponent } from './address-book-list/address-book-list.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ProfileComponent } from './profile/profile.component';
     MyOrdersComponent,
     MyWishlistComponent,
     DashboardNavComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddressBookListComponent
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MyWishlistComponent } from './my-wishlist/my-wishlist.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AddressBookListComponent } from "./address-book-list/address-book-list.component";
 
 const routes: Routes = [
     {
@@ -19,6 +20,10 @@ const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent
+    },
+    {
+        path: 'address-book-list',
+        component: AddressBookListComponent
     },
     {
         path: 'address-book',

@@ -1,0 +1,70 @@
+<!-- section start -->
+<section class="section-b-space addbk-main-pg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <app-dashboard-nav></app-dashboard-nav>
+            </div>
+            <div class="col-lg-9" @fadeInAnimation>
+                <div class="dashboard-right">
+                    <div class="dashboard">
+                        <div class="page-title">
+                            <h2>Address Book 
+                                <span class="add_link">
+                                    <a href="javascript:void(0);" [routerLink]="['/address-book']" class="btn btn-solid">New Address</a>
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="welcome-msg">
+                            <p>Hello, MARK JECNO !</p>                           
+                        </div>
+                        <div class="address-book_sec mt-5">
+                            <ul class="address-section">
+                                <li>
+                                    <div class="media"><img src="../assets/images/avtar.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <h6><strong>Mark Jecno</strong>
+                                                <span> - 9876543210</span>
+                                            </h6>
+                                            <div class="add_info">
+                                                <p><span>Flat Number</span>, <span>Address number</span>, <span>160033</span>, <span>India</span>, <span>Chandigarh</span>, <span>Chandigarh</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="edit_trash_link">
+                                            <a href="javascript:void(0);" [routerLink]="['/address-book']">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#!">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>                                    
+                                </li>    
+                                <li>
+                                    <div class="media"><img src="../assets/images/avtar.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <h6><strong>Mark Jecno</strong> - <span class="tag">HOME</span>
+                                            </h6>
+                                            <div class="add_info">
+                                                <p><span>Flat Number</span>, <span>Address number</span>, <span>160033</span>, <span>India</span>, <span>Chandigarh</span>, <span>Chandigarh</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="edit_trash_link">
+                                            <a href="javascript:void(0);" [routerLink]="['/address-book']">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#!">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->
