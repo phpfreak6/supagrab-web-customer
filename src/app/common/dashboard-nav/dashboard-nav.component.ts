@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
 	selector: 'app-dashboard-nav',
@@ -7,9 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardNavComponent implements OnInit {
 
-	public openSideBarClass:string = '';
+	public openSideBarClass = '';
+	public dashboardNav: string = '';
+	public addressBookListNav: string = '';
+	public myOrdersNav: string = '';
+	public myWishlist: string = '';
 
-	constructor() { }
+	constructor(
+		private route: ActivatedRoute,
+    	private router: Router,
+	) {
+
+		this.dashboardNav = '';
+		this.addressBookListNav = '';
+		this.myOrdersNav = '';
+		this.myWishlist = '';
+
+		this.router.url == '/dasboard' ? this.dashboardNav = 'active' : '';
+		this.router.url == '/address-book-list' ? this.addressBookListNav = 'active' : '';
+		this.router.url == '/my-orders' ? this.myOrdersNav = 'active' : '';
+		this.router.url == '/my-wishlist' ? this.myWishlist = 'active' : '';
+		
+		this.router.events.subscribe((ev) => {
+
+			if (ev instanceof NavigationEnd) { /* Your code goes here on every router change */
+			  window.scrollTo(0, 0);
+			}
+		});
+	}
 
 	ngOnInit(): void {
 	}
