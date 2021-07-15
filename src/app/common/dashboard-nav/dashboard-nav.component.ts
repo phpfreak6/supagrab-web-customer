@@ -9,7 +9,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 export class DashboardNavComponent implements OnInit {
 
 	public openSideBarClass = '';
-	public dashboardNav: string = '';
+	public dashboardNav: string = 'active';
 	public addressBookListNav: string = '';
 	public myOrdersNav: string = '';
 	public myWishlist: string = '';
@@ -27,7 +27,7 @@ export class DashboardNavComponent implements OnInit {
 		
 		this.router.events.subscribe((ev) => {
 
-			this.router.url == '/dashboard' ? this.dashboardNav = 'active' : '';
+			this.router.url == '/dashboard' || this.router.url == '/profile' ? this.dashboardNav = 'active' : '';
 			this.router.url == '/address-book-list' ? this.addressBookListNav = 'active' : '';
 			this.router.url == '/my-orders' ? this.myOrdersNav = 'active' : '';
 			this.router.url == '/my-wishlist' ? this.myWishlist = 'active' : '';

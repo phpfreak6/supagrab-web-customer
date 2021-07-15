@@ -38,6 +38,17 @@ export class LoginComponent implements OnInit {
 		this.authService.authState.subscribe(user => {
 			this.user = user;
 			console.log(user);
+
+			let session = localStorage.getItem('currentUser');
+			if( session ) {
+				let stringyfyUser = JSON.stringify(this.user);
+				let in_data = {
+					social_flag: 'gmail',
+					token: user.id,
+					social_user_detail: stringyfyUser
+				};
+				this.saveGoogleuserData( in_data );
+			}
 		});
 	}
 
