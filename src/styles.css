@@ -10,6 +10,11 @@ body > img.img-fluid.bg-img {
 
 
 /********** HOME PAGE TOP BANNER STARTED HERE *************/
+.service-block svg {
+    margin-right: 15px;
+    width: 45px;
+    height: 45px;
+}
 section.new_homebanner {
     padding: 0;
 }
