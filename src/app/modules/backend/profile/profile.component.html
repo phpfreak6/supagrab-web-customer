@@ -8,7 +8,10 @@
             <div class="col-sm-9" @fadeInAnimation>
                 <div _ngcontent-hvt-c57="" class="dashboard-right ng-tns-c57-2">
                     <div _ngcontent-hvt-c57="" class="dashboard ng-tns-c57-2">
-                        <h3>PERSONAL DETAIL</h3>
+                        <h3>
+                            PERSONAL DETAIL
+                            <span class="add_link"><a href="javascript:void(0);" [routerLink]="['/dashboard']" class="btn btn-solid">Back</a></span>
+                        </h3>
                         <!-- <form class="theme-form imm-grayfrm_box"> -->
                         <form class="theme-form imm-grayfrm_box" [formGroup]="userForm" (ngSubmit)="onSubmit()">
                             <div class="form-row row">

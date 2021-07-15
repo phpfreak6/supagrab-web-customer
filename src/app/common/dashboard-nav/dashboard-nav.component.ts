@@ -24,10 +24,16 @@ export class DashboardNavComponent implements OnInit {
 		this.myOrdersNav = '';
 		this.myWishlist = '';
 
-		
+		let session = localStorage.getItem('currentUser');
+		let loggedinUserId = '';
+		if( session ) {
+			let parsedUser = JSON.parse(session);
+			loggedinUserId = parsedUser.user._id;
+		}
+
 		this.router.events.subscribe((ev) => {
 
-			this.router.url == '/dashboard' || this.router.url == '/profile' ? this.dashboardNav = 'active' : '';
+			this.router.url == '/dashboard' || this.router.url == `/profile/${loggedinUserId}` ? this.dashboardNav = 'active' : '';
 			this.router.url == '/address-book-list' ? this.addressBookListNav = 'active' : '';
 			this.router.url == '/my-orders' ? this.myOrdersNav = 'active' : '';
 			this.router.url == '/my-wishlist' ? this.myWishlist = 'active' : '';
