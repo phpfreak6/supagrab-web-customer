@@ -11,10 +11,17 @@ export class HeaderComponent implements OnInit {
 	classToggleHeaderHighlighted: any = '';
 	showHideMobileSubMenu: any = '';
 	isAddClassHighlighted = false;
+	loggedinUserId: string;
 
 	constructor() { }
 
 	ngOnInit(): void {
+		let session = localStorage.getItem('currentUser');
+		if( session ) {
+			let parsedUser = JSON.parse(session);
+			this.loggedinUserId = parsedUser.user._id;
+			console.log('this.loggedinUserId', this.loggedinUserId);
+		}
 	}
 
 	toggleHeader() {

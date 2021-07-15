@@ -46,4 +46,17 @@ export class UserService {
 				catchError((e: Response) => throwError(e))
 			);
 	}
+
+	updateUser(in_data, userId): Observable<any> {
+		return this.httpClient
+			.patch(
+				`${this.apiEndPoint}/users/${userId}`,
+				in_data,
+				this.constantService.getHttpJsonOptions()
+			)
+			.pipe(
+				map((e: Response) => e),
+				catchError((e: Response) => throwError(e))
+		);
+	}
 }

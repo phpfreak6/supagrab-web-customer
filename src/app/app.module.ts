@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { RouterModule} from '@angular/router';
 
@@ -50,6 +50,7 @@ const googleLoginOptions = {
     RouterModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     SocialLoginModule,
     NgxSpinnerModule,
     HttpClientModule

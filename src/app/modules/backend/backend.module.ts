@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 import { BackendRoutingModule } from './backend-routing.module';
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AddressBookComponent } from './address-book/address-book.component';
@@ -23,7 +25,9 @@ import { AddressBookListComponent } from './address-book-list/address-book-list.
   ],
   imports: [
     CommonModule,
-    BackendRoutingModule
+    BackendRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class BackendModule { }
