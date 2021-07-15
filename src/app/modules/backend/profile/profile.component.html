@@ -9,35 +9,49 @@
                 <div _ngcontent-hvt-c57="" class="dashboard-right ng-tns-c57-2">
                     <div _ngcontent-hvt-c57="" class="dashboard ng-tns-c57-2">
                         <h3>PERSONAL DETAIL</h3>
-                        <form class="theme-form imm-grayfrm_box">
+                        <!-- <form class="theme-form imm-grayfrm_box"> -->
+                        <form class="theme-form imm-grayfrm_box" [formGroup]="userForm" (ngSubmit)="onSubmit()">
                             <div class="form-row row">
                                 <div class="col-md-6">
                                     <label for="name">First Name</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Your name"
-                                        required="">
+                                    <input type="text" class="form-control" id="name" placeholder="Enter first name" required="" formControlName="first_name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+                                    <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                                        <div *ngIf="f.first_name.errors.required">first name is required</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email">Last Name</label>
-                                    <input type="text" class="form-control" id="last-name" placeholder="Email" required="">
+                                    <input type="text" class="form-control" id="last-name" formControlName="last_name" placeholder="Enter last name" required="">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="review">Phone number</label>
-                                    <input type="text" class="form-control" id="review" placeholder="Enter your number"
-                                        required="">
+                                    <input type="text" class="form-control" id="review" placeholder="Enter your phone number" required="" formControlName="contact_number" [ngClass]="{ 'is-invalid': submitted && f.contact_number.errors }">
+                                    <div *ngIf="submitted && f.contact_number.errors" class="invalid-feedback">
+                                        <div *ngIf="f.contact_number.errors.required">phone number is required</div>
+                                        <div *ngIf="f.contact_number.errors.minlength">phone number must be 10 digits in length</div>
+                                        <div *ngIf="f.contact_number.errors.pattern">only numeric values allowed.</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                                    <input type="text" class="form-control" id="email" placeholder="Enter your email" required="" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+										<div *ngIf="f.email.errors.required">Email is required</div>
+										<div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+									</div>
                                 </div>
-                                <div class="col-md-12">
+                                <!-- <div class="col-md-12">
                                     <label for="review">Write Your Message</label>
                                     <textarea class="form-control mb-0" placeholder="Write Your Message"
                                             id="exampleFormControlTextarea1" rows="6"></textarea>
+                                </div> -->
+                                <div class="col-md-12">
+                                    <button class="btn btn-sm btn-solid" type="submit">Save setting</button>
                                 </div>
                             </div>
                         </form>
 
-                        <h3 class="pt-3">SHIPPING ADDRESS</h3>
+                        <!-- <h3 class="pt-3">SHIPPING ADDRESS</h3>
                         <form class="theme-form imm-grayfrm_box">
                             <div class="form-row row">
                                 <div class="col-md-6">
@@ -77,7 +91,8 @@
                                     <button class="btn btn-sm btn-solid" type="submit">Save setting</button>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
+                        
                     </div>
                 </div>
             </div>
