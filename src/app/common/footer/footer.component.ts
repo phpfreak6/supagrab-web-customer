@@ -34,4 +34,8 @@ export class FooterComponent implements OnInit {
 			this.classFooterSubMenu = '';
 		}
 	}
+
+	goToTop() {
+		window.scrollTo(0, 0);
+	}
 }
