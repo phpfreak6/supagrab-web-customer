@@ -15,7 +15,7 @@ export class DashboardNavComponent implements OnInit {
 	public myWishlist: string = '';
 
 	constructor(
-		private route: ActivatedRoute,
+		private activatedRoute: ActivatedRoute,
     	private router: Router,
 	) {
 
