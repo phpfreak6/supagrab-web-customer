@@ -73,6 +73,20 @@ export class UserService {
 		);
 	}
 
+	updateUserAddress(in_data, userId, addrId): Observable<any> {
+		
+		return this.httpClient
+			.patch(
+				`${this.apiEndPoint}/users/${userId}/addresses/${addrId}`,
+				in_data,
+				this.constantService.getHttpJsonOptions()
+			)
+			.pipe(
+				map((e: Response) => e),
+				catchError((e: Response) => throwError(e))
+		);
+	}
+
 	getAllAddressesByUserId( userId ): Observable<any> {
 
 		let url = `${this.apiEndPoint}/users/${userId}`;
