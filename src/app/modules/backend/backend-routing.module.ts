@@ -26,11 +26,11 @@ const routes: Routes = [
         component: AddressBookListComponent
     },
     {
-        path: 'address-book/user/:userId/addr/:addrId',
+        path: 'address-book/user/:userId/addr',
         component: AddressBookComponent
     },
     {
-        path: 'address-book/user/:userId/addr',
+        path: 'address-book/user/:userId/addr/:addrId',
         component: AddressBookComponent
     },
     {

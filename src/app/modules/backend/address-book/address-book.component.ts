@@ -68,9 +68,9 @@ export class AddressBookComponent implements OnInit {
 
 		this.activatedRoute.params.subscribe( params => {      
 		this.userId = params.userId;
-		this.addrId = params.addrId;
+		this.addrId = params?.addrId ? params?.addrId : '';
 		this.isUserIdProvidedFlag = this.userId ? true : false;
-		this.isAddrIdProvidedFlag = this.userId ? true : false;		
+		this.isAddrIdProvidedFlag = this.addrId ? true : false;		
 	
 			if( this.isAddrIdProvidedFlag ) {
 				this.getAddrById( this.userId, this.addrId );
