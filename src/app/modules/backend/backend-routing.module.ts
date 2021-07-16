@@ -26,7 +26,7 @@ const routes: Routes = [
         component: AddressBookListComponent
     },
     {
-        path: 'address-book',
+        path: 'address-book/:userId',
         component: AddressBookComponent
     },
     {

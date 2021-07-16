@@ -59,4 +59,17 @@ export class UserService {
 				catchError((e: Response) => throwError(e))
 		);
 	}
+
+	insertUserAddress( in_data, userId ): Observable<any> {
+
+		return this.httpClient.post( 
+			`${this.apiEndPoint}/users/${userId}/addresses`, 
+			in_data,
+			this.constantService.getHttpJsonOptions()
+			)
+			.pipe(
+			  map((e:Response)=> e),
+			  catchError((e:Response)=> throwError(e))
+		);
+	}
 }

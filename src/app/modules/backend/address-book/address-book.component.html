@@ -16,46 +16,114 @@
                         </div>
                         <div class="address-book_sec">                            
                             <div class="shippingaddress-changes imm-grayfrm_box">
-                                <form class="theme-form">
+                                <form class="theme-form" [formGroup]="userAddrForm" (ngSubmit)="onSubmit()">
                                     <div class="form-row row">
                                         <div class="col-md-12">
                                             <h4>New Address</h4>
                                         </div>
+
                                         <div class="col-md-6">
-                                            <label for="name">Flat/Plot</label>
-                                            <input type="text" class="form-control" id="home-ploat" placeholder="Company Name" required="">
-                                            <span class="error_span" aria-hidden="true">The field is required.</span>
+                                            <label for="name">Title*</label>
+                                            <input type="text" class="form-control" id="home-ploat" placeholder="Address Title" required="" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                                <span *ngIf="f.title.errors.required" class="error_span" aria-hidden="true">The address title field is required.</span>
+                                            </div>
                                         </div>
+
                                         <div class="col-md-6">
-                                            <label for="name">Address *</label>
-                                            <input type="text" class="form-control" id="address-two" placeholder="Address" required="">
-                                            <span class="error_span" aria-hidden="true">The field is required.</span>
+                                            <label for="name">Customer Full Name*</label>
+                                            <input type="text" class="form-control" id="home-ploat" placeholder="Customer full name" required="" formControlName="full_name" [ngClass]="{ 'is-invalid': submitted && f.full_name.errors }">
+                                            <div *ngIf="submitted && f.full_name.errors" class="invalid-feedback">
+                                                <span *ngIf="f.full_name.errors.required" class="error_span" aria-hidden="true">The customer full name field is required.</span>
+                                            </div>
                                         </div>
+
                                         <div class="col-md-6">
-                                            <label for="email">Zip Code *</label>
-                                            <input type="text" class="form-control" id="zip-code" placeholder="Zip Code" required="">
-                                            <span class="error_span" aria-hidden="true">The field is required.</span>
+                                            <label for="name">Phone Number *</label>
+                                            <input type="number" class="form-control" id="address-two" placeholder="Phone number" required="" formControlName="phone_number" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }">
+                                            <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+                                                <span *ngIf="f.phone_number.errors.required" class="error_span" aria-hidden="true">The phone number field is required.</span>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 select_input">
-                                            <label for="review">Country *</label>
-                                            <select class="form-control" size="1">
-                                                <option value="India">India</option>
-                                                <option value="UAE">UAE</option>
-                                                <option value="U.K">U.K</option>
-                                                <option value="US">US</option>
-                                            </select>
-                                            <span class="error_span" aria-hidden="true">The field is required.</span>
+
+                                        <div class="col-md-6">
+                                            <label for="name">Alternate Phone Number</label>
+                                            <input type="number" class="form-control" id="address-two" placeholder="Alternate phone number" required="" formControlName="alternate_phone_number">
+                                            <!-- <span class="error_span" aria-hidden="true">The alternate phone number field is required.</span> -->
                                         </div>
+
+                                        <div class="col-md-6">
+                                            <label for="email">Pin Code *</label>
+                                            <input type="text" class="form-control" id="zip-code" placeholder="Pin Code" required="" formControlName="pincode" [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }">
+                                            <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+                                                <span *ngIf="f.pincode.errors.required" class="error_span" aria-hidden="true">The pincode field is required.</span>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6">
                                             <label for="review">City *</label>
-                                            <input type="text" class="form-control" id="city" placeholder="City" required="">
-                                            <span class="error_span" aria-hidden="true">The field is required.</span>
+                                            <input type="text" class="form-control" id="city" placeholder="City" required="" formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                                <span class="error_span" aria-hidden="true">The city field is required.</span>
+                                            </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <label for="review">Region/State *</label>
-                                            <input type="text" class="form-control" id="region-state" placeholder="Region/State" required="">
-                                            <span class="error_span" aria-hidden="true">The field is required.</span>
+                                            <input type="text" class="form-control" id="region-state" placeholder="Region/State" required="" formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                                            <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                                                <span class="error_span" aria-hidden="true">The state field is required.</span>
+                                            </div>
                                         </div>
+
+                                        <div class="col-md-6 select_input">
+                                            <label for="review">Country *</label>
+                                            <select class="form-control" formControlName="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                                                <option value="">-SELECT-</option>
+                                                <option value="India">India</option>
+                                            </select>
+                                            <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                                <span class="error_span" aria-hidden="true">The country field is required.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="email">Landmark *</label>
+                                            <input type="text" class="form-control" id="zip-code" placeholder="Landmark" required="" formControlName="landmark" [ngClass]="{ 'is-invalid': submitted && f.landmark.errors }">
+                                            <div *ngIf="submitted && f.landmark.errors" class="invalid-feedback">
+                                                <span class="error_span" aria-hidden="true">The landmark field is required.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="name">Email*</label>
+                                            <input type="text" class="form-control" id="home-ploat" placeholder="Email" required="" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                <span *ngIf="f.email.errors.required" class="error_span" aria-hidden="true">The email field is required.</span>
+                                                <span *ngIf="f.email.errors.email" class="error_span" aria-hidden="true">The email format is invalid.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 select_input">
+                                            <label for="review">Address Type *</label>
+                                            <select class="form-control" formControlName="type" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                                                <option value="">-SELECT-</option>
+                                                <option value="HOME">HOME</option>
+                                                <option value="OFFICE">OFFICE</option>
+                                            </select>
+                                            <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                                                <span class="error_span" aria-hidden="true">The address type field is required.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label for="email">Address *</label>
+                                            <textarea class="form-control" id="zip-code" placeholder="address" required="" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
+                                            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                                <span class="error_span" aria-hidden="true">The address field is required.</span>
+                                            </div>
+                                        </div>
+                                        
                                         <div class="col-md-12">
                                             <button class="mt-4 btn btn-sm btn-solid" type="submit">Save setting</button>
                                         </div>
