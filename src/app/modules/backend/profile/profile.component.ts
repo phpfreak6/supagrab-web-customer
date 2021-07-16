@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-
 import { NgxSpinnerService } from "ngx-spinner";
 
 import { UserService } from "../../../services/user.service";
