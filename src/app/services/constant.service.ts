@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 })
 export class ConstantService {
 
-	public baseUrl: string = `http://localhost:3000`;
-	// public baseUrl: string = `http://www.jobsarina.com/local`;
+	// public baseUrl: string = `http://localhost:3000`;
+	public baseUrl: string = `https://supagrab.herokuapp.com`;
 	// public apiBaseUrl: string = `${this.baseUrl}/api/v1`;
 	public apiBaseUrl: string = `${this.baseUrl}`;
 	// LIVE
@@ -35,7 +35,8 @@ export class ConstantService {
 	}
 
 	setLocalStorage() {
-    let user = JSON.parse(localStorage.getItem('currentUser')!);
+		
+    	let user = JSON.parse(localStorage.getItem('currentUser')!);
 		this.user = user.user;
 		this.token = user.token;
 	}

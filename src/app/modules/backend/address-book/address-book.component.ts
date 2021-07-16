@@ -88,7 +88,8 @@ export class AddressBookComponent implements OnInit {
 			this.userService.getAddressByUserIdAddressId( user_id, addr_id ).subscribe(
 				( result ) => {
 					if (result.success) {
-						this.userAddrData = result.data.user.addresses;
+						this.userAddrData = result.data.user_address;
+						this.setFormData();
 					} else {
 						this.constantService.handleResCode(result);
 					}
@@ -160,6 +161,29 @@ export class AddressBookComponent implements OnInit {
 
 			let in_data = this.userAddrForm.value;
 			in_data.email = in_data.email.toLowerCase();
+			if( this.isAddrIdProvidedFlag ) {
+
+				// update
+				this.updateUsrAddr( in_data );
+			} else {
+
+				// insert
+				this.insertUsrAddr( in_data );
+			}
+			
+		} catch (ex) {
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	insertUsrAddr( in_data ) {
+
+		try {
 
 			this.userService.insertUserAddress(in_data, this.userId).subscribe( 
 				async (result) => {
@@ -189,7 +213,8 @@ export class AddressBookComponent implements OnInit {
 					this.ngxSpinnerService.hide();
 				}
 			);
-		} catch (ex) {
+		} catch( ex ) {
+
 			this.ngxSpinnerService.hide();
 			let obj = {
 				resCode: 400,
@@ -199,4 +224,46 @@ export class AddressBookComponent implements OnInit {
 		}
 	}
 
+	updateUsrAddr( in_data ) {
+
+		try {
+
+			this.userService.updateUserAddress( in_data, this.userId, this.addrId ).subscribe( 
+				async (result) => {
+
+                    if (result.success) {
+                        Swal.fire(
+							result.msg,
+							'',
+							'success'
+						);
+						this.router.navigate(['/address-book-list']);
+                    } else {
+                        this.constantService.handleResCode(result);
+                    }
+				},
+				async (error) => {
+					this.ngxSpinnerService.hide();
+                    console.log(error.message);
+                    let obj = {
+                        resCode: 400,
+                        msg: error.message.toString(),
+                    };
+                    this.constantService.handleResCode(obj);
+				},
+				() => {
+					// inside complete
+					this.ngxSpinnerService.hide();
+				}
+			);
+		} catch( ex ) {
+
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
 }
