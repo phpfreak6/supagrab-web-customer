@@ -72,4 +72,27 @@ export class UserService {
 			  catchError((e:Response)=> throwError(e))
 		);
 	}
+
+	getAllAddressesByUserId( userId ): Observable<any> {
+
+		let url = `${this.apiEndPoint}/users/${userId}`;
+		return this.httpClient
+			.get(url, this.constantService.getHttpJsonOptions())
+			.pipe(
+				map((e: any) => e),
+				catchError((e: Response) => throwError(e))
+		);
+	}
+
+	// PENDING
+	getAddressByUserIdAddressId( userId, addrId ): Observable<any> {
+
+		let url = `${this.apiEndPoint}/users/${userId}/addresses/${addrId}`;
+		return this.httpClient
+			.get(url, this.constantService.getHttpJsonOptions())
+			.pipe(
+				map((e: any) => e),
+				catchError((e: Response) => throwError(e))
+		);
+	}
 }
