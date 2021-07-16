@@ -21,10 +21,12 @@ import Swal from 'sweetalert2';
 export class AddressBookComponent implements OnInit {
 
 	isUserIdProvidedFlag = false;
+	isAddrIdProvidedFlag = false;
 	userId: any;
+	addrId: any;
 	userAddrForm: FormGroup;
 	submitted = false;
-	userData: any;
+	userAddrData: any;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -66,14 +68,53 @@ export class AddressBookComponent implements OnInit {
 
 		this.activatedRoute.params.subscribe( params => {      
 		this.userId = params.userId;
+		this.addrId = params.addrId;
 		this.isUserIdProvidedFlag = this.userId ? true : false;
+		this.isAddrIdProvidedFlag = this.userId ? true : false;		
 	
-			if( this.isUserIdProvidedFlag ) {
-				// this.getUserById( this.userId );
+			if( this.isAddrIdProvidedFlag ) {
+				this.getAddrById( this.userId, this.addrId );
 			} else {
 				// user id not provided
 			}
 		});
+	}
+
+	getAddrById( user_id, addr_id ) {
+
+		try {
+
+			this.ngxSpinnerService.show();
+			this.userService.getAddressByUserIdAddressId( user_id, addr_id ).subscribe(
+				( result ) => {
+					if (result.success) {
+						this.userAddrData = result.data.user.addresses;
+					} else {
+						this.constantService.handleResCode(result);
+					}
+				},
+				( error ) => {
+					this.ngxSpinnerService.hide();
+					console.log(error.message);
+					let obj = {
+						resCode: 400,
+						msg: error.message.toString(),
+					};
+					this.constantService.handleResCode(obj);
+				},
+				() => {
+					this.ngxSpinnerService.hide();
+				},
+			);
+
+		} catch (ex) {
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
 	}
 
 	setFormData() {
@@ -81,10 +122,18 @@ export class AddressBookComponent implements OnInit {
 		try {
 
 			this.userAddrForm.patchValue({
-				email: this.userData.email,
-				contact_number: this.userData.contact_number,
-				first_name: this.userData.first_name,
-				last_name: this.userData.last_name
+				title: this.userAddrData.title,
+				full_name: this.userAddrData.full_name,
+				phone_number: this.userAddrData.phone_number,
+				alternate_phone_number: this.userAddrData.alternate_phone_number,
+				pincode: this.userAddrData.pincode,
+				city: this.userAddrData.city,
+				state: this.userAddrData.state,
+				country: this.userAddrData.country,
+				address: this.userAddrData.address,
+				landmark: this.userAddrData.landmark,
+				type: this.userAddrData.type,
+				email: this.userAddrData.email
 			});
 		} catch( ex ) {
 

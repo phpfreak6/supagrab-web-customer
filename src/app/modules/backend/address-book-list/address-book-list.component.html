@@ -11,7 +11,7 @@
                         <div class="page-title">
                             <h2>Address Book 
                                 <span class="add_link">
-                                    <a href="javascript:void(0);" [routerLink]="['/address-book', loggedinUserId]" class="btn btn-solid">New Address</a>
+                                    <a href="javascript:void(0);" [routerLink]="['/address-book/user/', loggedinUserId, 'addr']" class="btn btn-solid">New Address</a>
                                 </span>
                             </h2>
                         </div>
@@ -19,8 +19,8 @@
                             <p>Hello, MARK JECNO !</p>                           
                         </div>
                         <div class="address-book_sec mt-5">
-                            <ul class="address-section">
-                                <li>
+                            <ul class="address-section" *ngIf="addrList.length; else no_data_templ">
+                                <!-- <li>
                                     <div class="media"><img src="../assets/images/avtar.jpg" alt="Generic placeholder image">
                                         <div class="media-body">
                                             <h6><strong>Mark Jecno</strong>
@@ -58,8 +58,45 @@
                                             </a>
                                         </div>
                                     </div>                                    
+                                </li> -->
+                                <li *ngFor="let addr of addrList; let i = index">
+                                    <div class="media">
+                                        <img src="../assets/images/avtar.jpg" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <h6>
+                                                <strong>{{ addr?.title }}</strong>
+                                                <span> - <a href="tel:{{addr?.phone_number}}">{{ addr?.phone_number }}</a></span>
+                                                <span> - <a href="tel:{{addr?.alternate_phone_number}}">{{ addr?.alternate_phone_number }}</a></span>
+                                                <span> - <a href="mailto:{{addr?.email}}">{{ addr?.email }}</a></span>
+                                            </h6>
+                                            <div class="add_info">
+                                                <p>
+                                                    <span>{{ addr?.address }}</span>, 
+                                                    <span>{{ addr?.landmark }}</span>, 
+                                                    <span>{{ addr?.pincode }}</span>, 
+                                                    <span>{{ addr?.city }}</span>, 
+                                                    <span>{{ addr?.state }}</span>, 
+                                                    <span>{{ addr?.country }}</span> 
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="edit_trash_link">
+                                            <a href="javascript:void(0);" [routerLink]="['/address-book/user/', loggedinUserId, 'addr', addr?._id]">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#!">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>   
                                 </li>
                             </ul>
+
+                            <ng-template #no_data_templ>
+                                <ul class="address-section">
+                                    <li>No record found.</li>
+                                </ul>
+                            </ng-template>
                         </div>
                     </div>
                 </div>
