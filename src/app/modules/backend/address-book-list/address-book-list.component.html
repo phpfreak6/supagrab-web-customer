@@ -84,7 +84,7 @@
                                             <a href="javascript:void(0);" [routerLink]="['/address-book/user/', loggedinUserId, 'addr', addr?._id]">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </a>
-                                            <a href="#!">
+                                            <a href="javascript:void(0);" (click)="ConfirmDelUsrAddr( loggedinUserId, addr?._id );">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
                                         </div>

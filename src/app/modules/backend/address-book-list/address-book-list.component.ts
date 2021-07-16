@@ -76,4 +76,72 @@ export class AddressBookListComponent implements OnInit {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	ConfirmDelUsrAddr( userId, addrId ) {
+
+		try {
+
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'question',
+				iconHtml: '?',
+				confirmButtonText: 'Yes',
+				cancelButtonText: 'No',
+				showCancelButton: true,
+				showCloseButton: true,
+			}).then((result) => {
+				if (result.value) {
+					this.delAddressByUserIdAddressId( userId, addrId );
+				}
+			});
+		} catch (ex) {
+			console.log('ex', ex);
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	delAddressByUserIdAddressId( userId, addrId ) {
+
+		try {
+
+			this.ngxSpinnerService.show();
+			this.userService.delAddressByUserIdAddressId( userId, addrId ).subscribe(
+				(result) => {
+					if (result.success) {
+						this.getAllAddresses();
+						Swal.fire(
+							result.msg,
+							'',
+							'success'
+						);
+					} else {
+						this.constantService.handleResCode(result);
+					}
+				},
+				(error) => {
+					this.ngxSpinnerService.hide();
+					console.log(error.message);
+					let obj = {
+						resCode: 400,
+						msg: error.message.toString(),
+					};
+					this.constantService.handleResCode(obj);
+				},
+				() => {
+					this.ngxSpinnerService.hide();
+				}
+			);
+		} catch (ex) {
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
 }
