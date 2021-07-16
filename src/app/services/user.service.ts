@@ -84,6 +84,17 @@ export class UserService {
 		);
 	}
 
+	delAddressByUserIdAddressId( userId, addrId ): Observable<any> {
+
+		let url = `${this.apiEndPoint}/users/${userId}/addresses/${addrId}`;
+		return this.httpClient
+			.delete(url, this.constantService.getHttpJsonOptions())
+			.pipe(
+				map((e: Response) => e),
+				catchError((e: Response) => throwError(e))
+			);
+	}
+
 	// PENDING
 	getAddressByUserIdAddressId( userId, addrId ): Observable<any> {
 
