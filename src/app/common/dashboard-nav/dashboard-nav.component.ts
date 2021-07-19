@@ -62,11 +62,6 @@ export class DashboardNavComponent implements OnInit {
 		this.openSideBarClass = '';
 	}
 
-	logOutConfirm() {
-
-		
-	}
-
 	ConfirmLogOut() {
 
 		try {
@@ -99,5 +94,10 @@ export class DashboardNavComponent implements OnInit {
 		this.constantService.clearLocalStorage();
 		this.socialAuthService.signOut();
 		this.router.navigate(['/login']);
+		let obj = {
+			resCode: 200,
+			msg: 'Logout Successfully!'
+		};
+		this.constantService.handleResCode(obj);
 	}
 }
