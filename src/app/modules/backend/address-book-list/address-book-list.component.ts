@@ -41,7 +41,12 @@ export class AddressBookListComponent implements OnInit {
 			this.loggedinUserId = parsedUser.user._id;
 			this.getAllAddresses();
 		} else {
-			console.log('outside session');
+
+			let obj = {
+				resCode: 401,
+				msg: 'Session ended',
+			};
+			this.constantService.handleResCode(obj);
 		}
 	}
 
