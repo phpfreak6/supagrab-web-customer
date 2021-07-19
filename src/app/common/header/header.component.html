@@ -20,10 +20,10 @@
                         <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
                             My Account
                             <ul class="onhover-show-div">
-                                <li><a href="javacript:void(0);" [routerLink]="['/login']">Login</a></li>
+                                <li *ngIf="!isLoggedInFlag"><a href="javacript:void(0);" [routerLink]="['/login']">Login</a></li>
                                 <!-- <li><a href="javacript:void(0);">Register</a></li> -->
-                                <li><a href="javacript:void(0);" [routerLink]="['/profile', loggedinUserId]">Profile</a></li>
-                                <li><a href="javacript:void(0);" [routerLink]="['/dashboard']">Dashboard</a></li>
+                                <li *ngIf="isLoggedInFlag"><a href="javacript:void(0);" [routerLink]="['/profile', loggedinUserId]">Profile</a></li>
+                                <li *ngIf="isLoggedInFlag"><a href="javacript:void(0);" [routerLink]="['/dashboard']">Dashboard</a></li>
                             </ul>
                         </li>
                     </ul>

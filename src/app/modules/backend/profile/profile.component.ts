@@ -74,6 +74,7 @@ export class ProfileComponent implements OnInit {
 
 		try {
 
+			this.ngxSpinnerService.show();
 			this.userService.getUserById( userId ).subscribe(
 				async (result) => {
 
