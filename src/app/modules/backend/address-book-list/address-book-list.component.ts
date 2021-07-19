@@ -122,11 +122,7 @@ export class AddressBookListComponent implements OnInit {
 				(result) => {
 					if (result.success) {
 						this.getAllAddresses();
-						Swal.fire(
-							result.msg,
-							'',
-							'success'
-						);
+						this.constantService.handleResCode(result);
 					} else {
 						this.constantService.handleResCode(result);
 					}

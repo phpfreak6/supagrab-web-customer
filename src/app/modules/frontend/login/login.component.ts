@@ -9,6 +9,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { UserService } from "../../../services/user.service";
 import { ConstantService } from "../../../services/constant.service";
+import { TosterService } from "../../../services/toster.service";
 
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -21,6 +22,7 @@ import Swal from 'sweetalert2';
 		fadeInAnimation
 	]
 })
+
 export class LoginComponent implements OnInit {
 
 	public user: SocialUser = new SocialUser;
@@ -30,7 +32,8 @@ export class LoginComponent implements OnInit {
 		private authService: SocialAuthService,
 		private ngxSpinnerService: NgxSpinnerService,
 		private userService: UserService,
-		private constantService: ConstantService
+		private constantService: ConstantService,
+		private tosterService: TosterService
 	) { }
 
 	ngOnInit(): void {
@@ -96,13 +99,17 @@ export class LoginComponent implements OnInit {
 
                         this.constantService.setLocalStorage();
                         this.router.navigate(['/dashboard']);
-                        Swal.fire(
-                            'Authentication Successfull!',
-                            'Login successfull.',
-                            'success'
-                        );
+
+						this.tosterService.success();
+						this.tosterService.toastMixin.fire(
+							'Signed in Successfully'
+						);
                     } else {
-                        this.constantService.handleResCode(result);
+						this.tosterService.error();
+                        // this.constantService.handleResCode(result);
+						this.tosterService.toastMixin.fire(
+							result.msg
+						);
                     }
 				},
 				async (error) => {
