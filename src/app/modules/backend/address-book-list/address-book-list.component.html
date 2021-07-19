@@ -7,6 +7,22 @@
             </div>
             <div class="col-lg-9" @fadeInAnimation>
                 <div class="dashboard-right">
+
+                    <!-- spinner -->
+                    <div class="ngx-spinner-custom">
+                        <ngx-spinner 
+                            bdOpacity = 0.9
+                            bdColor = "rgba(0, 0, 0, 0.8)" 
+                            size = "medium" 
+                            color = "#fff" 
+                            type = "ball-clip-rotate" 
+                            [fullScreen] = "true"
+                        >
+                            <p style="color: white" > Loading... </p>
+                        </ngx-spinner>
+                    </div>
+                    <!-- spinner -->
+
                     <div class="dashboard">
                         <div class="page-title">
                             <h2>Address Book 
@@ -103,5 +119,8 @@
             </div>
         </div>
     </div>
+
+    
+
 </section>
 <!-- section end -->

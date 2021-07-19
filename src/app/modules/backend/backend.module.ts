@@ -12,6 +12,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AddressBookComponent } from './address-book/address-book.component';
 import { AddressBookListComponent } from './address-book-list/address-book-list.component';
 
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { AddressBookListComponent } from './address-book-list/address-book-list.
     CommonModule,
     BackendRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ]
 })
 export class BackendModule { }
