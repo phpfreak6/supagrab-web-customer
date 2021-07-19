@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { TosterService } from "../services/toster.service";
 
 @Injectable({
 	providedIn: 'root'
@@ -25,7 +26,11 @@ export class ConstantService {
 	public paginationLimit: number;
 	public stripe_Publishable_key: string;
 
-	constructor(private router: Router, private route: ActivatedRoute) {
+	constructor(
+		private router: Router,
+		private route: ActivatedRoute,
+		private tosterService: TosterService
+	) {
 		// this.baseUrl = `http://localhost:3000/api1`;
 
 		this.userImageLink = `${this.baseUrl}/deliveryapp/storage/images/`;
@@ -46,19 +51,52 @@ export class ConstantService {
 	}
 
 	handleResCode(obj: any) {
+
+		this.tosterService.error();
 		if (obj.resCode == 200) {
-			Swal.fire(obj.msg, 'Success.', 'success');
+			
+			this.tosterService.success();
+			// Swal.fire(obj.msg, 'Success.', 'success');
+			this.tosterService.toastMixin.fire(
+				obj.msg
+			);
 		} else if (obj.resCode == 400) {
-			Swal.fire('Request Exception!', obj.msg, 'error');
+
+			// Swal.fire('Request Exception!', obj.msg, 'error');
+			this.tosterService.toastMixin.fire(
+				obj.msg
+			);
 		} else if (obj.resCode == 401) {
-			Swal.fire('Unauthorized Access!', obj.msg, 'error');
+
+			// Swal.fire('Unauthorized Access!', obj.msg, 'error');
+			this.tosterService.toastMixin.fire(
+				obj.msg
+			);
 
 			this.clearLocalStorage();
 			this.router.navigate(['/login']);
 		}
 	}
 
+	// NO AUTH Content-Type starts
+	getHttpJsonOptionsNoAuth() {
+
+		let httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+			}),
+		};
+		return httpOptions;
+	}
+	// NO AUTH Content-Type ends
+
+	// WITH AUTH Content-Type starts
 	getHttpJsonOptions() {
+
+		let user = JSON.parse(localStorage.getItem('currentUser')!);
+		this.user = user.user;
+		this.token = user.token;
+
 		let httpOptions = {
 			headers: new HttpHeaders({
 				Authorization: `Bearer ${this.token}`,
@@ -69,6 +107,11 @@ export class ConstantService {
 	}
 
 	getHttpFormDataOptions() {
+
+		let user = JSON.parse(localStorage.getItem('currentUser')!);
+		this.user = user.user;
+		this.token = user.token;
+		
 		let httpOptions = {
 			headers: new HttpHeaders({
 				Authorization: `Bearer ${this.token}`,
@@ -76,4 +119,5 @@ export class ConstantService {
 		};
 		return httpOptions;
 	}
+	// WITH AUTH Content-Type ends
 }

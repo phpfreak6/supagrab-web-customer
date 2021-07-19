@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 	showHideMobileSubMenu: any = '';
 	isAddClassHighlighted = false;
 	loggedinUserId: string;
+	isLoggedInFlag: boolean = false;
 
 	constructor() { }
 
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
 			let parsedUser = JSON.parse(session);
 			this.loggedinUserId = parsedUser.user._id;
 			console.log('this.loggedinUserId', this.loggedinUserId);
+			this.isLoggedInFlag = true;
 		}
 	}
 

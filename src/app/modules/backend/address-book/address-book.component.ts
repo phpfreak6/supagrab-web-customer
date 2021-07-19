@@ -153,7 +153,6 @@ export class AddressBookComponent implements OnInit {
 			this.submitted = true;
 
 			// stop here if form is invalid
-			console.log('this.userAddrForm.invalid', this.userAddrForm.invalid);
 			if (this.userAddrForm.invalid) {
 				window.scrollTo(0, 0);
 				return;
@@ -190,11 +189,8 @@ export class AddressBookComponent implements OnInit {
 				async (result) => {
 
                     if (result.success) {
-                        Swal.fire(
-							result.msg,
-							'',
-							'success'
-						);
+
+						this.constantService.handleResCode(result);
 						this.router.navigate(['/address-book-list']);
                     } else {
                         this.constantService.handleResCode(result);
@@ -234,11 +230,8 @@ export class AddressBookComponent implements OnInit {
 				async (result) => {
 
                     if (result.success) {
-                        Swal.fire(
-							result.msg,
-							'',
-							'success'
-						);
+
+						this.constantService.handleResCode(result);
 						this.router.navigate(['/address-book-list']);
                     } else {
                         this.constantService.handleResCode(result);

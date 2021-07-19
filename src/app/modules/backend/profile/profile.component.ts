@@ -61,6 +61,11 @@ export class ProfileComponent implements OnInit {
 				this.getUserById( this.userId );
 			} else {
 				// user id not provided
+				let result = {
+					resCode: 400,
+					msg: "Invalid UserId"
+				};
+				this.constantService.handleResCode(result);
 			}
 		});
 	}
@@ -69,6 +74,7 @@ export class ProfileComponent implements OnInit {
 
 		try {
 
+			this.ngxSpinnerService.show();
 			this.userService.getUserById( userId ).subscribe(
 				async (result) => {
 
@@ -77,11 +83,8 @@ export class ProfileComponent implements OnInit {
 						this.userData = result.data.user;
 						this.setFormData();
 					} else {
-						Swal.fire(
-							result.msg,
-							'',
-							'error'
-						);
+						this.constantService.handleResCode(result);
+						this.router.navigate(['/dashboard']);
 					}
 				},
 				async (error) => {
@@ -93,6 +96,7 @@ export class ProfileComponent implements OnInit {
                         msg: error.message.toString(),
                     };
                     this.constantService.handleResCode(obj);
+					this.router.navigate(['/dashboard']);
 				},
 				() => {
 
@@ -108,6 +112,7 @@ export class ProfileComponent implements OnInit {
 				msg: ex.toString(),
 			};
 			this.constantService.handleResCode(obj);
+			this.router.navigate(['/dashboard']);
 		}
 	}
 

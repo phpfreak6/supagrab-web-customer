@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
+import Swal from 'sweetalert2';
+import { ConstantService } from "../../services/constant.service";
+import { SocialAuthService } from "angularx-social-login";
+
 @Component({
 	selector: 'app-dashboard-nav',
 	templateUrl: './dashboard-nav.component.html',
@@ -17,6 +21,8 @@ export class DashboardNavComponent implements OnInit {
 	constructor(
 		private activatedRoute: ActivatedRoute,
     	private router: Router,
+		private constantService: ConstantService,
+		private socialAuthService: SocialAuthService,
 	) {
 
 		this.dashboardNav = '';
@@ -54,5 +60,44 @@ export class DashboardNavComponent implements OnInit {
 
 	closeSideBar() {
 		this.openSideBarClass = '';
+	}
+
+	ConfirmLogOut() {
+
+		try {
+
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'question',
+				iconHtml: '?',
+				confirmButtonText: 'Yes',
+				cancelButtonText: 'No',
+				showCancelButton: true,
+				showCloseButton: true,
+			}).then((result) => {
+				if (result.value) {
+					this.logout();
+				}
+			});
+		} catch (ex) {
+			console.log('ex', ex);
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	logout() {
+		
+		this.constantService.clearLocalStorage();
+		this.socialAuthService.signOut();
+		this.router.navigate(['/login']);
+		let obj = {
+			resCode: 200,
+			msg: 'Logout Successfully!'
+		};
+		this.constantService.handleResCode(obj);
 	}
 }

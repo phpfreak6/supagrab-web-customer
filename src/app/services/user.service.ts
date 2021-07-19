@@ -24,12 +24,11 @@ export class UserService {
 
 	signInWithGoogle(in_data: any): Observable<any> {
 
-		console.log('signInWithGoogle service in_data', in_data);
 		return this.httpClient
 			.post(
 				`${this.apiEndPoint}/auth/social-sign-in`,
 				in_data,
-				this.constantService.getHttpJsonOptions()
+				this.constantService.getHttpJsonOptionsNoAuth()
 			)
 			.pipe(
 				map((e: any) => e),
@@ -90,6 +89,7 @@ export class UserService {
 	getAllAddressesByUserId( userId ): Observable<any> {
 
 		let url = `${this.apiEndPoint}/users/${userId}`;
+		console.log('after');
 		return this.httpClient
 			.get(url, this.constantService.getHttpJsonOptions())
 			.pipe(
@@ -109,7 +109,6 @@ export class UserService {
 			);
 	}
 
-	// PENDING
 	getAddressByUserIdAddressId( userId, addrId ): Observable<any> {
 
 		let url = `${this.apiEndPoint}/users/${userId}/addresses/${addrId}`;

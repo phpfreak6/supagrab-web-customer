@@ -33,11 +33,20 @@ export class AddressBookListComponent implements OnInit {
 	ngOnInit(): void {
 
 		let session = localStorage.getItem('currentUser');
+		console.log('session',session);
 		this.loggedinUserId = '';
 		if (session) {
+			console.log('inside session');
 			let parsedUser = JSON.parse(session);
 			this.loggedinUserId = parsedUser.user._id;
 			this.getAllAddresses();
+		} else {
+
+			let obj = {
+				resCode: 401,
+				msg: 'Session ended',
+			};
+			this.constantService.handleResCode(obj);
 		}
 	}
 
@@ -113,11 +122,7 @@ export class AddressBookListComponent implements OnInit {
 				(result) => {
 					if (result.success) {
 						this.getAllAddresses();
-						Swal.fire(
-							result.msg,
-							'',
-							'success'
-						);
+						this.constantService.handleResCode(result);
 					} else {
 						this.constantService.handleResCode(result);
 					}
