@@ -14,7 +14,7 @@
             <li class="{{ addressBookListNav }}"><a href="javascript:void(0);" [routerLink]="['/address-book-list']">Address Book</a></li>
             <li class="{{ myOrdersNav }}"><a href="javascript:void(0);" [routerLink]="['/my-orders']">My Orders</a></li>
             <li class="{{ myWishlist }}"><a href="javascript:void(0);" [routerLink]="['/my-wishlist']">My Wishlist</a></li>
-            <li class="last"><a href="javascript:void(0);">Log Out</a></li>
+            <li class="last"><a href="javascript:void(0);" (click)="ConfirmLogOut();">Log Out</a></li>
         </ul>
     </div>
 </div>

@@ -33,11 +33,15 @@ export class AddressBookListComponent implements OnInit {
 	ngOnInit(): void {
 
 		let session = localStorage.getItem('currentUser');
+		console.log('session',session);
 		this.loggedinUserId = '';
 		if (session) {
+			console.log('inside session');
 			let parsedUser = JSON.parse(session);
 			this.loggedinUserId = parsedUser.user._id;
 			this.getAllAddresses();
+		} else {
+			console.log('outside session');
 		}
 	}
 

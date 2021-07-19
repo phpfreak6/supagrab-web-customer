@@ -58,7 +58,25 @@ export class ConstantService {
 		}
 	}
 
+	// NO AUTH Content-Type starts
+	getHttpJsonOptionsNoAuth() {
+
+		let httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+			}),
+		};
+		return httpOptions;
+	}
+	// NO AUTH Content-Type ends
+
+	// WITH AUTH Content-Type starts
 	getHttpJsonOptions() {
+
+		let user = JSON.parse(localStorage.getItem('currentUser')!);
+		this.user = user.user;
+		this.token = user.token;
+
 		let httpOptions = {
 			headers: new HttpHeaders({
 				Authorization: `Bearer ${this.token}`,
@@ -69,6 +87,11 @@ export class ConstantService {
 	}
 
 	getHttpFormDataOptions() {
+
+		let user = JSON.parse(localStorage.getItem('currentUser')!);
+		this.user = user.user;
+		this.token = user.token;
+		
 		let httpOptions = {
 			headers: new HttpHeaders({
 				Authorization: `Bearer ${this.token}`,
@@ -76,4 +99,5 @@ export class ConstantService {
 		};
 		return httpOptions;
 	}
+	// WITH AUTH Content-Type ends
 }
