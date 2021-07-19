@@ -58,9 +58,12 @@
                                         alt=""></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
+                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart">
+                                    <i class="ti-shopping-cart"></i>
+                                </button> 
+                                <a href="javascript:void(0);" (click)="addToWishList( '60f17e864cb9c400227e949f', '{class:green}' );" title="Add to Wishlist">
+                                    <i class="ti-heart" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
                         <div class="product-detail">

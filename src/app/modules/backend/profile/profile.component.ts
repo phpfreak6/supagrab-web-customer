@@ -157,11 +157,7 @@ export class ProfileComponent implements OnInit {
 				async (result) => {
 
                     if (result.success) {
-                        Swal.fire(
-							result.msg,
-							'',
-							'success'
-						);
+                        this.constantService.handleResCode(result);
                     } else {
                         this.constantService.handleResCode(result);
                     }
