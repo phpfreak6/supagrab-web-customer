@@ -89,7 +89,6 @@ export class UserService {
 	getAllAddressesByUserId( userId ): Observable<any> {
 
 		let url = `${this.apiEndPoint}/users/${userId}`;
-		console.log('after');
 		return this.httpClient
 			.get(url, this.constantService.getHttpJsonOptions())
 			.pipe(
