@@ -133,13 +133,16 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <form
-                            action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda"
-                            class="form-inline subscribe-form auth-form needs-validation" method="post"
-                            id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+                        <form 
+                            [formGroup]="newsletterForm" 
+                            (ngSubmit)="newsletterFormOnSubmit()"
+                            class="form-inline subscribe-form auth-form needs-validation">
                             <div class="form-group mx-sm-3">
-                                <input type="text" class="form-control" name="EMAIL" id="mce-EMAIL"
-                                    placeholder="Enter your email" required="required">
+                                <input type="text" class="form-control" name="EMAIL" id="mce-EMAIL" placeholder="Enter your email" required="required" required="" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <span *ngIf="f.email.errors.required" class="error_span" aria-hidden="true">The email field is required.</span>
+                                    <span *ngIf="f.email.errors.email" class="error_span" aria-hidden="true">The email format is invalid.</span>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-solid" id="mc-submit">Sign Up</button>
                         </form>
