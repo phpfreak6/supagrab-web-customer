@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
-import Swal from 'sweetalert2';
 import { TosterService } from "../services/toster.service";
 
 @Injectable({
