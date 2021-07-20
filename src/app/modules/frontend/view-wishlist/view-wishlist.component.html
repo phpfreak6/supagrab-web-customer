@@ -48,14 +48,16 @@
                 
                 <ng-template #noWishListTemp>
                     <div class="col-md-12">
-
-                        <div class="card_box_main" >
-                            <div class="row product-card">No wish added to the list yet.</div>
+                        
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="../assets/images/custom/empty-wishlist.png" class="img-fluid mb-4">
+                            <h3><strong>Wishlist is Empty</strong></h3>
+                            <h4><a href="javascript:void(0);" [routerLink]="['/home']" class="btn btn-solid">Explore More</a></h4>
                         </div>
                     </div>
                 </ng-template>
             </div>
-            <div class="row wishlist-buttons">
+            <div class="row wishlist-buttons" *ngIf="wishList.length">
                 <div class="col-12">
                     <a href="javascript:void(0);" [routerLink]="['/home']" class="btn btn-solid">continue shopping</a>
                     <a href="javascript:void(0);" [routerLink]="['/checkout']" class="btn btn-solid">check out</a>
