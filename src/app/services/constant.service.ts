@@ -9,8 +9,8 @@ import { TosterService } from "../services/toster.service";
 })
 export class ConstantService {
 
-	// public baseUrl: string = `http://localhost:3000`;
-	public baseUrl: string = `https://supagrab.herokuapp.com`;
+	public baseUrl: string = `http://localhost:3000`;
+	// public baseUrl: string = `https://supagrab.herokuapp.com`;
 	// public apiBaseUrl: string = `${this.baseUrl}/api/v1`;
 	public apiBaseUrl: string = `${this.baseUrl}`;
 	// LIVE
