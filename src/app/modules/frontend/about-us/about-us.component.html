@@ -27,17 +27,23 @@
     <section class="about-page section-b-space">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
-                    <h3 class="text-center">WELCOME TO SUPAGRAB</h3>
-                    <h4>Our Mission &amp; Vision</h4>
-                    <p>SupaGrab is a Fashion accessories and gift items hub. We possess the latest designs in a variety
-                        of Necklaces, Earrings, Bracelets and Pendants. Our Registered Office is Situated at Mohali,
-                        India. We are proud to hold certification from various associations. We strive to make people a
-                        little bit more gorgeous with the unique Jewelry range of our brand. SupaGrab provides online
-                        shopping throughout the world. We try to provide backend support to each of our customer as much
-                        as possible.</p><br>
-                    <p>Thank you for being here and Happy Supa-Grabbing !</p>
+                <div class="col-sm-12" *ngIf="cmsData != null; else default_templ">
+                    {{ cmsData?.value }}
                 </div>
+
+                <ng-template #default_templ>
+                    <div class="col-sm-12">
+                        <h3 class="text-center">WELCOME TO SUPAGRAB</h3>
+                        <h4>Our Mission &amp; Vision</h4>
+                        <p>SupaGrab is a Fashion accessories and gift items hub. We possess the latest designs in a variety
+                            of Necklaces, Earrings, Bracelets and Pendants. Our Registered Office is Situated at Mohali,
+                            India. We are proud to hold certification from various associations. We strive to make people a
+                            little bit more gorgeous with the unique Jewelry range of our brand. SupaGrab provides online
+                            shopping throughout the world. We try to provide backend support to each of our customer as much
+                            as possible.</p><br>
+                        <p>Thank you for being here and Happy Supa-Grabbing !</p>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </section>
