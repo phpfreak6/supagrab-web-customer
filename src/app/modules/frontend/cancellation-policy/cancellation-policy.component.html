@@ -26,45 +26,52 @@
     <section class="about-page section-b-space">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="needhelp">
-                        <p>Users/Customers are eligible to cancel their order in the following cases:<br>
-                            1. User can cancel any order on SupaGrab website within 24 hours of the order placed if they
-                            have placed the order by mistake.<br>
-                            2. User can cancel any order on SupaGrab within 24 hours of the order placed if they have
-                            changed their mind or don’t want the products any more.</p>
-                        <p>For cancellations of your order, please send an email on <strong><a
-                                    href="mailto:cancel@supagrab.com">cancel@supagrab.com </a></strong>with your order
-                            number.</p>
-                        <h4>SupaGrab Cancellations Policy</h4>
-                        <p>SupaGrab owns the right to cancel any of the orders. A few reasons for cancellation from our
-                            end usually include limitation of the product in the inventory, error in pricing, error in
-                            product information etc. We also have the right to check out for extra information for the
-                            purpose of accepting orders in a few cases. We make sure to notify you if in case your order
-                            is cancelled partially or completely or if in case any extra data is required for the
-                            purpose of accepting your order.</p>
-                        <h4>Easy Returns and Exchange Policy for product purchased on www.supagrab.com:</h4>
-                        <p>To make you confident about your purchase from Supagrab, we have an Easy Returns and Exchange
-                            Policy, which gives you enough time to be in no doubt that you have made the right decision
-                            of buying jewellery from SupaGrab. Should you have any problem with the jewellery piece, you
-                            can choose to return it back and claim refund or exchange within the policy time frame.</p>
-                        <h4>Policy:</h4>
-                        <p>For products purchased online through www.supagrab.com refund/ exchange / return shall be
-                            entertained through www.supagrab.com only and shall not be entertained at any other
-                            platform.</p>
-                        <h4>Refund Policy:</h4>
-                        <h5>What is the procedure for availing this Policy?</h5>
-                        <p>Please email us at <a href="mailto:support@supagrab.com">support@supagrab.com</a> and place
-                            your exchange/ return request. We will create a ticket for your reference.</p>
-                        <p>Secure your product with the original invoice, Jewellery box, etc. and send us message with
-                            the reference of your ticket number. Upon a quick quality check of the received product at
-                            our end, our Customer Care team would process the refund/exchange. We are fully committed to
-                            ensure that you are 100% confident and satisfied with your purchase. Therefore, we give you
-                            the flexibility of further exchanging the jewellery piece selected by you (and already
-                            exchanged once), within a period of 5 days from receiving the new jewellery piece by you.
-                            All subsequent request will taken under lifetime buyback policy.</p>
-                    </div>
+
+                <div class="col-sm-12" *ngIf="cmsData != null; else default_templ">
+                    {{ cmsData?.value }}
                 </div>
+
+                <ng-template #default_templ>
+                    <div class="col-sm-12">
+                        <div class="needhelp">
+                            <p>Users/Customers are eligible to cancel their order in the following cases:<br>
+                                1. User can cancel any order on SupaGrab website within 24 hours of the order placed if they
+                                have placed the order by mistake.<br>
+                                2. User can cancel any order on SupaGrab within 24 hours of the order placed if they have
+                                changed their mind or don’t want the products any more.</p>
+                            <p>For cancellations of your order, please send an email on <strong><a
+                                        href="mailto:cancel@supagrab.com">cancel@supagrab.com </a></strong>with your order
+                                number.</p>
+                            <h4>SupaGrab Cancellations Policy</h4>
+                            <p>SupaGrab owns the right to cancel any of the orders. A few reasons for cancellation from our
+                                end usually include limitation of the product in the inventory, error in pricing, error in
+                                product information etc. We also have the right to check out for extra information for the
+                                purpose of accepting orders in a few cases. We make sure to notify you if in case your order
+                                is cancelled partially or completely or if in case any extra data is required for the
+                                purpose of accepting your order.</p>
+                            <h4>Easy Returns and Exchange Policy for product purchased on www.supagrab.com:</h4>
+                            <p>To make you confident about your purchase from Supagrab, we have an Easy Returns and Exchange
+                                Policy, which gives you enough time to be in no doubt that you have made the right decision
+                                of buying jewellery from SupaGrab. Should you have any problem with the jewellery piece, you
+                                can choose to return it back and claim refund or exchange within the policy time frame.</p>
+                            <h4>Policy:</h4>
+                            <p>For products purchased online through www.supagrab.com refund/ exchange / return shall be
+                                entertained through www.supagrab.com only and shall not be entertained at any other
+                                platform.</p>
+                            <h4>Refund Policy:</h4>
+                            <h5>What is the procedure for availing this Policy?</h5>
+                            <p>Please email us at <a href="mailto:support@supagrab.com">support@supagrab.com</a> and place
+                                your exchange/ return request. We will create a ticket for your reference.</p>
+                            <p>Secure your product with the original invoice, Jewellery box, etc. and send us message with
+                                the reference of your ticket number. Upon a quick quality check of the received product at
+                                our end, our Customer Care team would process the refund/exchange. We are fully committed to
+                                ensure that you are 100% confident and satisfied with your purchase. Therefore, we give you
+                                the flexibility of further exchanging the jewellery piece selected by you (and already
+                                exchanged once), within a period of 5 days from receiving the new jewellery piece by you.
+                                All subsequent request will taken under lifetime buyback policy.</p>
+                        </div>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </section>
