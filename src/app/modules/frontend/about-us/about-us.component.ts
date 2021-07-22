@@ -6,18 +6,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ConstantService } from "../../../services/constant.service";
 import { CmsService } from "../../../services/cms.service";
 
-import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
-
-interface Page {	
-	"key": string,
-	"value": string,
-	"status": string,
-	"deletedAt": string,
-	"createdAt": string,
-	"updatedAt": string,
-	"_id": string
-}
+import { PageInterface } from "../../../interfaces/PageInterface";
 
 @Component({
 	selector: 'app-about-us',
@@ -32,11 +21,9 @@ export class AboutUsComponent implements OnInit {
 	isCmsKeyProvidedFlag = false;
 	cmsKey: any;
 	submitted = false;
-	cmsData: Page;
+	cmsData: PageInterface;
 
 	constructor(
-		private activatedRoute: ActivatedRoute,
-		private router: Router,
 		private ngxSpinnerService: NgxSpinnerService,
 		private cmsService: CmsService,
 		private constantService: ConstantService
@@ -60,7 +47,6 @@ export class AboutUsComponent implements OnInit {
 				( result ) => {
 					if (result.success) {
 						this.cmsData = result.data.cms;
-						this.cmsData = null;
 					} else {
 						this.constantService.handleResCode(result);
 					}
