@@ -160,17 +160,34 @@
                         <p>SupaGrab is a Fashion accessories and gift items hub. We possess the latest designs in a
                             variety of Necklaces, Earrings, Bracelets and Pendants.</p>
                         <div class="footer-social">
-                            <ul>
-                                <li><a href="https://www.facebook.com/supagrab/"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a href="https://www.youtube.com/channel/UCzN9UdZiYS4nPPLfGAF8vuw"><i
-                                            class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                                <li><a href="https://twitter.com/supagrab"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a href="https://www.instagram.com/supagrab/"><i class="fa fa-instagram"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a href="https://in.pinterest.com/supagrab/"><i class="fa fa-pinterest-p"
-                                            aria-hidden="true"></i></a></li>
+                            <ul *ngIf="getSiteSettingsFlag && siteSettingsData.length > 0">
+                                <!-- <li><a href="https://www.facebook.com/supagrab/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.youtube.com/channel/UCzN9UdZiYS4nPPLfGAF8vuw"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                <li><a href="https://twitter.com/supagrab"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.instagram.com/supagrab/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="https://in.pinterest.com/supagrab/"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li> -->
+
+                                <li *ngFor="let siteSettings of siteSettingsData">
+                                    <a *ngIf="siteSettings.site_setting_key == 'facebook'" href="{{ siteSettings.value }}" target="_blank">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    </a>
+                                    
+                                    <a *ngIf="siteSettings.site_setting_key == 'youtube'"  href="{{ siteSettings.value }}" target="_blank">
+                                        <i class="fa fa-youtube" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a *ngIf="siteSettings.site_setting_key == 'twitter'"  href="{{ siteSettings.value }}" target="_blank">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a *ngIf="siteSettings.site_setting_key == 'instagram'"  href="{{ siteSettings.value }}" target="_blank">
+                                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                                    </a>
+
+                                    <a *ngIf="siteSettings.site_setting_key == 'pinterest'"  href="{{ siteSettings.value }}" target="_blank">
+                                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
