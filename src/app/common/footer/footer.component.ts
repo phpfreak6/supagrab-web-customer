@@ -4,6 +4,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { ConstantService } from "../../services/constant.service";
 import { NewsletterService } from "../../services/newsletter.service";
+import { SiteSettingsService } from "../../services/site-settings.service";
 
 @Component({
 	selector: 'app-footer',
@@ -19,12 +20,15 @@ export class FooterComponent implements OnInit {
 
 	newsletterForm: FormGroup;
 	submitted = false;
+	siteSettingsData: any;
+	getSiteSettingsFlag = false;
 
 	constructor(
 		private formBuilder: FormBuilder,
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
-		private newsletterService: NewsletterService
+		private newsletterService: NewsletterService,
+		private siteSettingsService: SiteSettingsService
 	) { }
 
 	ngOnInit(): void {
@@ -32,6 +36,8 @@ export class FooterComponent implements OnInit {
 		this.newsletterForm = this.formBuilder.group({
 			email: ['', [Validators.required, Validators.email]]
 		});
+
+		this.getSiteSettings();
 	}
 
 	// convenience getter for easy access to form fields
@@ -99,6 +105,45 @@ export class FooterComponent implements OnInit {
 			);
 		} catch( ex ) {
 
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	getSiteSettings() {
+
+		try {
+
+			this.ngxSpinnerService.show();
+			this.siteSettingsService.getAllSiteSettings().subscribe(
+				( result ) => {
+					if (result.success) {
+						this.siteSettingsData = result.data.site_settings;
+						console.log('siteSettingsData',this.siteSettingsData);
+						this.getSiteSettingsFlag = true;
+					} else {
+						this.constantService.handleResCode(result);
+					}
+				},
+				( error ) => {
+					this.ngxSpinnerService.hide();
+					console.log(error.message);
+					let obj = {
+						resCode: 400,
+						msg: error.message.toString(),
+					};
+					this.constantService.handleResCode(obj);
+				},
+				() => {
+					this.ngxSpinnerService.hide();
+				},
+			);
+
+		} catch (ex) {
 			this.ngxSpinnerService.hide();
 			let obj = {
 				resCode: 400,
