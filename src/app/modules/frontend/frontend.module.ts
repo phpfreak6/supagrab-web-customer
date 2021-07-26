@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 import { FrontendRoutingModule } from './frontend-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ProductViewComponent } from './product-view/product-view.component';
@@ -35,7 +37,9 @@ import { FaqsComponent } from './faqs/faqs.component';
   ],
   imports: [
     CommonModule,
-    FrontendRoutingModule
+    FrontendRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class FrontendModule { }

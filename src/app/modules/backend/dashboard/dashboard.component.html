@@ -28,8 +28,8 @@
                                             <h3>Contact Information</h3><a href="javascript:void(0);" [routerLink]="['/profile/', loggedinUserId]">Edit</a>
                                         </div>
                                         <div class="box-content">
-                                            <h6>MARK JECNO</h6>
-                                            <h6>MARk-JECNO@gmail.com</h6>
+                                            <h6>{{ userData?.first_name }} {{ userData?.last_name }}</h6>
+                                            <h6>{{ userData?.email }}</h6>
                                         </div>
                                     </div>
                                 </div>

@@ -1,0 +1,26 @@
+export interface UserInterface {
+    parent_id: string,
+    first_name: string,
+    last_name: string
+    profilePic: string,
+    email: string,
+    contact_number: string,
+    pwd_reset_token: string,
+    refresh_token: string,
+    gender: string,
+    role: string,
+    status: string,
+    token: string,
+    social_flag: string,
+    social_user_detail: string,
+    account_verification_token: string,
+    fcm_device_type: string,
+    fcm_token: string,
+    addresses: string,
+    wishlist: string,
+    device_info: string,
+    otp_code: string,
+    deletedAt: Date,
+    createdAt: Date,
+    updatedAt: Date
+}
