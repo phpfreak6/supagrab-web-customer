@@ -14,7 +14,7 @@
                         <div class="welcome-msg">
                             <p>Hello, MARK JECNO !</p>                            
                         </div>
-                        <div class="product-order mt-4 prod-wish" *ngIf="wishList.length; else noWishListTemp;">
+                        <div class="product-order mt-4 prod-wish" *ngIf="wishList?.length > 0; else noWishListTemp;">
 
 							<div class="row product-order-detail" *ngFor="let wish of wishList; let i = index">								
 								<div class="col-6 order_detail">

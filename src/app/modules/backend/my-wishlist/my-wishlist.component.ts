@@ -40,11 +40,12 @@ export class MyWishlistComponent implements OnInit {
 
 		try {
 
+			this.wishList = [];
 			this.ngxSpinnerService.show();
 			this.wishlistService.getAllWishListByUserId(this.userId).subscribe(
 				async (result) => {
 
-                    if (result.success && result.data.length > 0 ) {
+                    if (result.success && parseInt(result.data?.wishlist_items.length) > 0 ) {
 						this.wishList = result.data.wishlist_items;
                     } else {
                         this.constantService.handleResCode(result);
