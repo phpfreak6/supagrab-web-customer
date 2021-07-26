@@ -4,6 +4,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { WishlistService } from "../../../services/wishlist.service";
 import { ConstantService } from "../../../services/constant.service";
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { TosterService } from 'src/app/services/toster.service';
 
 @Component({
 	selector: 'app-product-by-category',
@@ -18,7 +20,9 @@ export class ProductByCategoryComponent implements OnInit {
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
-		private wishlistService: WishlistService
+		private wishlistService: WishlistService,
+		private authService: AuthService,
+		private tosterService: TosterService
 	) { }
 
 	ngOnInit(): void {
@@ -28,6 +32,15 @@ export class ProductByCategoryComponent implements OnInit {
 		
 		try {
 			
+			if( !this.authService.isLoggedIn() ) {
+
+				this.tosterService.error();
+				this.tosterService.toastMixin.fire(
+					'You need to login first, to add product to the cart.'
+				);
+				return;
+			}
+
 			let data = JSON.parse(localStorage.getItem('currentUser')!);
 			let user = data.user;
 			let userId = user._id;

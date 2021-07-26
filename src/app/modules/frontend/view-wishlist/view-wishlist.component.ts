@@ -7,6 +7,7 @@ import { WishlistService } from "../../../services/wishlist.service";
 import { ConstantService } from "../../../services/constant.service";
 
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
 	selector: 'app-view-wishlist',
@@ -23,15 +24,22 @@ export class ViewWishlistComponent implements OnInit {
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
-		private wishlistService: WishlistService
+		private wishlistService: WishlistService,
+		private authService: AuthService
 	) { }
 
 	ngOnInit(): void {
 
-		let data = JSON.parse(localStorage.getItem('currentUser')!);
-		let user = data.user;
-		this.userId = user._id;
-		this.getAllWishListByUserId();
+		if( this.authService.isLoggedIn() ) {
+
+			let data = JSON.parse(localStorage.getItem('currentUser')!);
+			let user = data.user;
+			this.userId = user._id;
+			this.getAllWishListByUserId();
+		} else {
+
+			this.wishList = [];
+		}
 	}
 
 	getAllWishListByUserId() {
