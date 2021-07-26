@@ -53,9 +53,13 @@ export class ViewWishlistComponent implements OnInit {
 
                     if (result.success && parseInt(result.data?.wishlist_items.length) > 0 ) {
 						this.wishList = result.data.wishlist_items;
-                    } else {
+
+                    } else if( !result.success ) {
                         this.constantService.handleResCode(result);
-                    }
+
+                    } else {
+						console.log('result', result);
+					}
 				},
 				async (error) => {
 					this.ngxSpinnerService.hide();
