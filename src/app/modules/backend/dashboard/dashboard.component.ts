@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+
+import { UserInterface } from "../../../interfaces/user-interface";
 
 @Component({
 	selector: 'app-dashboard',
@@ -12,14 +15,21 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 export class DashboardComponent implements OnInit {
 
 	loggedinUserId: string;
+	userData: UserInterface;
 
-	constructor() { }
+	constructor(
+		private authService: AuthService
+	) { }
 
 	ngOnInit(): void {
-		let session = localStorage.getItem('currentUser');
-		if( session ) {
-			let parsedUser = JSON.parse(session);
-			this.loggedinUserId = parsedUser.user._id;
+
+		if( this.authService.isLoggedIn() ) {
+			let session = localStorage.getItem('currentUser');
+			if( session ) {
+				let parsedUser = JSON.parse(session);
+				this.loggedinUserId = parsedUser.user._id;
+				this.userData = parsedUser.user;
+			}
 		}
 	}
 
