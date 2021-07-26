@@ -32,6 +32,7 @@ export class MyWishlistComponent implements OnInit {
 		let data = JSON.parse(localStorage.getItem('currentUser')!);
 		let user = data.user;
 		this.userId = user._id;
+		console.log('this.userId',this.userId);
 		this.getAllWishListByUserId();
 	}
 
@@ -43,7 +44,7 @@ export class MyWishlistComponent implements OnInit {
 			this.wishlistService.getAllWishListByUserId(this.userId).subscribe(
 				async (result) => {
 
-                    if (result.success) {
+                    if (result.success && result.data.length > 0 ) {
 						this.wishList = result.data.wishlist_items;
                     } else {
                         this.constantService.handleResCode(result);

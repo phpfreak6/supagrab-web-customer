@@ -5,6 +5,7 @@ import { HomeComponent } from './modules/frontend/home/home.component';
 
 import { BackendComponent } from "./layout/backend/backend.component";
 import { FrontendComponent } from "./layout/frontend/frontend.component";
+import { AuthGuard } from './services/guard/auth.guard';
 
 const routes: Routes = [
 	{
@@ -18,7 +19,8 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				loadChildren: () => import('./modules/backend/backend.module').then(module => module.BackendModule)
+				loadChildren: () => import('./modules/backend/backend.module').then(module => module.BackendModule),
+				canActivate: [AuthGuard]
 			}
 		]
 	},

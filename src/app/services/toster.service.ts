@@ -12,8 +12,8 @@ const toastMixinSuccess = Swal.mixin({
 	timer: 3000,
 	timerProgressBar: true,
 	didOpen: (toast) => {
-	  toast.addEventListener('mouseenter', Swal.stopTimer)
-	  toast.addEventListener('mouseleave', Swal.resumeTimer)
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
 	}
 });
 
@@ -28,27 +28,27 @@ const toastMixinError = Swal.mixin({
 	timer: 3000,
 	timerProgressBar: true,
 	didOpen: (toast) => {
-	  toast.addEventListener('mouseenter', Swal.stopTimer)
-	  toast.addEventListener('mouseleave', Swal.resumeTimer)
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
 	}
 });
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 
 export class TosterService {
 
-  public toastMixin: any;
+	public toastMixin: any;
 
-  constructor() {
-  }
+	constructor() {
+	}
 
-  success() {
-    this.toastMixin = toastMixinSuccess;
-  }
+	success() {
+		this.toastMixin = toastMixinSuccess;
+	}
 
-  error() {
-    this.toastMixin = toastMixinError;
-  }
+	error() {
+		this.toastMixin = toastMixinError;
+	}
 }
