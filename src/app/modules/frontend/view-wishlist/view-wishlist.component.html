@@ -18,7 +18,7 @@
     <section class="wishlist-section section-b-space pt-0">
         <div class="container">
             <div class="row">
-                <div class="col-md-12" *ngIf="wishList.length; else noWishListTemp;">
+                <div class="col-md-12" *ngIf="wishList.length > 0; else noWishListTemp;">
 
                     <div class="card_box_main" *ngFor="let wish of wishList; let i = index">
                         <div class="row product-card">
