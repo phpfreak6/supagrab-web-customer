@@ -96,6 +96,10 @@ export class LoginComponent implements OnInit {
                                 user: result.data.user,
                             })
                         );
+						localStorage.setItem(
+                            'token',
+                            result.data.token
+                        );
 
                         this.constantService.setLocalStorage();
                         this.router.navigate(['/dashboard']);

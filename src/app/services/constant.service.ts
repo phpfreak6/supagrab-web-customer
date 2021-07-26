@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { TosterService } from "../services/toster.service";
+import { SocialAuthService } from 'angularx-social-login';
 
 @Injectable({
 	providedIn: 'root'
@@ -27,7 +28,8 @@ export class ConstantService {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private tosterService: TosterService
+		private tosterService: TosterService,
+		private socialAuthService: SocialAuthService
 	) {
 		// this.baseUrl = `http://localhost:3000/api1`;
 
@@ -46,6 +48,8 @@ export class ConstantService {
 
 	clearLocalStorage() {
 		localStorage.removeItem('currentUser');
+		localStorage.removeItem('token');
+		this.socialAuthService.signOut();
 	}
 
 	handleResCode(obj: any) {
