@@ -47,24 +47,12 @@
                             <nav id="main-nav">
                                 <div (click)="toggleHeader();" class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
 
-                                <ul id="main-menu" class="sm pixelstrap sm-horizontal" [class]="classToggleHeader" *ngIf="deptDataFlag">
+                                <ul id="main-menu" class="sm pixelstrap sm-horizontal" [class]="classToggleHeader">
                                     
                                     <li>
                                         <div (click)="toggleBackBtn();" class="mobile-back text-end">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                                     </li>
-
-                                    <li *ngFor="let dept of deptData">
-                                        <a href="javascript:void(0);" [class]="classToggleHeaderHighlighted" (click)="addClassHighlighted()"><span class="sub-arrow"></span> {{ dept?.title }}</a>
-                                        
-                                        <ul [class]="showHideMobileSubMenu" class="menu-list" *ngIf="dept && dept?.categories.length > 0">
-                                            
-                                            <li *ngFor="let catg of dept.categories">
-                                                <a href='#'>{{ catg?.title }}</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- <li>
+                                    <li>
                                         <a href="javascript:void(0);" [class]="classToggleHeaderHighlighted" (click)="addClassHighlighted()"><span class="sub-arrow"></span> COSMETICS</a>
                                         <ul [class]="showHideMobileSubMenu" class="menu-list">
                                             <li><a href='#'>three grid</a></li>
@@ -116,8 +104,7 @@
                                     </li>
                                     <li>
                                         <a href="javascript:void(0);">OFFERS</a>
-                                    </li> -->
-
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

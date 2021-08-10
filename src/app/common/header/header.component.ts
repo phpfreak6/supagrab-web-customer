@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from "ngx-spinner";
+import { DepartmentService } from "../../services/department.service";
+import { ConstantService } from "../../services/constant.service";
 
 @Component({
 	selector: 'app-header',
@@ -14,9 +17,17 @@ export class HeaderComponent implements OnInit {
 	loggedinUserId: string;
 	isLoggedInFlag: boolean = false;
 
-	constructor() { }
+	deptData: any;
+	deptDataFlag = false;
+
+	constructor(
+		private ngxSpinnerService: NgxSpinnerService,
+		private departmentService: DepartmentService,
+		private constantService: ConstantService,
+	) { }
 
 	ngOnInit(): void {
+		this.getDepts();
 		let session = localStorage.getItem('currentUser');
 		if( session ) {
 			let parsedUser = JSON.parse(session);
@@ -24,6 +35,10 @@ export class HeaderComponent implements OnInit {
 			console.log('this.loggedinUserId', this.loggedinUserId);
 			this.isLoggedInFlag = true;
 		}
+	}
+
+	async getDepts() {
+		await this.getDeptsCatgs();
 	}
 
 	toggleHeader() {
@@ -44,6 +59,45 @@ export class HeaderComponent implements OnInit {
 		} else {
 			this.classToggleHeaderHighlighted = '';
 			this.showHideMobileSubMenu = '';
+		}
+	}
+
+	getDeptsCatgs() {
+
+		try {
+
+			this.ngxSpinnerService.show();
+			this.departmentService.getAllDepartments().subscribe(
+				( result ) => {
+					if (result.success) {
+						this.deptData = result.data.departments;
+						this.deptDataFlag = this.deptData.length > 0 ? true : false;
+						console.log('deptData', this.deptData);
+					} else {
+						this.constantService.handleResCode(result);
+					}
+				},
+				( error ) => {
+					this.ngxSpinnerService.hide();
+					console.log(error.message);
+					let obj = {
+						resCode: 400,
+						msg: error.message.toString(),
+					};
+					this.constantService.handleResCode(obj);
+				},
+				() => {
+					this.ngxSpinnerService.hide();
+				},
+			);
+
+		} catch (ex) {
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
 		}
 	}
 }
