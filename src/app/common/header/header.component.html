@@ -54,12 +54,15 @@
                                     </li>
 
                                     <li *ngFor="let dept of deptData">
-                                        <a href="javascript:void(0);" [class]="classToggleHeaderHighlighted" (click)="addClassHighlighted()"><span class="sub-arrow"></span> {{ dept?.title }}</a>
+                                        <a href="javascript:void(0);" [class]="classToggleHeaderHighlighted" (click)="addClassHighlighted()">
+                                            <span class="sub-arrow"></span> 
+                                            {{ dept?.department_title }}
+                                        </a>
                                         
                                         <ul [class]="showHideMobileSubMenu" class="menu-list" *ngIf="dept && dept?.categories.length > 0">
                                             
                                             <li *ngFor="let catg of dept.categories">
-                                                <a href='#'>{{ catg?.title }}</a>
+                                                <a href='#'>{{ catg?.category_title }}</a>
                                             </li>
                                         </ul>
                                     </li>

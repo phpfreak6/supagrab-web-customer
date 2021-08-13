@@ -9,9 +9,9 @@ import { SocialAuthService } from 'angularx-social-login';
 })
 export class ConstantService {
 
-	public baseUrl: string = `http://localhost:3000`;
+	// public baseUrl: string = `http://localhost:3000`;
 	// LIVE
-	// public baseUrl: string = `https://supagrab.herokuapp.com`;
+	public baseUrl: string = `https://node.gutsyminds.com`;
 	// LOCAL
 	// public apiBaseUrl: string = `${this.baseUrl}/api/v1`;
 	public apiBaseUrl: string = `${this.baseUrl}`;
