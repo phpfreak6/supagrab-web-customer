@@ -1,0 +1,7 @@
+.tab-product .tab-pane.active.show {
+    display: block;
+}
+
+.tab-product .tab-pane {
+    display: none;
+}

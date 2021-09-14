@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
-                            <h2>Women Pink Shirt</h2>
+                            <h2>{{ productData?.product_title }}</h2>
                             <div class="rating-section">
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -99,187 +99,46 @@
 
 
     <!-- product-tab starts -->
-    <section class="tab-product m-0 single_pro_tabs">
+    <section class="tab-product m-0 single_pro_tabs" *ngIf="productData?.attributes.length > 0">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-lg-12">
                     <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab"
-                                href="#top-home" role="tab" aria-selected="true"><i
-                                    class="icofont icofont-ui-home"></i>Details</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab"
-                                href="#top-profile" role="tab" aria-selected="false"><i
-                                    class="icofont icofont-man-in-glasses"></i>Specification</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab"
-                                href="#top-contact" role="tab" aria-selected="false"><i
-                                    class="icofont icofont-contacts"></i>Video</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab"
-                                href="#top-review" role="tab" aria-selected="false"><i
-                                    class="icofont icofont-contacts"></i>Product Review</a>
+                        <li 
+                            class="nav-item" 
+                            *ngFor="let product of productData?.attributes; let i = index" 
+                            (click)="showTabDetails( i )"
+                            [attr.data-index]="i">
+                            
+                            <!-- <a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true"> -->
+                            <a 
+                                class="nav-link" 
+                                [class.active]="lastActivatedTabId === i"
+                                id="tab-{{ i }}" 
+                                data-bs-toggle="tab" 
+                                href="#href-{{ i }}" role="tab">
+                                <i class="icofont icofont-ui-home"></i>{{ product?.tab_name }}
+                            </a>
                             <div class="material-border"></div>
                         </li>
                     </ul>
                     <div class="tab-content nav-material" id="top-tabContent">
-                        <div class="tab-pane fade show active" id="top-home" role="tabpanel"
-                            aria-labelledby="top-home-tab">
-                            <div class="product-tab-discription">
-                                <div class="part">
-                                    <p>The Model is wearing a white blouse from our stylist's collection, see the image
-                                        for a mock-up of what the actual blouse would look like.it has text written on
-                                        it in a black cursive language which looks great on a white color.</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">fabric:</h5>
-                                    <p>Art silk is manufactured by synthetic fibres like rayon. It's light in weight and
-                                        is soft on the skin for comfort in summers.Art silk is manufactured by synthetic
-                                        fibres like rayon. It's light in weight and is soft on the skin for comfort in
-                                        summers.</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">size & fit:</h5>
-                                    <p>The model (height 5'8") is wearing a size S</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">Material & Care:</h5>
-                                    <p>Top fabric: pure cotton</p>
-                                    <p>Bottom fabric: pure cotton</p>
-                                    <p>Hand-wash</p>
-                                </div>
+                        
+                        <!-- deeps additional div starts -->
+                        <div *ngFor="let product of productData?.attributes; let i = index">
+                            <!-- class="tab-pane fade show active"  -->
+                            <div 
+                                class="tab-pane fade"
+                                [class.show]="lastActivatedTabId === i"
+                                [class.active]="lastActivatedTabId === i"
+                                id="href-{{ i }}" 
+                                role="tabpanel" 
+                                [attr.aria-labelledby]="'tab-'+i"
+                                [innerHTML]="product.tab_value"
+                                >
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                            <p>The Model is wearing a white blouse from our stylist's collection, see the image for a
-                                mock-up of what the actual blouse would look like.it has text written on it in a black
-                                cursive language which looks great on a white color.</p>
-                            <div class="single-product-tables">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Sleeve Length</td>
-                                            <td>Sleevless</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Neck</td>
-                                            <td>Round Neck</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Occasion</td>
-                                            <td>Sports</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Fabric</td>
-                                            <td>Polyester</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fit</td>
-                                            <td>Regular Fit</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                            <div class="">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8"
-                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
-                            <div class="single-review review-page">
-                                <ul class="comment-section">
-                                    <li>
-                                        <div class="media"><img src="../assets/images/avtar.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                                                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit
-                                                    amet felis fringilla bibendum at at leo. Proin molestie ac nisi eu
-                                                    laoreet. Integer faucibus enim nec ullamcorper tempor. Aenean nec
-                                                    felis dui.</p>
-                                                <ul class="comnt-sec">
-                                                    <li><a href="#"><i class="fa fa-thumbs-o-up"
-                                                                aria-hidden="true"></i><span>(14)</span></a></li>
-                                                    <li><a href="#">
-                                                            <div class="unlike"><i class="fa fa-thumbs-o-down"
-                                                                    aria-hidden="true"></i>(2)</div>
-                                                        </a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media"><img src="../assets/images/2.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                                                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit
-                                                    amet felis fringilla bibendum at at leo. Proin molestie ac nisi eu
-                                                    laoreet. Integer faucibus enim nec ullamcorper tempor. Aenean nec
-                                                    felis dui.</p>
-                                                <ul class="comnt-sec">
-                                                    <li><a href="#"><i class="fa fa-thumbs-o-up"
-                                                                aria-hidden="true"></i><span>(14)</span></a></li>
-                                                    <li><a href="#">
-                                                            <div class="unlike"><i class="fa fa-thumbs-o-down"
-                                                                    aria-hidden="true"></i>(2)</div>
-                                                        </a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media"><img src="../assets/images/20.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                                                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit
-                                                    amet felis fringilla bibendum at at leo. Proin molestie ac nisi eu
-                                                    laoreet. Integer faucibus enim nec ullamcorper tempor. Aenean nec
-                                                    felis dui.</p>
-                                                <ul class="comnt-sec">
-                                                    <li><a href="#"><i class="fa fa-thumbs-o-up"
-                                                                aria-hidden="true"></i><span>(14)</span></a></li>
-                                                    <li><a href="#">
-                                                            <div class="unlike"><i class="fa fa-thumbs-o-down"
-                                                                    aria-hidden="true"></i>(2)</div>
-                                                        </a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="media"><img src="../assets/images/avtar.jpg"
-                                                alt="Generic placeholder image">
-                                            <div class="media-body">
-                                                <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                                                <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit
-                                                    amet felis fringilla bibendum at at leo. Proin molestie ac nisi eu
-                                                    laoreet. Integer faucibus enim nec ullamcorper tempor. Aenean nec
-                                                    felis dui.</p>
-                                                <ul class="comnt-sec">
-                                                    <li><a href="#"><i class="fa fa-thumbs-o-up"
-                                                                aria-hidden="true"></i><span>(14)</span></a></li>
-                                                    <li><a href="#">
-                                                            <div class="unlike"><i class="fa fa-thumbs-o-down"
-                                                                    aria-hidden="true"></i>(2)</div>
-                                                        </a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <!-- deeps additional div ends -->
                     </div>
                 </div>
             </div>
