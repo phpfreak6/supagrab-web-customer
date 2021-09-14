@@ -54,7 +54,7 @@
                                 <!-- [routerLink]="[/product/view/product-page(left-image)']" -->
                                 <a 
                                     href="javascript:void(0);"
-                                    routerLink="/product/view/{{ product?.product_slug }}">                                    
+                                    routerLink="/product/view/{{ product?.product_slug }}">
                                     <img
                                         src="../assets/images/custom/1-min-12.jpg" 
                                         class="img-fluid bg-img"
@@ -80,7 +80,8 @@
                             </div>
                         </div>
                         <div class="product-detail">
-                            <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']">
+                            <a href="javascript:void(0);" 
+                                routerLink="/product/view/{{ product?.product_slug }}">
                                 <h6>{{ product?.product_title }}</h6>
                             </a>
                             <h4>$500.00 <del>$600.00</del></h4>
