@@ -6,6 +6,8 @@ import { WishlistService } from "../../../services/wishlist.service";
 import { ConstantService } from "../../../services/constant.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from "../../../services/product.service";
 
 @Component({
 	selector: 'app-product-by-category',
@@ -17,15 +19,30 @@ import { TosterService } from 'src/app/services/toster.service';
 })
 export class ProductByCategoryComponent implements OnInit {
 
+	catgSlug;
+  	isCatgSlugProvidedFlag;
+	products;
+
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
 		private wishlistService: WishlistService,
 		private authService: AuthService,
-		private tosterService: TosterService
+		private tosterService: TosterService,
+		private activatedRoute: ActivatedRoute,
+		private productService: ProductService
 	) { }
 
 	ngOnInit(): void {
+
+		this.activatedRoute.params.subscribe( params => {
+
+			this.catgSlug = params.catgSlug ? params.catgSlug : null;
+			this.isCatgSlugProvidedFlag = this.catgSlug !== null ? true : false;
+			if( this.isCatgSlugProvidedFlag ) {
+				this.getProductsByCatgSlug();
+			}
+		});
 	}
 
 	addToWishList( productId, productDetails ) {
@@ -81,5 +98,32 @@ export class ProductByCategoryComponent implements OnInit {
 			};
 			this.constantService.handleResCode(obj);
 		}
+	}
+
+	getProductsByCatgSlug() {
+
+		this.productService.getProductsByCatgSlug( this.catgSlug )
+		.subscribe(
+			( result ) => {
+				if (result.success) {
+					this.products = result.data.product;
+					console.log('this.products', this.products);
+				} else {
+					this.constantService.handleResCode(result);
+				}
+			},
+			( error ) => {
+				this.ngxSpinnerService.hide();
+				console.log(error.message);
+				let obj = {
+					resCode: 400,
+					msg: error.message.toString(),
+				};
+				this.constantService.handleResCode(obj);
+			},
+			() => {
+				this.ngxSpinnerService.hide();
+			},
+		);
 	}
 }

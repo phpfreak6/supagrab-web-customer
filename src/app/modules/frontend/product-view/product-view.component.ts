@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConstantService } from 'src/app/services/constant.service';
@@ -19,6 +20,7 @@ export class ProductViewComponent implements OnInit {
 	productSlug: string;
 	isProductSlugFlag = false;
 	productImageLink: any;
+	lastActivatedTabId = 0;
   
   constructor(
 	private activatedRoute: ActivatedRoute,
@@ -26,6 +28,7 @@ export class ProductViewComponent implements OnInit {
 	private ngxSpinnerService: NgxSpinnerService,
 	private constantService: ConstantService,
 	private productService: ProductService,
+	@Inject(DOCUMENT) private document: Document
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,6 @@ export class ProductViewComponent implements OnInit {
   setProductSlug() {
     this.activatedRoute.params.subscribe( params => {      
 		this.productSlug = params.prodSlug;
-		console.log('productSlug', this.productSlug);
 		this.isProductSlugFlag = this.productSlug ? true : false;
 	
 			if( this.isProductSlugFlag ) {
@@ -104,5 +106,19 @@ export class ProductViewComponent implements OnInit {
   addToWishList( product_id: string ) {
 
     this.router.navigate(['/view/wish-list']);
+  }
+
+  showTabDetails( indx ) {
+	// console.log('indx', indx);
+	// this.document.body.classList.add('login-page');
+	let reff1 = this.document.getElementById('href-'+ this.lastActivatedTabId).classList.remove('active');
+	let reff11 = this.document.getElementById('href-'+ this.lastActivatedTabId).classList.remove('show');
+
+	let reff2 = this.document.getElementById('href-'+ indx).classList.add('active');
+	let reff22 = this.document.getElementById('href-'+ indx).classList.add('show');
+
+	console.log('reff1', reff1);
+	console.log('reff2', reff2);
+	this.lastActivatedTabId = indx;
   }
 }

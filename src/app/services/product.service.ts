@@ -21,9 +21,20 @@ export class ProductService {
 		this.apiEndPoint = this.constantService.apiBaseUrl + '/products';
 	}
 
-	getProductBySlug( in_slug ) {
+	getProductBySlug( in_slug ) : Observable<any> {
 
 		let url = `${this.apiEndPoint}/slug/${in_slug}`;
+		return this.httpClient
+			.get(url, this.constantService.getHttpJsonOptionsNoAuth())
+			.pipe(
+				map((e: any) => e),
+				catchError((e: Response) => throwError(e))
+		);
+	}
+
+	getProductsByCatgSlug( in_slug ) : Observable<any> {
+
+		let url = `${this.apiEndPoint}/byCategory/${in_slug}`;
 		return this.httpClient
 			.get(url, this.constantService.getHttpJsonOptionsNoAuth())
 			.pipe(
