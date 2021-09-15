@@ -47,8 +47,11 @@ export class ProductByCategoryComponent implements OnInit {
 
 	addToWishList( productId, productDetails ) {
 		
-		try {
-			
+		console.log('productId', productId);
+		console.log('productDetails', productDetails);
+
+		try {			
+
 			if( !this.authService.isLoggedIn() ) {
 
 				this.tosterService.error();
@@ -106,10 +109,9 @@ export class ProductByCategoryComponent implements OnInit {
 		.subscribe(
 			( result ) => {
 				if (result.success) {
-					this.products = result.data.product;
-					console.log('this.products', this.products);
+					this.products = result.data.product ? result.data.product : [];
 				} else {
-					this.constantService.handleResCode(result);
+					// this.constantService.handleResCode(result);
 				}
 			},
 			( error ) => {

@@ -41,7 +41,7 @@
     <!-- product section start -->
     <!-- *ngIf="products.length > 0; else templ_notFound" -->
 
-    <section class="section-b-space ratio_asos search_prod">
+    <section class="section-b-space ratio_asos search_prod" *ngIf="products && products.length > 0; else noDataTempl">
         <div class="container">
             <div class="row search-product">
                 
@@ -74,7 +74,10 @@
                                 <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart">
                                     <i class="ti-shopping-cart"></i>
                                 </button> 
-                                <a href="javascript:void(0);" (click)="addToWishList( '60f17e864cb9c400227e949f', '{class:green}' );" title="Add to Wishlist">
+                                <a 
+                                    href="javascript:void(0);" 
+                                    (click)="addToWishList( product?._id, product );" 
+                                    title="Add to Wishlist">
                                     <i class="ti-heart" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -94,110 +97,25 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-xl-3 col-md-3 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(left-image)']"><img
-                                        src="../assets/images/custom/20210414_170713-min.jpg" class="img-fluid   bg-img"
-                                        alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(left-image)']"><img
-                                        src="../assets/images/custom/20210414_170713-min.jpg" class="img-fluid   bg-img"
-                                        alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00<del>$600.00</del></h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-3 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(left-image)']"><img
-                                        src="../assets/images/custom/20210414_170609-min.jpg" class="img-fluid   bg-img"
-                                        alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(left-image)']"><img
-                                        src="../assets/images/custom/20210414_170609-min.jpg" class="img-fluid   bg-img"
-                                        alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00</h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-3 col-6">
-                    <div class="product-box">
-                        <div class="img-wrapper">
-                            <div class="front">
-                                <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(left-image)']"><img
-                                        src="../assets/images/custom/1-min-2-1.jpg" class="img-fluid   bg-img"
-                                        alt=""></a>
-                            </div>
-                            <div class="back">
-                                <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(left-image)']"><img
-                                        src="../assets/images/custom/1-min-2-1.jpg" class="img-fluid   bg-img"
-                                        alt=""></a>
-                            </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
-                                        class="ti-shopping-cart"></i></button> <a href="javascript:void(0)"
-                                    title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-detail">
-                            <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']">
-                                <h6>Slim Fit Cotton Shirt</h6>
-                            </a>
-                            <h4>$500.00 <del>$600.00</del></h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </section>
+
+    <ng-template #noDataTempl>
+
+        <section class="section-b-space ratio_asos search_prod">
+            <div class="container">
+                <div class="row search-product">
+                    <div class="col-xl-12 col-md-12 col-12">
+                        
+                        <div class="alert alert-danger" role="alert">
+                            No record found.
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-template>
     <!-- product section end -->
 </div>

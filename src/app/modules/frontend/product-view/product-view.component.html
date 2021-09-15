@@ -77,7 +77,9 @@
                                     class="btn btn-solid hover-solid btn-animation">
                                     <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i> add to cart
                                 </a>
-                                <a href="javascript:void(0)" (click)="addToWishList( 'product_id' )"
+                                <a 
+                                    href="javascript:void(0)" 
+                                    (click)="addToWishList( productData._id, productData )"
                                     class="btn btn-solid">
                                     <i class="fa fa-bookmark fz-16 me-2" aria-hidden="true"></i>wishlist
                                 </a>
