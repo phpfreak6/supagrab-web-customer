@@ -15,5 +15,5 @@ export class ViewCartComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }
