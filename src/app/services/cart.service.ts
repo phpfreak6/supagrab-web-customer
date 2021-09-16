@@ -22,7 +22,7 @@ export class CartService {
 	addToCart( userId, productId ): Observable<any> {
 
 		return this.httpClient.post( 
-			`${this.apiEndPoint}/users/${userId}/cart/${productId}`, 
+			`${this.apiEndPoint}/users/${userId}/product/${productId}/cart`, 
 			null,
 			this.constantService.getHttpJsonOptions()
 			)

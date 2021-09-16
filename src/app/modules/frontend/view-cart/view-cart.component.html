@@ -16,20 +16,20 @@
 
     <!--section start-->
     <section class="cart-section section-b-space pt-0">
-        <div class="container">
+        <div class="container" *ngIf="cartData?.length > 0; else itemNotFound">
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="card_box_main">
                         
-                        <div class="row product-card align-items-center">
+                        <div class="row product-card align-items-center" *ngFor="let cart of cartData; index as i">
                             <div class="col-4 order_detail">
                                 <div>
                                     <h5>
                                         <a 
                                            href="javascript:void(0);"
-                                           [routerLink]="['/product/view/product-page(left-image)']">
-                                           Beautiful Swarovski Stud Earrings
+                                           [routerLink]="['/product/view/', cart?.product_detail?.product_slug ]">
+                                           {{ cart?.product_detail?.product_title }}
                                         </a>
                                     </h5>
                                 </div>
@@ -48,8 +48,7 @@
                                 <div>
                                     <div class="qty-box">
                                         <div class="input-group">
-                                            <input type="number" name="quantity" class="form-control input-number"
-                                                value="1">
+                                            <input type="number" name="quantity" class="form-control input-number" value="1">
                                         </div>
                                     </div>
                                 </div>
@@ -62,10 +61,10 @@
                             <div class="col-1 order_detail wish_btn">
                                 <div>
                                     <button 
+                                        (click)="removeCartItem( cart?.user_id, cart?._id )"
                                         class="btn btn-sm btn-solid" 
-                                        type="submit">
-                                        <i 
-                                            class="fa fa-trash" 
+                                        type="button">
+                                        <i class="fa fa-trash" 
                                             aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -210,6 +209,23 @@
                         class="btn btn-solid">check out</a></div>
             </div>
         </div>
+
+        <ng-template #itemNotFound>
+            <div class="container">
+                <div class="row">
+                    <div class="card_box_main">
+                        <div class="col-md-12">
+                    
+                            <div class="col-sm-12 empty-cart-cls text-center">
+                                <img src="../assets/images/custom/empty-wishlist.png" class="img-fluid mb-4">
+                                <h3><strong>Cart is Empty</strong></h3>
+                                <h4><a href="javascript:void(0);" [routerLink]="['/home']" class="btn btn-solid">Explore More</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
     </section>
     <!--section end-->
 </div>

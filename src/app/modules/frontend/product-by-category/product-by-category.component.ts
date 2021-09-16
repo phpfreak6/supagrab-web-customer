@@ -3,6 +3,7 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 import { NgxSpinnerService } from "ngx-spinner";
 
 import { WishlistService } from "../../../services/wishlist.service";
+import { CartService } from "../../../services/cart.service";
 import { ConstantService } from "../../../services/constant.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
@@ -30,7 +31,8 @@ export class ProductByCategoryComponent implements OnInit {
 		private authService: AuthService,
 		private tosterService: TosterService,
 		private activatedRoute: ActivatedRoute,
-		private productService: ProductService
+		private productService: ProductService,
+		private cartService: CartService
 	) { }
 
 	ngOnInit(): void {
@@ -46,9 +48,6 @@ export class ProductByCategoryComponent implements OnInit {
 	}
 
 	addToWishList( productId, productDetails ) {
-		
-		console.log('productId', productId);
-		console.log('productDetails', productDetails);
 
 		try {			
 
@@ -105,7 +104,7 @@ export class ProductByCategoryComponent implements OnInit {
 
 	addToCart( productId, productDetails ) {
 
-		try {			
+		try {
 
 			if( !this.authService.isLoggedIn() ) {
 
@@ -121,7 +120,7 @@ export class ProductByCategoryComponent implements OnInit {
 			let userId = user._id;
 			
 			this.ngxSpinnerService.show();
-			this.wishlistService.addToWishList(userId, productId).subscribe( 
+			this.cartService.addToCart(userId, productId).subscribe( 
 				async (result) => {
 
                     if (result.success) {
