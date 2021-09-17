@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { UserInterface } from "../../../interfaces/user-interface";
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { CartService } from "src/app/services/cart.service";
 import { AuthService } from 'src/app/services/auth/auth.service';

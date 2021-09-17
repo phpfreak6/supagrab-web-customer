@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConstantService } from 'src/app/services/constant.service';
 import { ProductService } from 'src/app/services/product.service';
-import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';

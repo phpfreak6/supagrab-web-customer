@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 @Component({
   selector: 'app-home',
