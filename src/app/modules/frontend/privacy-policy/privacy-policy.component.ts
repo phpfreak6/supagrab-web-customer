@@ -3,8 +3,8 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { ConstantService } from "../../../services/constant.service";
-import { CmsService } from "../../../services/cms.service";
+import { ConstantService } from "src/app/services/constant.service";
+import { CmsService } from "src/app/services/cms.service";
 
 import { PageInterface } from "../../../interfaces/PageInterface";
 

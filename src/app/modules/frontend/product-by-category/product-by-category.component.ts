@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { WishlistService } from "../../../services/wishlist.service";
-import { CartService } from "../../../services/cart.service";
-import { ConstantService } from "../../../services/constant.service";
+import { WishlistService } from "src/app/services/wishlist.service";
+import { CartService } from "src/app/services/cart.service";
+import { ConstantService } from "src/app/services/constant.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from "../../../services/product.service";
+import { ProductService } from "src/app/services/product.service";
 
 @Component({
 	selector: 'app-product-by-category',

@@ -4,8 +4,8 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { UserService } from "../../../services/user.service";
-import { ConstantService } from "../../../services/constant.service";
+import { UserService } from "src/app/services/user.service";
+import { ConstantService } from "src/app/services/constant.service";
 
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';

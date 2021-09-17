@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 
-import { CartService } from "../../../services/cart.service";
+import { CartService } from "src/app/services/cart.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
 import { NgxSpinnerService } from "ngx-spinner";
-import { ConstantService } from "../../../services/constant.service";
+import { ConstantService } from "src/app/services/constant.service";
+
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-view-cart',
@@ -76,6 +78,33 @@ export class ViewCartComponent implements OnInit {
 			);
 		} catch (ex) {
 			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	confirmRemoveCartItem( userId, cartId ) {
+
+		try {
+
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'question',
+				iconHtml: '?',
+				confirmButtonText: 'Yes',
+				cancelButtonText: 'No',
+				showCancelButton: true,
+				showCloseButton: true,
+			}).then((result) => {
+				if (result.value) {
+					this.removeCartItem( userId, cartId );
+				}
+			});
+		} catch (ex) {
+			console.log('ex', ex);
 			let obj = {
 				resCode: 400,
 				msg: ex.toString(),

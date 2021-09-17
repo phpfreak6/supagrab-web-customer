@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 import Swal from 'sweetalert2';
-import { ConstantService } from "../../services/constant.service";
+import { ConstantService } from "src/app/services/constant.service";
 import { SocialAuthService } from "angularx-social-login";
 
 @Component({

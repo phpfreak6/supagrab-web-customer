@@ -8,7 +8,7 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
-import { WishlistService } from "../../../services/wishlist.service";
+import { WishlistService } from "src/app/services/wishlist.service";
 
 @Component({
   selector: 'app-product-view',

@@ -3,8 +3,8 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { FaqService } from "../../../services/faq.service";
-import { ConstantService } from "../../../services/constant.service";
+import { FaqService } from "src/app/services/faq.service";
+import { ConstantService } from "src/app/services/constant.service";
 
 @Component({
 	selector: 'app-faqs',

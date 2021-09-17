@@ -3,8 +3,8 @@ import { fadeInAnimation } from "../../../common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { WishlistService } from "../../../services/wishlist.service";
-import { ConstantService } from "../../../services/constant.service";
+import { WishlistService } from "src/app/services/wishlist.service";
+import { ConstantService } from "src/app/services/constant.service";
 
 import Swal from 'sweetalert2';
 

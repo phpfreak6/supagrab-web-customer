@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
-import { DepartmentService } from "../../services/department.service";
-import { ConstantService } from "../../services/constant.service";
+import { DepartmentService } from "src/app/services/department.service";
+import { ConstantService } from "src/app/services/constant.service";
 
 @Component({
 	selector: 'app-header',
