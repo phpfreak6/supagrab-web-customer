@@ -73,13 +73,11 @@
                                 </div>
                             </div>
                             <div class="product-buttons">
-                                <a href="javascript:void(0)" (click)="addToCart( 'product_id' )" id="cartEffect"
-                                    class="btn btn-solid hover-solid btn-animation">
+                                <a href="javascript:void(0)" (click)="addToCart( productData?._id, productData )"
+                                    id="cartEffect" class="btn btn-solid hover-solid btn-animation">
                                     <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i> add to cart
                                 </a>
-                                <a 
-                                    href="javascript:void(0)" 
-                                    (click)="addToWishList( productData._id, productData )"
+                                <a href="javascript:void(0)" (click)="addToWishList( productData?._id, productData )"
                                     class="btn btn-solid">
                                     <i class="fa fa-bookmark fz-16 me-2" aria-hidden="true"></i>wishlist
                                 </a>
@@ -106,38 +104,25 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-12">
                     <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                        <li 
-                            class="nav-item" 
-                            *ngFor="let product of productData?.attributes; let i = index" 
-                            (click)="showTabDetails( i )"
-                            [attr.data-index]="i">
-                            
+                        <li class="nav-item" *ngFor="let product of productData?.attributes; let i = index"
+                            (click)="showTabDetails( i )" [attr.data-index]="i">
+
                             <!-- <a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true"> -->
-                            <a 
-                                class="nav-link" 
-                                [class.active]="lastActivatedTabId === i"
-                                id="tab-{{ i }}" 
-                                data-bs-toggle="tab" 
-                                href="#href-{{ i }}" role="tab">
+                            <a class="nav-link" [class.active]="lastActivatedTabId === i" id="tab-{{ i }}"
+                                data-bs-toggle="tab" href="#href-{{ i }}" role="tab">
                                 <i class="icofont icofont-ui-home"></i>{{ product?.tab_name }}
                             </a>
                             <div class="material-border"></div>
                         </li>
                     </ul>
                     <div class="tab-content nav-material" id="top-tabContent">
-                        
+
                         <!-- deeps additional div starts -->
                         <div *ngFor="let product of productData?.attributes; let i = index">
                             <!-- class="tab-pane fade show active"  -->
-                            <div 
-                                class="tab-pane fade"
-                                [class.show]="lastActivatedTabId === i"
-                                [class.active]="lastActivatedTabId === i"
-                                id="href-{{ i }}" 
-                                role="tabpanel" 
-                                [attr.aria-labelledby]="'tab-'+i"
-                                [innerHTML]="product.tab_value"
-                                >
+                            <div class="tab-pane fade" [class.show]="lastActivatedTabId === i"
+                                [class.active]="lastActivatedTabId === i" id="href-{{ i }}" role="tabpanel"
+                                [attr.aria-labelledby]="'tab-'+i" [innerHTML]="product.tab_value">
                             </div>
                         </div>
                         <!-- deeps additional div ends -->

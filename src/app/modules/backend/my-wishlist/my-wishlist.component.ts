@@ -5,6 +5,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { WishlistService } from "src/app/services/wishlist.service";
 import { ConstantService } from "src/app/services/constant.service";
+import { WishlistCommonService } from "src/app/services/common/wishlist-common.service";
 
 import Swal from 'sweetalert2';
 
@@ -24,7 +25,8 @@ export class MyWishlistComponent implements OnInit {
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
-		private wishlistService: WishlistService
+		private wishlistService: WishlistService,
+		private wishlistCommonService: WishlistCommonService
 	) { }
 
 	ngOnInit(): void {
@@ -32,7 +34,6 @@ export class MyWishlistComponent implements OnInit {
 		let data = JSON.parse(localStorage.getItem('currentUser')!);
 		let user = data.user;
 		this.userId = user._id;
-		console.log('this.userId',this.userId);
 		this.getAllWishListByUserId();
 	}
 
@@ -81,67 +82,9 @@ export class MyWishlistComponent implements OnInit {
 
 	confirmDeleteWishListById( wishListId ) {
 
-		try {
-
-			Swal.fire({
-				title: 'Are you sure?',
-				icon: 'question',
-				iconHtml: '?',
-				confirmButtonText: 'Yes',
-				cancelButtonText: 'No',
-				showCancelButton: true,
-				showCloseButton: true,
-			}).then((result) => {
-				if (result.value) {
-					this.deleteWishListById( wishListId );
-				}
-			});
-		} catch (ex) {
-			console.log('ex', ex);
-			let obj = {
-				resCode: 400,
-				msg: ex.toString(),
-			};
-			this.constantService.handleResCode(obj);
-		}
+		this.wishlistCommonService.confirmDeleteWishListById( wishListId, this.userId )
+		// this.getAllWishListByUserId();
 	}
 
-	deleteWishListById( wishListId ) {
-
-		try {
-
-			this.ngxSpinnerService.show();
-			this.wishlistService.delWishListByWishListId( this.userId, wishListId ).subscribe(
-				async (result) => {
-
-                    if (result.success) {
-						this.getAllWishListByUserId();
-						this.constantService.handleResCode(result);
-                    } else {
-                        this.constantService.handleResCode(result);
-                    }
-				},
-				async (error) => {
-					this.ngxSpinnerService.hide();
-                    console.log(error.message);
-                    let obj = {
-                        resCode: 400,
-                        msg: error.message.toString(),
-                    };
-                    this.constantService.handleResCode(obj);
-				},
-				() => {
-					// inside complete
-					this.ngxSpinnerService.hide();
-				}
-			);
-		} catch( ex ) {
-			this.ngxSpinnerService.hide();
-			let obj = {
-				resCode: 400,
-				msg: ex.toString(),
-			};
-			this.constantService.handleResCode(obj);
-		}
-	}
+	
 }
