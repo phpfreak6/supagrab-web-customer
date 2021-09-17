@@ -8,6 +8,7 @@ import { ConstantService } from "src/app/services/constant.service";
 
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CartCommonService } from 'src/app/services/common/cart-common.service';
 
 @Component({
 	selector: 'app-view-wishlist',
@@ -25,7 +26,8 @@ export class ViewWishlistComponent implements OnInit {
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
 		private wishlistService: WishlistService,
-		private authService: AuthService
+		private authService: AuthService,
+		private cartCommonService: CartCommonService
 	) { }
 
 	ngOnInit(): void {
@@ -149,5 +151,10 @@ export class ViewWishlistComponent implements OnInit {
 			};
 			this.constantService.handleResCode(obj);
 		}
+	}
+
+	addToCart( wishListId, productId, productDetails ) {
+		this.cartCommonService.addToCart(productId, productDetails);
+		this.deleteWishListById(wishListId);
 	}
 }

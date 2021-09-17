@@ -38,7 +38,7 @@
                             <div class="col-3 order_detail wish_btn">
                                 <div>
                                     <button (click)="confirmDeleteWishListById( wish._id );" class="btn btn-sm btn-solid" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    <button class="btn btn-sm btn-solid" type="button"><i class="ti-shopping-cart"></i></button>
+                                    <button (click)="addToCart( wish._id, wish.product_id, wish.product_detail )" class="btn btn-sm btn-solid" type="button"><i class="ti-shopping-cart"></i></button>
                                 </div>
                             </div>
                         </div>
