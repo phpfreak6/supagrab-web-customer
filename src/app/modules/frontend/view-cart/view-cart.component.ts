@@ -25,6 +25,7 @@ export class ViewCartComponent implements OnInit {
 	grandTotal = 0;
 	userId;
 	disabled: boolean = false;
+	cartCnt = 0;
 
 	constructor(
 		private cartService: CartService,
@@ -37,6 +38,9 @@ export class ViewCartComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getCartByUserId();
+		this.cartCountService.cart$.subscribe( (cnt:number) => {      
+			this.cartCnt = cnt;
+		} );
 	}
 
 	getCartByUserId() {

@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from "src/app/services/product.service";
 import { WishlistCommonService } from "src/app/services/common/wishlist-common.service";
 
+import { CartCountService } from "src/app/services/cart-count.service";
+
 @Component({
 	selector: 'app-product-by-category',
 	templateUrl: './product-by-category.component.html',
@@ -25,6 +27,7 @@ export class ProductByCategoryComponent implements OnInit {
 	catgSlug;
   	isCatgSlugProvidedFlag;
 	products;
+	cartCnt = 0;
 
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
@@ -36,7 +39,8 @@ export class ProductByCategoryComponent implements OnInit {
 		private productService: ProductService,
 		private cartService: CartService,
 		private cartCommonService: CartCommonService,
-		private wishlistCommonService: WishlistCommonService
+		private wishlistCommonService: WishlistCommonService,
+		private cartCountService: CartCountService
 	) { }
 
 	ngOnInit(): void {
