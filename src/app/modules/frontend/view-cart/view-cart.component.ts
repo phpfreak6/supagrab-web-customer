@@ -24,6 +24,7 @@ export class ViewCartComponent implements OnInit {
 	cartData: Array<any>;
 	grandTotal = 0;
 	userId;
+	disabled: boolean = false;
 
 	constructor(
 		private cartService: CartService,
@@ -160,6 +161,7 @@ export class ViewCartComponent implements OnInit {
 
 	onQtyChange($event, indx ) {
 
+		this.disabled = true;
 		let qty = Math.abs($event.target.value);
 		this.cartData[indx]['qty']  = qty;
 		this.calculate();
@@ -187,6 +189,9 @@ export class ViewCartComponent implements OnInit {
 			},
 			() => {
 				// inside complete
+				setTimeout(() => {					
+					this.disabled = false;
+				}, 1000);
 				this.ngxSpinnerService.hide();
 			}
 		);
