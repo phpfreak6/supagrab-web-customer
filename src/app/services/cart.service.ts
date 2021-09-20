@@ -53,4 +53,20 @@ export class CartService {
 				catchError((e: Response) => throwError(e))
 			);
 	}
+
+	updateCartQty(userId, cartId, qty): Observable<any> {
+		let in_data = {
+			qty: qty
+		};
+		return this.httpClient
+			.patch(
+				`${this.apiEndPoint}/users/${userId}/cart/${cartId}/update-quantity`,
+				in_data,
+				this.constantService.getHttpJsonOptions()
+			)
+			.pipe(
+				map((e: Response) => e),
+				catchError((e: Response) => throwError(e))
+		);
+	}
 }

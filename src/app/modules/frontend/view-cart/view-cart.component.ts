@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { CartService } from "src/app/services/cart.service";
@@ -20,6 +20,8 @@ import Swal from 'sweetalert2';
 export class ViewCartComponent implements OnInit {
 
 	cartData: Array<any>;
+	grandTotal = 0;
+	userId;
 
 	constructor(
 		private cartService: CartService,
@@ -48,16 +50,16 @@ export class ViewCartComponent implements OnInit {
 
 			let data = JSON.parse(localStorage.getItem('currentUser')!);
 			let user = data.user;
-			let userId = user._id;
+			this.userId = user._id;
 
 			this.ngxSpinnerService.show();
-			this.cartService.getCartByUserId(userId).subscribe(
+			this.cartService.getCartByUserId(this.userId).subscribe(
 				async (result) => {
 
 					if (result.success) {
 						// this.constantService.handleResCode(result);
 						this.cartData = result?.data?.cart ? result.data.cart : [];
-						console.log('this.cartData', this.cartData);
+						this.calculate();
 					} else {
 						this.constantService.handleResCode(result);
 					}
@@ -150,5 +152,51 @@ export class ViewCartComponent implements OnInit {
 			};
 			this.constantService.handleResCode(obj);
 		}
+	}
+
+	onQtyChange($event, indx ) {
+
+		let qty = Math.abs($event.target.value);
+		this.cartData[indx]['qty']  = qty;
+		this.calculate();
+
+		this.cartService.updateCartQty( this.userId, this.cartData[indx]['_id'], qty )
+		.subscribe(
+			async (result) => {
+
+				if (result.success) {
+					this.getCartByUserId();
+					// this.calculate();
+					this.constantService.handleResCode(result);
+				} else {
+					this.constantService.handleResCode(result);
+				}
+			},
+			async (error) => {
+				this.ngxSpinnerService.hide();
+				console.log(error.message);
+				let obj = {
+					resCode: 400,
+					msg: error.message.toString(),
+				};
+				this.constantService.handleResCode(obj);
+			},
+			() => {
+				// inside complete
+				this.ngxSpinnerService.hide();
+			}
+		);
+	}
+
+	calculate() {
+
+		this.grandTotal = 0;
+		this.cartData.forEach( (element, index) => {
+			
+			let product_value = element?.product_detail?.product_price * Math.abs(element.qty);
+			this.cartData[index]['product_value'] = product_value;
+			this.cartData[index]['qty'] = Math.abs(element.qty);
+			this.grandTotal += product_value;
+		} );
 	}
 }
