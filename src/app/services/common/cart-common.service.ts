@@ -6,6 +6,7 @@ import { CartService } from "src/app/services/cart.service";
 import { ConstantService } from "src/app/services/constant.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
+import { CartCountService } from "src/app/services/cart-count.service";
 
 @Injectable({
 	providedIn: 'root'
@@ -17,7 +18,8 @@ export class CartCommonService {
 		private constantService: ConstantService,
 		private authService: AuthService,
 		private tosterService: TosterService,
-		private cartService: CartService
+		private cartService: CartService,
+		private cartCountService: CartCountService
 	) { }
 
 	addToCart(productId, productDetails) {
@@ -42,7 +44,8 @@ export class CartCommonService {
 				async (result) => {
 
 					if (result.success) {
-						this.constantService.handleResCode(result);
+						this.cartCountService.addItemToCart( result?.data?.cart );
+						// this.constantService.handleResCode(result);
 					} else {
 						this.constantService.handleResCode(result);
 					}

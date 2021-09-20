@@ -7,6 +7,8 @@ import { TosterService } from 'src/app/services/toster.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ConstantService } from "src/app/services/constant.service";
 
+import { CartCountService } from "src/app/services/cart-count.service";
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,6 +31,7 @@ export class ViewCartComponent implements OnInit {
 		private tosterService: TosterService,
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
+		private cartCountService: CartCountService
 	) { }
 
 	ngOnInit(): void {
@@ -60,6 +63,7 @@ export class ViewCartComponent implements OnInit {
 						// this.constantService.handleResCode(result);
 						this.cartData = result?.data?.cart ? result.data.cart : [];
 						this.calculate();
+						this.addItem();
 					} else {
 						this.constantService.handleResCode(result);
 					}
@@ -198,5 +202,9 @@ export class ViewCartComponent implements OnInit {
 			this.cartData[index]['qty'] = Math.abs(element.qty);
 			this.grandTotal += product_value;
 		} );
+	}
+
+	addItem() {
+		this.cartCountService.addItemToCart( this.cartData );
 	}
 }

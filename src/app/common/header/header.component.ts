@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DepartmentService } from "src/app/services/department.service";
 import { ConstantService } from "src/app/services/constant.service";
+import { CartCountService } from "src/app/services/cart-count.service";
 
 @Component({
 	selector: 'app-header',
@@ -19,11 +20,13 @@ export class HeaderComponent implements OnInit {
 
 	deptData: any;
 	deptDataFlag = false;
+	cartCnt = 0;
 
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private departmentService: DepartmentService,
 		private constantService: ConstantService,
+		private cartCountService: CartCountService
 	) { }
 
 	ngOnInit(): void {
@@ -35,6 +38,10 @@ export class HeaderComponent implements OnInit {
 			console.log('this.loggedinUserId', this.loggedinUserId);
 			this.isLoggedInFlag = true;
 		}
+
+		this.cartCountService.cart$.subscribe( (cnt:number) => {      
+			this.cartCnt = cnt;
+		} );
 	}
 
 	async getDepts() {
