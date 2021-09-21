@@ -58,7 +58,7 @@
                                     <img
                                         src="../assets/images/custom/1-min-12.jpg" 
                                         class="img-fluid bg-img"
-                                        alt="">
+                                        alt="{{ product?.product_title }}">
                                 </a>
                             </div>
                             <div class="back">
@@ -67,27 +67,37 @@
                                     <img
                                         src="../assets/images/custom/1-min-12.jpg" 
                                         class="img-fluid   bg-img"
-                                        alt="">
+                                        alt="{{ product?.product_title }}">
                                 </a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart">
+                                <button 
+
+                                    (click)="addToCart( product?._id, product );" 
+
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#addtocart" 
+                                    title="Add to cart">
                                     <i class="ti-shopping-cart"></i>
                                 </button> 
                                 <a 
-                                    href="javascript:void(0);" 
                                     (click)="addToWishList( product?._id, product );" 
+
+                                    href="javascript:void(0);" 
                                     title="Add to Wishlist">
                                     <i class="ti-heart" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
                         <div class="product-detail">
-                            <a href="javascript:void(0);" 
+                            <a 
+                                title="{{ product?.product_title }}"
+                                href="javascript:void(0);" 
+                                (click)="addToWishList( product?._id, product );" 
                                 routerLink="/product/view/{{ product?.product_slug }}">
                                 <h6>{{ product?.product_title }}</h6>
                             </a>
-                            <h4>$500.00 <del>$600.00</del></h4>
+                            <h4>${{ product?.product_price }} <del>$600.00</del></h4>
                             <ul class="color-variant">
                                 <li class="bg-light0"></li>
                                 <li class="bg-light1"></li>

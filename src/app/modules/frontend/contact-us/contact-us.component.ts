@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { ConstantService } from "../../../services/constant.service";
-import { ContactUsService } from "../../../services/contact-us.service";
+import { ConstantService } from "src/app/services/constant.service";
+import { ContactUsService } from "src/app/services/contact-us.service";
 import { TosterService } from 'src/app/services/toster.service';
 
 @Component({

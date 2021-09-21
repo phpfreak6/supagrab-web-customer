@@ -3,8 +3,8 @@ import { fadeInAnimation } from 'src/app/common/animations/fadein-animation';
 
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { UserService } from "../../../services/user.service";
-import { ConstantService } from "../../../services/constant.service";
+import { UserService } from "src/app/services/user.service";
+import { ConstantService } from "src/app/services/constant.service";
 
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';

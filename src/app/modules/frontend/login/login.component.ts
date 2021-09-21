@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { fadeInAnimation } from "../../../common/animations/fadein-animation";
+import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { SocialAuthService } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
@@ -7,9 +7,9 @@ import { GoogleLoginProvider } from "angularx-social-login";
 
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { UserService } from "../../../services/user.service";
-import { ConstantService } from "../../../services/constant.service";
-import { TosterService } from "../../../services/toster.service";
+import { UserService } from "src/app/services/user.service";
+import { ConstantService } from "src/app/services/constant.service";
+import { TosterService } from "src/app/services/toster.service";
 
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';

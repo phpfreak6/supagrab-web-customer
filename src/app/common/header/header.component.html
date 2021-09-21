@@ -150,9 +150,42 @@
                                     <li class="onhover-div mobile-cart">
                                         <div><img src="/assets/images/icon/cart.png" class="img-fluid  " alt=""> <i
                                                 class="ti-shopping-cart"></i></div>
-                                        <span class="cart_qty_cls">2</span>
-                                        <ul class="show-div shopping-cart">
+                                        <span class="cart_qty_cls">{{ cartCnt }}</span>
+                                        <ul class="show-div shopping-cart" *ngIf="cartData?.length > 0; else noDataTempl">
+
+                                            <li *ngFor="let cart of cartData; index as i">
+
+                                                <div class="media">
+                                                    <a href="javascript:void(0);" [routerLink]="['/product/view/', cart?.product_detail?.product_slug]">
+                                                        <img alt="" class="me-3" src="/assets/images/custom/20210414_174357-min-1.jpg">
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a href="javascript:void(0);" [routerLink]="['/product/view/', cart?.product_detail?.product_slug]">
+                                                            <h4>{{ cart?.product_detail?.product_title }}</h4>
+                                                        </a>
+                                                        <h4><span>{{ cart?.qty }} x $ {{ cart?.product_detail?.product_price }}</span></h4>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="close-circle"><a href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div> -->
+                                            </li>
+
                                             <li>
+                                                <div class="total">
+                                                    <h5>subtotal : <span>$ {{grandTotal}}</span></h5>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="buttons">
+                                                    <a href="javascript:void(0);" [routerLink]="['/view/cart']"
+                                                        class="view-cart">view cart</a>
+                                                    <a href="javascript:void(0);" [routerLink]="['/checkout']"
+                                                        class="checkout">checkout</a>
+                                                </div>
+                                            </li>
+
+
+
+                                            <!-- <li>
                                                 <div class="media">
                                                     <a href="javascript:void(0);"
                                                         [routerLink]="['/product/view/product-page(left-image)']"><img
@@ -200,8 +233,79 @@
                                                     <a href="javascript:void(0);" [routerLink]="['/checkout']"
                                                         class="checkout">checkout</a>
                                                 </div>
-                                            </li>
+                                            </li> -->
                                         </ul>
+
+                                        <ng-template #noDataTempl>
+                                            <!-- <ul class="show-div shopping-cart" *ngIf="cartData?.length > 0; else noDataTempl">
+
+                                                <li *ngFor="let cart of cartData; index as i">
+    
+                                                    <div class="media">
+                                                        <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']"><img alt="" class="me-3" src="/assets/images/custom/20210414_174357-min-1.jpg"></a>
+                                                        <div class="media-body">
+                                                            <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(left-image)']">
+                                                                <h4>{{ cart?.product_detail?.product_title }}</h4>
+                                                            </a>
+                                                            <h4><span>1 x $ 299.00</span></h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="close-circle"><a href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+                                                </li> 
+    
+    
+    
+                                                <li>
+                                                    <div class="media">
+                                                        <a href="javascript:void(0);"
+                                                            [routerLink]="['/product/view/product-page(left-image)']"><img
+                                                                alt="" class="me-3"
+                                                                src="/assets/images/custom/20210414_174357-min-1.jpg"></a>
+                                                        <div class="media-body">
+                                                            <a href="javascript:void(0);"
+                                                                [routerLink]="['/product/view/product-page(left-image)']">
+                                                                <h4>item name</h4>
+                                                            </a>
+                                                            <h4><span>1 x $ 299.00</span></h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="close-circle"><a href="javascript:void(0);"><i
+                                                                class="fa fa-times" aria-hidden="true"></i></a></div>
+                                                </li>
+                                                <li>
+                                                    <div class="media">
+                                                        <a href="javascript:void(0);"
+                                                            [routerLink]="['/product/view/product-page(left-image)']"><img
+                                                                alt="" class="me-3"
+                                                                src="/assets/images/custom/1-min-12.jpg"></a>
+                                                        <div class="media-body">
+                                                            <a href="javascript:void(0);"
+                                                                [routerLink]="['/product/view/product-page(left-image)']">
+                                                                <h4>item name</h4>
+                                                            </a>
+                                                            <h4><span>1 x $ 299.00</span></h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="close-circle">
+                                                        <a href="javascript:void(0);"><i class="fa fa-times"
+                                                                aria-hidden="true"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="total">
+                                                        <h5>subtotal : <span>$299.00</span></h5>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="buttons">
+                                                        <a href="javascript:void(0);" [routerLink]="['/view/cart']"
+                                                            class="view-cart">view cart</a>
+                                                        <a href="javascript:void(0);" [routerLink]="['/checkout']"
+                                                            class="checkout">checkout</a>
+                                                    </div>
+                                                </li>
+                                            </ul> -->
+                                        </ng-template>
                                     </li>
                                 </ul>
                             </div>
