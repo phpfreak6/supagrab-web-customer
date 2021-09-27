@@ -9,7 +9,7 @@ import { ConstantService } from './constant.service';
 })
 export class CartService {
 
-  public apiEndPoint: string;
+  	public apiEndPoint: string;
 	public data: any;
 
 	constructor(

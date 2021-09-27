@@ -122,6 +122,21 @@ export class AddressBookComponent implements OnInit {
 
 		try {
 
+			// this.userAddrData = {
+			// 	title: 'Amritsar Home',
+			// 	full_name: 'Deepak Bawa',
+			// 	phone_number: '7508498585',
+			// 	alternate_phone_number: '9646255040',
+			// 	pincode: '143001',
+			// 	city: 'amritsar',
+			// 	state: 'punjab',
+			// 	country: 'India',
+			// 	landmark: 'opp hara wala mandir',
+			// 	type: 'HOME',
+			// 	email: 'deepak4bawa@gmail.com',
+			// 	address: 'house 2439 main bazar gobindpura amritsar',
+			// };
+
 			this.userAddrForm.patchValue({
 				title: this.userAddrData.title,
 				full_name: this.userAddrData.full_name,
@@ -150,6 +165,7 @@ export class AddressBookComponent implements OnInit {
 
 		try {
 
+			console.log('this.userAddrForm.value', this.userAddrForm.value);
 			this.submitted = true;
 
 			// stop here if form is invalid

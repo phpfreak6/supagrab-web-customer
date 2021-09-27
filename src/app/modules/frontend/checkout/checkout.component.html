@@ -19,7 +19,7 @@
         <div class="container">
             <div class="checkout-page">
                 <div class="checkout-form">
-                    <form>
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-lg-7 col-sm-12 col-xs-12">
                                 <div class="checkout-title">
@@ -28,49 +28,53 @@
                                 <div class="row check-out">
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                         <div class="field-label">First Name</div>
-                                        <input type="text" name="field-name" value="" placeholder="">
+                                        <input type="text" formControlName="first_name" name="first_name" value=""
+                                            placeholder="">
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                         <div class="field-label">Last Name</div>
-                                        <input type="text" name="field-name" value="" placeholder="">
+                                        <input type="text" formControlName="last_name" name="last_name" value=""
+                                            placeholder="">
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                         <div class="field-label">Phone</div>
-                                        <input type="text" name="field-name" value="" placeholder="">
+                                        <input type="number" formControlName="phone_number" name="phone_number" value=""
+                                            placeholder="">
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                         <div class="field-label">Email Address</div>
-                                        <input type="text" name="field-name" value="" placeholder="">
+                                        <input type="email" formControlName="email" name="email" value=""
+                                            placeholder="">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">Country</div>
-                                        <select>
-                                            <option>India</option>
-                                            <option>South Africa</option>
-                                            <option>United State</option>
-                                            <option>Australia</option>
+                                        <select formControlName="country" name="country">
+                                            <option value="">SELECT</option>
+                                            <option value="India">India</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">Address</div>
-                                        <input type="text" name="field-name" value="" placeholder="Street address">
+                                        <input type="text" formControlName="address" name="address" value=""
+                                            placeholder="Street address">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">Town/City</div>
-                                        <input type="text" name="field-name" value="" placeholder="">
+                                        <input type="text" formControlName="city" name="city" value="" placeholder="">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                         <div class="field-label">State / County</div>
-                                        <input type="text" name="field-name" value="" placeholder="">
+                                        <input type="text" formControlName="state" name="state" value="" placeholder="">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                         <div class="field-label">Postal Code</div>
-                                        <input type="text" name="field-name" value="" placeholder="">
+                                        <input type="text" formControlName="pincode" name="pincode" value=""
+                                            placeholder="">
                                     </div>
-                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!-- <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <input type="checkbox" name="shipping-option" id="account-option"> &ensp;
                                         <label for="account-option">Create An Account?</label>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-lg-5 col-sm-12 col-xs-12">
@@ -80,10 +84,17 @@
                                     <div class="coupon_toogle">
                                         <div class="coupon ">
                                             <label for="coupon_code"></label>
-                                            <input type="text" name="coupon_code" class="input-text" id="coupon_code"
-                                                value="" placeholder="Coupon code">
-                                            <button type="button" class="btn-solid btn" name="apply_coupon" value="APPLY">APPLY</button>
-                                        </div>
+                                            <input type="text" name="coupon_code" #couponCode class="input-text" id="coupon_code" value="" placeholder="Coupon code">
+                                            <button type="button" class="btn-solid btn" (click)="setCouponCode(couponCode.value)" name="apply_coupon" value="APPLY">APPLY</button>
+                                        </div><br>
+                                        <h6 *ngIf="isCouponApplied">
+                                            <div *ngIf="couponMsgType == 'success'" class="alert alert-success" role="alert">
+                                                <b>{{couponMsg}}</b>
+                                            </div>
+                                            <div *ngIf="couponMsgType == 'error'" class="alert alert-danger" role="alert">
+                                                <b>{{couponMsg}}</b>
+                                            </div>
+                                        </h6>
                                     </div>
                                 </div>
 
@@ -92,12 +103,18 @@
                                         <div class="title-box">
                                             <div>Product <span>Total</span></div>
                                         </div>
-                                        <ul class="qty">
-                                            <li>Pink Slim Shirt × 1 <span>$25.10</span></li>
-                                            <li>SLim Fit Jeans × 1 <span>$555.00</span></li>
+                                        <ul class="qty" *ngIf="isCartDataSet">
+                                            <!-- <li>Pink Slim Shirt × 1 <span>25.10</span></li>
+                                            <li>SLim Fit Jeans × 1 <span>555.00</span></li> -->
+
+                                            <li *ngFor="let item of cartData; index as i">
+                                                {{ item?.product_detail?.product_title }} ({{ item?.product_value }} x
+                                                {{ item?.qty }})
+                                                <span>{{ item?.product_value * item?.qty | currency:'INR' }}</span>
+                                            </li>
                                         </ul>
                                         <ul class="sub-total">
-                                            <li>Subtotal <span class="count">$380.10</span></li>
+                                            <li>Subtotal <span class="count">{{ subTotal | currency:'INR' }}</span></li>
                                             <li>Shipping
                                                 <div class="shipping">
                                                     <div class="shopping-option">
@@ -112,7 +129,9 @@
                                             </li>
                                         </ul>
                                         <ul class="total">
-                                            <li>Total <span class="count">$620.00</span></li>
+                                            <li>Coupon Discount <span class="count">(- {{ this.discountAmount |
+                                                    currency:'INR' }})</span></li>
+                                            <li>Total <span class="count">{{ grandTotal | currency:'INR' }}</span></li>
                                         </ul>
                                     </div>
                                     <div class="payment-box">
@@ -149,8 +168,14 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="text-end"><a href="javascript:void(0);"
-                                                [routerLink]="['/order-placed']" class="btn-solid btn">Place Order</a>
+                                        <div class="text-end">
+                                            <!-- <a href="javascript:void(0);" [routerLink]="['/order-placed']" class="btn-solid btn">
+                                                Place Order
+                                            </a> -->
+
+                                            <button type="submit" class="btn-solid btn">
+                                                Place Order
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
