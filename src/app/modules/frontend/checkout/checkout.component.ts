@@ -32,6 +32,7 @@ export class CheckoutComponent implements OnInit {
 	couponType;
 	couponCode;
 	discountAmount: number= 0;
+	discountAmt: number= 0;
 	subTotal: number = 0;
 	
 	constructor(
@@ -183,32 +184,6 @@ export class CheckoutComponent implements OnInit {
 		}
 	}
 
-	onSubmit() {
-
-		try {
-
-			console.log('this.userForm.value', this.userForm.value);
-			this.submitted = true;
-
-			// stop here if form is invalid
-			if (this.userForm.invalid) {
-				window.scrollTo(0, 0);
-				return;
-			}
-
-			let in_data = this.userForm.value;
-			in_data.email = in_data.email.toLowerCase();
-			
-		} catch (ex) {
-			this.ngxSpinnerService.hide();
-			let obj = {
-				resCode: 400,
-				msg: ex.toString(),
-			};
-			this.constantService.handleResCode(obj);
-		}
-	}
-
 	calculate() {
 
 		this.subTotal = 0;
@@ -226,11 +201,13 @@ export class CheckoutComponent implements OnInit {
 
 			if( this.couponType == 'FLAT' ) {
 				this.grandTotal = this.subTotal - this.discountAmount;
+				this.discountAmt = this.discountAmount;
 				this.couponMsg = `Flat ${this.discountAmount} off applied successfully.`;
 				this.couponMsgType = 'success';
 
 			} else if( this.couponType == 'PERCENTAGE' ) {
-				this.grandTotal = this.subTotal - ( ((this.subTotal * this.discountAmount)/100) )
+				this.discountAmt = ((this.subTotal * this.discountAmount)/100);
+				this.grandTotal = this.subTotal - ( this.discountAmt );
 				this.couponMsg = `${this.discountAmount}% off applied successfully.`;
 				this.couponMsgType = 'success';
 				
@@ -280,6 +257,33 @@ export class CheckoutComponent implements OnInit {
 			);
 		} catch( ex ) {
 
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	onSubmit() {
+
+		try {
+
+			this.submitted = true;
+
+			// stop here if form is invalid
+			if (this.userForm.invalid) {
+				window.scrollTo(0, 0);
+				return;
+			}
+
+			let in_data = this.userForm.value;
+			in_data.email = in_data.email.toLowerCase();
+			in_data.coupon_code = this.couponCode;
+			console.log('this.userForm.value', in_data);
+			
+		} catch (ex) {
 			this.ngxSpinnerService.hide();
 			let obj = {
 				resCode: 400,
