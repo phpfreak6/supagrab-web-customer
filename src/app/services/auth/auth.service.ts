@@ -11,4 +11,18 @@ export class AuthService {
 
 		return !!localStorage.getItem('token');
 	}
+
+	async getLocalUser() {
+
+		if( !!localStorage.getItem('currentUser') ) 
+		{
+			let session = localStorage.getItem('currentUser');
+			let parsedSession = JSON.parse( session );
+			let currentUser = parsedSession.user;
+
+			return currentUser;
+		} else {
+			return null;
+		}
+	}
 }
