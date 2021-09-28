@@ -118,7 +118,7 @@
                                                 Coupon Discount 
                                                 <span class="count">
                                                     (- {{ discountAmt | currency:'INR' }})
-                                                    &nbsp;<i *ngIf="isCouponApplied" class="fa fa-trash text-danger" (click)="confirmRemoveCoupon(couponCode);"></i>
+                                                    &nbsp;<i *ngIf="isCouponApplied && discountAmt > 0" class="fa fa-trash text-danger" (click)="confirmRemoveCoupon(couponCode);"></i>
                                                 </span>
                                             </li>
                                         </ul>

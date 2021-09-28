@@ -213,7 +213,9 @@ export class CheckoutComponent implements OnInit {
 				this.couponMsgType = 'success';
 				
 			} else {
-				this.couponMsg = `You are not eleigible for this coupon.`;
+				this.discountAmt = 0;
+				this.grandTotal = this.subTotal - ( this.discountAmt );
+				this.couponMsg = `Invalid coupon.`;
 				this.couponMsgType = 'error';
 			}
 		} else {
@@ -254,7 +256,7 @@ export class CheckoutComponent implements OnInit {
 							this.couponType = 'unknown';
 							this.couponCode = null;
 							this.discountAmount = 0;
-							this.isCouponApplied = false;
+							this.isCouponApplied = true;
 						}
 						this.calculate();
                     } else {
