@@ -7,6 +7,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { CartService } from 'src/app/services/cart.service';
 import { TosterService } from 'src/app/services/toster.service';
 import { CouponService } from "src/app/services/coupon.service";
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-checkout',
@@ -215,7 +216,17 @@ export class CheckoutComponent implements OnInit {
 				this.couponMsg = `You are not eleigible for this coupon.`;
 				this.couponMsgType = 'error';
 			}
+		} else {
+			this.discountAmt = 0;
+			this.grandTotal = this.subTotal - ( this.discountAmt );
 		}
+
+		if( this.subTotal >= 700 ) {
+			this.shippingCost = 0;
+		} else {
+			this.shippingCost = 50;
+		}
+		this.grandTotal = this.grandTotal + this.shippingCost;
 	}
 
 	setCouponCode( in_CouponCode ) {
@@ -231,11 +242,20 @@ export class CheckoutComponent implements OnInit {
 			this.couponService.getByCouponCode( this.couponCode )
 			.subscribe( async (result) => {
                     if (result.success) {
+
 						let coupon = result.data.coupon;
-						this.couponType = coupon.coupon_type;
-						this.couponCode = coupon.coupon_code;
-						this.discountAmount = coupon.discount_amount;
-						this.isCouponApplied = true;
+						if( coupon ) {
+
+							this.couponType = coupon.coupon_type;
+							this.couponCode = coupon.coupon_code;
+							this.discountAmount = coupon.discount_amount;
+							this.isCouponApplied = true;
+						} else {
+							this.couponType = 'unknown';
+							this.couponCode = null;
+							this.discountAmount = 0;
+							this.isCouponApplied = false;
+						}
 						this.calculate();
                     } else {
                         this.constantService.handleResCode(result);
@@ -285,6 +305,34 @@ export class CheckoutComponent implements OnInit {
 			
 		} catch (ex) {
 			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	confirmRemoveCoupon(couponCode :HTMLInputElement) {
+		try {
+			
+			Swal.fire({
+				title: 'Are you sure?',
+				icon: 'question',
+				iconHtml: '?',
+				confirmButtonText: 'Yes',
+				cancelButtonText: 'No',
+				showCancelButton: true,
+				showCloseButton: true,
+			}).then((result) => {
+				if (result.value) {
+					couponCode.value = '';
+					this.isCouponApplied = false;
+					this.calculate();
+				}
+			});
+		} catch (ex) {
+			console.log('ex', ex);
 			let obj = {
 				resCode: 400,
 				msg: ex.toString(),

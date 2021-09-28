@@ -108,14 +108,23 @@
                                             <li>SLim Fit Jeans × 1 <span>555.00</span></li> -->
 
                                             <li *ngFor="let item of cartData; index as i">
-                                                {{ item?.product_detail?.product_title }} ({{ item?.product_value }} x
-                                                {{ item?.qty }})
-                                                <span>{{ item?.product_value * item?.qty | currency:'INR' }}</span>
+                                                {{ item?.product_detail?.product_title }} ({{ item?.product_detail.product_price }} x {{ item?.qty }})
+                                                <span>{{ item?.product_value | currency:'INR' }}</span>
                                             </li>
                                         </ul>
                                         <ul class="sub-total">
                                             <li>Subtotal <span class="count">{{ subTotal | currency:'INR' }}</span></li>
-                                            <li>Shipping
+                                            <li>
+                                                Coupon Discount 
+                                                <span class="count">
+                                                    (- {{ discountAmt | currency:'INR' }})
+                                                    &nbsp;<i *ngIf="isCouponApplied" class="fa fa-trash text-danger" (click)="confirmRemoveCoupon(couponCode);"></i>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                        <ul class="total">
+                                            <li>Shipping <span class="count">{{ shippingCost | currency:'INR' }}</span></li>
+                                            <!-- <li>Shipping
                                                 <div class="shipping">
                                                     <div class="shopping-option">
                                                         <input type="checkbox" name="free-shipping" id="free-shipping">
@@ -126,11 +135,7 @@
                                                         <label for="local-pickup">Local Pickup</label>
                                                     </div>
                                                 </div>
-                                            </li>
-                                        </ul>
-                                        <ul class="total">
-                                            <li>Coupon Discount <span class="count">(- {{ this.discountAmt |
-                                                    currency:'INR' }})</span></li>
+                                            </li> -->
                                             <li>Total <span class="count">{{ grandTotal | currency:'INR' }}</span></li>
                                         </ul>
                                     </div>
