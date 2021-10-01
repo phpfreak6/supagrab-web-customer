@@ -7,6 +7,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { CartService } from 'src/app/services/cart.service';
 import { TosterService } from 'src/app/services/toster.service';
 import { CouponService } from "src/app/services/coupon.service";
+import { OrderService } from "src/app/services/order.service";
 import Swal from 'sweetalert2';
 
 @Component({
@@ -35,6 +36,16 @@ export class CheckoutComponent implements OnInit {
 	discountAmount: number= 0;
 	discountAmt: number= 0;
 	subTotal: number = 0;
+
+	// razor pay properties starts
+	order_id: any;
+	transaction_detail: object = {
+		razorpay_order_id: "",
+		razorpay_payment_id: "",
+		razorpay_signature: ""
+	};
+	// razor pay properties ends
+
 	
 	constructor(
 		private authService: AuthService,
@@ -43,7 +54,8 @@ export class CheckoutComponent implements OnInit {
 		private ngxSpinnerService: NgxSpinnerService,
 		private cartService: CartService,
 		private tosterService: TosterService,
-		private couponService: CouponService
+		private couponService: CouponService,
+		private orderService: OrderService
 	) { }
 
 	ngOnInit(): void {
@@ -243,40 +255,39 @@ export class CheckoutComponent implements OnInit {
 			this.ngxSpinnerService.show();
 			this.couponService.getByCouponCode( this.couponCode )
 			.subscribe( async (result) => {
-                    if (result.success) {
+				if (result.success) {
 
-						let coupon = result.data.coupon;
-						if( coupon ) {
+					let coupon = result.data.coupon;
+					if( coupon ) {
 
-							this.couponType = coupon.coupon_type;
-							this.couponCode = coupon.coupon_code;
-							this.discountAmount = coupon.discount_amount;
-							this.isCouponApplied = true;
-						} else {
-							this.couponType = 'unknown';
-							this.couponCode = null;
-							this.discountAmount = 0;
-							this.isCouponApplied = true;
-						}
-						this.calculate();
-                    } else {
-                        this.constantService.handleResCode(result);
-                    }
-				},
-				async (error) => {
-					this.ngxSpinnerService.hide();
-                    console.log(error.message);
-                    let obj = {
-                        resCode: 400,
-                        msg: error.message.toString(),
-                    };
-                    this.constantService.handleResCode(obj);
-				},
-				() => {
-					// inside complete
-					this.ngxSpinnerService.hide();
+						this.couponType = coupon.coupon_type;
+						this.couponCode = coupon.coupon_code;
+						this.discountAmount = coupon.discount_amount;
+						this.isCouponApplied = true;
+					} else {
+						this.couponType = 'unknown';
+						this.couponCode = null;
+						this.discountAmount = 0;
+						this.isCouponApplied = true;
+					}
+					this.calculate();
+				} else {
+					this.constantService.handleResCode(result);
 				}
-			);
+			},
+			async (error) => {
+				this.ngxSpinnerService.hide();
+				console.log(error.message);
+				let obj = {
+					resCode: 400,
+					msg: error.message.toString(),
+				};
+				this.constantService.handleResCode(obj);
+			},
+			() => {
+				// inside complete
+				this.ngxSpinnerService.hide();
+			});
 		} catch( ex ) {
 
 			this.ngxSpinnerService.hide();
@@ -304,9 +315,60 @@ export class CheckoutComponent implements OnInit {
 			in_data.email = in_data.email.toLowerCase();
 			in_data.coupon_code = this.couponCode;
 			console.log('this.userForm.value', in_data);
+
+			in_data.transaction_id = '123abc';
+			in_data.payment_mode = 'UPI';
+			in_data.amount = this.grandTotal;
+			in_data.transaction_status = 'PENDING';
+			in_data.shipping_charge = this.shippingCost;
+			in_data.coupon_applied = this.isCouponApplied;
+			in_data.coupon_code = this.couponCode;
+
+			this.insertOrder( in_data );
 			
 		} catch (ex) {
 			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
+	}
+
+	insertOrder( in_data ) {
+
+		try {
+
+			this.ngxSpinnerService.show();
+			this.orderService.orderPlaced( this.userId, in_data )
+			.subscribe( async (result) => {
+				
+				if (result.success) {
+
+					let order = result.data.order;
+					this.order_id = order.id;
+
+				} else {
+					this.constantService.handleResCode(result);
+				}
+			},
+			async (error) => {
+				this.ngxSpinnerService.hide();
+				console.log(error.message);
+				let obj = {
+					resCode: 400,
+					msg: error.message.toString(),
+				};
+				this.constantService.handleResCode(obj);
+			},
+			() => {
+				// inside complete
+				this.ngxSpinnerService.hide();
+			});
+
+		} catch( ex ) {
+			console.log('ex', ex);
 			let obj = {
 				resCode: 400,
 				msg: ex.toString(),
@@ -329,6 +391,7 @@ export class CheckoutComponent implements OnInit {
 			}).then((result) => {
 				if (result.value) {
 					couponCode.value = '';
+					this.couponCode = '';
 					this.isCouponApplied = false;
 					this.calculate();
 				}

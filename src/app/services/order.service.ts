@@ -8,7 +8,7 @@ import { ConstantService } from './constant.service';
 @Injectable({
 	providedIn: 'root'
 })
-export class NewsletterService {
+export class OrderService {
 
 	public apiEndPoint: string;
 	public data: any;
@@ -20,16 +20,16 @@ export class NewsletterService {
 		this.apiEndPoint = this.constantService.apiBaseUrl;
 	}
 
-	subscribedToNewsLetter(in_data): Observable<any> {
+	orderPlaced(user_id, in_data): Observable<any> {
 
 		return this.httpClient.post(
-			`${this.apiEndPoint}/newsletter/subscribe`,
+			`${this.apiEndPoint}/users/${user_id}/order`,
 			in_data,
 			// this.constantService.getHttpJsonOptionsNoAuth()
 		)
-			.pipe(
-				map((e: Response) => e),
-				catchError((e: Response) => throwError(e))
-			);
+		.pipe(
+			map((e: Response) => e),
+			catchError((e: Response) => throwError(e))
+		);
 	}
 }
