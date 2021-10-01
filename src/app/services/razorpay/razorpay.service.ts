@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { ConstantService } from '../constant.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class RazorpayService {
 
-	public apiEndPoint!: string;
+	public apiEndPoint: string;
 	public data: any;
-	
+
 	constructor(
-		private httpClient: HttpClient
+		private httpClient: HttpClient,
+		private constantService: ConstantService
 	) {
-		this.apiEndPoint = '';
+		this.apiEndPoint = this.constantService.apiBaseUrl;
 	}
 
 	getOrderId(): Observable<any> {
@@ -35,7 +37,7 @@ export class RazorpayService {
 
 	isPaymentSuccessfull( transaction_detail: any ): Observable<any> {
 
-		let url = `http://localhost:3000/razorpay/is-payment-successfull`;
+		let url = `${this.apiEndPoint}/razorpay/is-payment-successfull`;
 		return this.httpClient
 			.post(url, transaction_detail)
 			.pipe(

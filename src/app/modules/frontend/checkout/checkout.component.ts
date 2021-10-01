@@ -9,6 +9,8 @@ import { TosterService } from 'src/app/services/toster.service';
 import { CouponService } from "src/app/services/coupon.service";
 import { OrderService } from "src/app/services/order.service";
 import Swal from 'sweetalert2';
+import { RazorpayService } from "src/app/services/razorpay/razorpay.service";
+import { WindowRefService } from 'src/app/services/razorpay/window-ref.service';
 
 @Component({
 	selector: 'app-checkout',
@@ -55,7 +57,9 @@ export class CheckoutComponent implements OnInit {
 		private cartService: CartService,
 		private tosterService: TosterService,
 		private couponService: CouponService,
-		private orderService: OrderService
+		private orderService: OrderService,
+		private winRef: WindowRefService,
+		private razorpayService: RazorpayService
 	) { }
 
 	ngOnInit(): void {
@@ -348,7 +352,7 @@ export class CheckoutComponent implements OnInit {
 
 					let order = result.data.order;
 					this.order_id = order.id;
-
+					this.payWithRazor(this.order_id);
 				} else {
 					this.constantService.handleResCode(result);
 				}
@@ -404,5 +408,80 @@ export class CheckoutComponent implements OnInit {
 			};
 			this.constantService.handleResCode(obj);
 		}
+	}
+
+	payWithRazor( order_id: any ) {
+		const options: any = {
+
+			"key": "rzp_test_48cTOMEXh9OIUO", // Enter the Key ID generated from the Dashboard
+			"amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+			"currency": "INR",
+			"name": "Acme Corp",
+			"description": "Test Transaction",
+			"image": "https://example.com/your_logo",
+			"order_id": order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+			// "handler": function (response){
+
+			// 	console.log('response', response);
+			// 	console.log('response.razorpay_payment_id', response.razorpay_payment_id);
+			// 	razorpay_payment_id = response.razorpay_payment_id;
+			// },
+			// "callback_url": "http://localhost:3000/razorpay/callbackUrl",
+			"handler": "",
+			"prefill": {
+				"name": "Deepak Bawa",
+				"email": "bawa_d@ymail.com",
+				"contact": "7508498585"
+			},
+			"notes": {
+				"address": "Razorpay Corporate Office"
+			},
+			"theme": {
+				"color": "#3399cc"
+			},
+			"modal": {
+				// We should prevent closing of the form when esc key is pressed.
+				escape: false,
+			},
+		};
+		options.handler = ((response: any, error: any) => {
+
+			if( error ) {
+
+				console.log('error', error);
+			} else {
+
+				options.response = response;
+
+				this.transaction_detail = {
+					razorpay_order_id: response.razorpay_order_id,
+					razorpay_payment_id: response.razorpay_payment_id,
+					razorpay_signature: response.razorpay_signature
+				};
+
+				console.log('response', response);
+				console.log('options', options);
+				// call your backend api to verify payment signature & capture transaction
+				this.isPaymentSuccessfull();
+			}
+		});
+		options.modal.ondismiss = (() => {
+			// handle the case when user closes the form while transaction is in progress
+			console.log('Transaction cancelled.');
+		});
+		const rzp = new this.winRef.nativeWindow.Razorpay(options);
+		rzp.open();
+	}
+
+	isPaymentSuccessfull() {
+
+		this.razorpayService.isPaymentSuccessfull( this.transaction_detail ).subscribe(
+			async (result) => {
+				console.log('result', result);
+			},
+			async (error) => {
+				console.log('error', error);
+			}
+		);
 	}
 }
