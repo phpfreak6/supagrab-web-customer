@@ -454,9 +454,10 @@ export class CheckoutComponent implements OnInit {
 				options.response = response;
 
 				this.transaction_detail = {
-					razorpay_order_id: response.razorpay_order_id,
+					order_id: this.order_id,
+					// razorpay_order_id: response.razorpay_order_id,
 					razorpay_payment_id: response.razorpay_payment_id,
-					razorpay_signature: response.razorpay_signature
+					// razorpay_signature: response.razorpay_signature
 				};
 
 				console.log('response', response);
@@ -475,7 +476,7 @@ export class CheckoutComponent implements OnInit {
 
 	isPaymentSuccessfull() {
 
-		this.razorpayService.isPaymentSuccessfull( this.transaction_detail ).subscribe(
+		this.razorpayService.isPaymentSuccessfull( this.userId, this.transaction_detail ).subscribe(
 			async (result) => {
 				console.log('result', result);
 			},

@@ -35,14 +35,16 @@ export class RazorpayService {
 		);
 	}
 
-	isPaymentSuccessfull( transaction_detail: any ): Observable<any> {
+	isPaymentSuccessfull( user_id, in_data: any ): Observable<any> {
 
-		let url = `${this.apiEndPoint}/razorpay/is-payment-successfull`;
-		return this.httpClient
-			.post(url, transaction_detail)
-			.pipe(
-				map((e: any) => e),
-				catchError((e: Response) => throwError(e))
+		return this.httpClient.patch(
+			`${this.apiEndPoint}/users/${user_id}/order`,
+			in_data,
+			// this.constantService.getHttpJsonOptionsNoAuth()
+		)
+		.pipe(
+			map((e: Response) => e),
+			catchError((e: Response) => throwError(e))
 		);
 	}
 }
