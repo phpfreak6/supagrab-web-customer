@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 import { RazorpayService } from "src/app/services/razorpay/razorpay.service";
 import { WindowRefService } from 'src/app/services/razorpay/window-ref.service';
 
+let $this;
+
 @Component({
 	selector: 'app-checkout',
 	templateUrl: './checkout.component.html',
@@ -41,10 +43,14 @@ export class CheckoutComponent implements OnInit {
 
 	// razor pay properties starts
 	order_id: any;
+	razorpay_order_id: any;
 	transaction_detail: object = {
+		order_id: "",
 		razorpay_order_id: "",
 		razorpay_payment_id: "",
-		razorpay_signature: ""
+		razorpay_signature: "",
+		response: "",
+		options: ""
 	};
 	// razor pay properties ends
 
@@ -60,7 +66,9 @@ export class CheckoutComponent implements OnInit {
 		private orderService: OrderService,
 		private winRef: WindowRefService,
 		private razorpayService: RazorpayService
-	) { }
+	) {
+		$this = this;
+	}
 
 	ngOnInit(): void {
 
@@ -97,6 +105,7 @@ export class CheckoutComponent implements OnInit {
 			this.userData = localUser;
 			this.userId = localUser._id;
 			this.setFormData();
+			this.getCartByUserId();
 		}
 	}
 
@@ -120,7 +129,6 @@ export class CheckoutComponent implements OnInit {
 					if (result.success) {
 						// this.constantService.handleResCode(result);
 						this.cartData = result?.data?.cart ? result.data.cart : [];
-						console.log('this.cartData', this.cartData);
 						this.isCartDataSet = true;
 						this.calculate();
 					} else {
@@ -129,7 +137,6 @@ export class CheckoutComponent implements OnInit {
 				},
 				async (error) => {
 					this.ngxSpinnerService.hide();
-					console.log(error.message);
 					let obj = {
 						resCode: 400,
 						msg: error.message.toString(),
@@ -172,23 +179,20 @@ export class CheckoutComponent implements OnInit {
 			// let first_name = splitted[0] !== undefined ? splitted[0] : null;
 			// let last_name = splitted[1] !== undefined ? splitted[1] : null;
 
-			// console.log('first_name', first_name);
-			// console.log('last_name', last_name);
-
 			this.userForm.patchValue({
-				title: this.userData.addresses[0].title,
-				first_name: this.userData.first_name,
-				last_name: this.userData.last_name,
-				phone_number: this.userData.addresses[0].phone_number,
-				alternate_phone_number: this.userData.addresses[0].alternate_phone_number,
-				pincode: this.userData.addresses[0].pincode,
-				city: this.userData.addresses[0].city,
-				state: this.userData.addresses[0].state,
-				country: this.userData.addresses[0].country,
-				address: this.userData.addresses[0].address,
-				landmark: this.userData.addresses[0].landmark,
-				type: this.userData.addresses[0].type,
-				email: this.userData.addresses[0].email
+				title: this.userData?.addresses[0]?.title,
+				first_name: this.userData?.first_name,
+				last_name: this.userData?.last_name,
+				phone_number: this.userData?.addresses[0]?.phone_number,
+				alternate_phone_number: this.userData?.addresses[0]?.alternate_phone_number,
+				pincode: this.userData?.addresses[0]?.pincode,
+				city: this.userData?.addresses[0]?.city,
+				state: this.userData?.addresses[0]?.state,
+				country: this.userData?.addresses[0]?.country,
+				address: this.userData?.addresses[0]?.address,
+				landmark: this.userData?.addresses[0]?.landmark,
+				type: this.userData?.addresses[0]?.type,
+				email: this.userData?.addresses[0]?.email
 			});
 			this.getCartByUserId();
 		} catch( ex ) {
@@ -281,7 +285,6 @@ export class CheckoutComponent implements OnInit {
 			},
 			async (error) => {
 				this.ngxSpinnerService.hide();
-				console.log(error.message);
 				let obj = {
 					resCode: 400,
 					msg: error.message.toString(),
@@ -318,7 +321,6 @@ export class CheckoutComponent implements OnInit {
 			let in_data = this.userForm.value;
 			in_data.email = in_data.email.toLowerCase();
 			in_data.coupon_code = this.couponCode;
-			console.log('this.userForm.value', in_data);
 
 			in_data.transaction_id = '123abc';
 			in_data.payment_mode = 'UPI';
@@ -327,7 +329,6 @@ export class CheckoutComponent implements OnInit {
 			in_data.shipping_charge = this.shippingCost;
 			in_data.coupon_applied = this.isCouponApplied;
 			in_data.coupon_code = this.couponCode;
-
 			this.insertOrder( in_data );
 			
 		} catch (ex) {
@@ -343,23 +344,21 @@ export class CheckoutComponent implements OnInit {
 	insertOrder( in_data ) {
 
 		try {
-
 			this.ngxSpinnerService.show();
 			this.orderService.orderPlaced( this.userId, in_data )
 			.subscribe( async (result) => {
 				
 				if (result.success) {
-
 					let order = result.data.order;
-					this.order_id = order.id;
-					this.payWithRazor(this.order_id);
+					$this.razorpay_order_id = result.data.razorpay_order_id;
+					$this.order_id = order._id;
+					$this.payWithRazor();
 				} else {
 					this.constantService.handleResCode(result);
 				}
 			},
 			async (error) => {
 				this.ngxSpinnerService.hide();
-				console.log(error.message);
 				let obj = {
 					resCode: 400,
 					msg: error.message.toString(),
@@ -372,7 +371,6 @@ export class CheckoutComponent implements OnInit {
 			});
 
 		} catch( ex ) {
-			console.log('ex', ex);
 			let obj = {
 				resCode: 400,
 				msg: ex.toString(),
@@ -401,7 +399,6 @@ export class CheckoutComponent implements OnInit {
 				}
 			});
 		} catch (ex) {
-			console.log('ex', ex);
 			let obj = {
 				resCode: 400,
 				msg: ex.toString(),
@@ -410,7 +407,7 @@ export class CheckoutComponent implements OnInit {
 		}
 	}
 
-	payWithRazor( order_id: any ) {
+	payWithRazor() {
 		const options: any = {
 
 			"key": "rzp_test_48cTOMEXh9OIUO", // Enter the Key ID generated from the Dashboard
@@ -419,7 +416,7 @@ export class CheckoutComponent implements OnInit {
 			"name": "Acme Corp",
 			"description": "Test Transaction",
 			"image": "https://example.com/your_logo",
-			"order_id": order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+			"order_id": $this.razorpay_order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
 			// "handler": function (response){
 
 			// 	console.log('response', response);
@@ -454,10 +451,13 @@ export class CheckoutComponent implements OnInit {
 				options.response = response;
 
 				this.transaction_detail = {
-					order_id: this.order_id,
-					// razorpay_order_id: response.razorpay_order_id,
+					order_id: $this.order_id,
 					razorpay_payment_id: response.razorpay_payment_id,
-					// razorpay_signature: response.razorpay_signature
+					razorpay_order_id: response.razorpay_order_id,
+					razorpay_signature: response.razorpay_signature,
+					razorpay_response: response,
+					razorpay_options: options,
+
 				};
 
 				console.log('response', response);
@@ -469,6 +469,7 @@ export class CheckoutComponent implements OnInit {
 		options.modal.ondismiss = (() => {
 			// handle the case when user closes the form while transaction is in progress
 			console.log('Transaction cancelled.');
+			this.updateOrderStatus();
 		});
 		const rzp = new this.winRef.nativeWindow.Razorpay(options);
 		rzp.open();
@@ -476,6 +477,7 @@ export class CheckoutComponent implements OnInit {
 
 	isPaymentSuccessfull() {
 
+		this.transaction_detail['order_id'] = $this.order_id;
 		this.razorpayService.isPaymentSuccessfull( this.userId, this.transaction_detail ).subscribe(
 			async (result) => {
 				console.log('result', result);
@@ -484,5 +486,40 @@ export class CheckoutComponent implements OnInit {
 				console.log('error', error);
 			}
 		);
+	}
+
+	updateOrderStatus() {
+
+		try {
+			this.ngxSpinnerService.show();
+			this.orderService.updateOrderStatus( this.userId, this.order_id )
+			.subscribe( async (result) => {
+				
+				if (result.success) {
+					this.constantService.handleResCode(result);
+				} else {
+					this.constantService.handleResCode(result);
+				}
+			},
+			async (error) => {
+				this.ngxSpinnerService.hide();
+				let obj = {
+					resCode: 400,
+					msg: error.message.toString(),
+				};
+				this.constantService.handleResCode(obj);
+			},
+			() => {
+				// inside complete
+				this.ngxSpinnerService.hide();
+			});
+
+		} catch( ex ) {
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+		}
 	}
 }

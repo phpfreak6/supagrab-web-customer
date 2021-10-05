@@ -32,4 +32,17 @@ export class OrderService {
 			catchError((e: Response) => throwError(e))
 		);
 	}
+
+	updateOrderStatus(user_id, order_id): Observable<any> {
+
+		return this.httpClient.patch(
+			`${this.apiEndPoint}/users/${user_id}/order/${order_id}/status`,
+			null,
+			// this.constantService.getHttpJsonOptionsNoAuth()
+		)
+		.pipe(
+			map((e: Response) => e),
+			catchError((e: Response) => throwError(e))
+		);
+	}
 }
