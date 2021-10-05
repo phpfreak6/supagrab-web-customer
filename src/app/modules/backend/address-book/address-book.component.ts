@@ -6,6 +6,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { UserService } from "src/app/services/user.service";
 import { ConstantService } from "src/app/services/constant.service";
+import { AuthService } from "src/app/services/auth/auth.service";
 
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -34,7 +35,8 @@ export class AddressBookComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private ngxSpinnerService: NgxSpinnerService,
 		private userService: UserService,
-		private constantService: ConstantService
+		private constantService: ConstantService,
+		private authService: AuthService
 	) { }
 
 	ngOnInit(): void {
@@ -206,6 +208,7 @@ export class AddressBookComponent implements OnInit {
 
                     if (result.success) {
 
+						this.authService.setLocalUser();
 						this.constantService.handleResCode(result);
 						this.router.navigate(['/address-book-list']);
                     } else {
@@ -247,6 +250,7 @@ export class AddressBookComponent implements OnInit {
 
                     if (result.success) {
 
+						this.authService.setLocalUser();
 						this.constantService.handleResCode(result);
 						this.router.navigate(['/address-book-list']);
                     } else {
