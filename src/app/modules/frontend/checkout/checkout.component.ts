@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 import { AuthService } from "src/app/services/auth/auth.service";
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -65,7 +66,9 @@ export class CheckoutComponent implements OnInit {
 		private couponService: CouponService,
 		private orderService: OrderService,
 		private winRef: WindowRefService,
-		private razorpayService: RazorpayService
+		private razorpayService: RazorpayService,
+		private activatedRoute: ActivatedRoute, 
+		private router: Router,
 	) {
 		$this = this;
 	}
@@ -480,7 +483,7 @@ export class CheckoutComponent implements OnInit {
 		this.transaction_detail['order_id'] = $this.order_id;
 		this.razorpayService.isPaymentSuccessfull( this.userId, this.transaction_detail ).subscribe(
 			async (result) => {
-				console.log('result', result);
+				this.router.navigate(['/order-placed/', $this.order_id]).then(() => { window.location.reload(); });
 			},
 			async (error) => {
 				console.log('error', error);

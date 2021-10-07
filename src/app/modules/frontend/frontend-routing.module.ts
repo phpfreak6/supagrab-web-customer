@@ -74,7 +74,7 @@ const routes: Routes = [
         component: CheckoutComponent
     },
     {
-        path: 'order-placed',
+        path: 'order-placed/:orderId',
         component: OrderPlacedComponent
     }
 ];
