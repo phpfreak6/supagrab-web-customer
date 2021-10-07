@@ -55,4 +55,14 @@ export class OrderService {
 				catchError((e: Response) => throwError(e))
 			);
 	}
+
+	getOrderByUser(userId: any, orderId: any): Observable<any> {
+		let url = `${this.apiEndPoint}/users/${userId}/order/${orderId}`;
+		return this.httpClient
+			.get(url, this.constantService.getHttpJsonOptions())
+			.pipe(
+				map((e: any) => e),
+				catchError((e: Response) => throwError(e))
+			);
+	}
 }
