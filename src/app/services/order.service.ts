@@ -56,8 +56,8 @@ export class OrderService {
 			);
 	}
 
-	getOrderByUser(userId: any, orderId: any): Observable<any> {
-		let url = `${this.apiEndPoint}/users/${userId}/order/${orderId}`;
+	getOrderByUser(userId: any): Observable<any> {
+		let url = `${this.apiEndPoint}/users/${userId}/order`;
 		return this.httpClient
 			.get(url, this.constantService.getHttpJsonOptions())
 			.pipe(

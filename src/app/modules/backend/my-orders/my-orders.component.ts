@@ -15,9 +15,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MyOrdersComponent implements OnInit {
 
+	userData;
 	userId;
 	isOrderDetailsSet = false;
 	orderData;
+	deliveryDate;
 
 	constructor(
 		private activatedRoute: ActivatedRoute, 
@@ -34,13 +36,17 @@ export class MyOrdersComponent implements OnInit {
 
 	async getOrderByUser() {
 
-		let user = await this.authService.getLocalUser();
-		this.orderService.getOrderById( this.userId, null ).subscribe(
+		this.userData = await this.authService.getLocalUser();
+		console.log('userData', this.userData);
+		this.orderService.getOrderByUser( this.userData._id ).subscribe(
 			async (result) => {
 				if( result.success ) {
 
 					this.isOrderDetailsSet = true;
 					this.orderData = result.data.order;
+					console.log('this.orderData', this.orderData);
+					this.deliveryDate = new Date();
+  					this.deliveryDate.setDate( this.deliveryDate.getDate() + 10 );
 				} else {
 					let result = {
 						resCode: 400,
