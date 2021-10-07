@@ -20,6 +20,7 @@ export class OrderPlacedComponent implements OnInit {
 	isOrderIdProvidedFlag = false;
 	orderData;
 	isOrderDetailsSet = false;
+	deliveryDate;
 
 	constructor(
 		private activatedRoute: ActivatedRoute, 
@@ -58,6 +59,8 @@ export class OrderPlacedComponent implements OnInit {
 
 					this.isOrderDetailsSet = true;
 					this.orderData = result.data.order;
+					this.deliveryDate = new Date();
+  					this.deliveryDate.setDate( this.deliveryDate.getDate() + 10 );
 				} else {
 					let result = {
 						resCode: 400,
@@ -74,5 +77,9 @@ export class OrderPlacedComponent implements OnInit {
 				this.constantService.handleResCode(result);
 			}
 		);
+	}
+
+	goToOrder() {
+		this.router.navigate(['/my-orders']);
 	}
 }

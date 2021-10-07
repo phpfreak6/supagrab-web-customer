@@ -71,8 +71,8 @@
     <section class="section-b-space">
         <div class="container">
             <div class="row" *ngIf="isOrderDetailsSet">
-                <div class="col-lg-6" *ngFor="let product of orderData.products">
-                    <div class="product-order">
+                <div class="col-lg-6">
+                    <div class="product-order mt-4 mb-4" *ngFor="let product of orderData.products">
                         <div class="row product-order-detail">
                             <div class="col-3">
                                 <img src="../assets/images/custom/4-min-6.jpg" alt="" class="img-fluid  lazyload">
@@ -95,22 +95,21 @@
                                     <h5>{{ product.qty * product.product_price | currency:'INR' }}</h5>
                                 </div>
                             </div>
+                        </div>                                             
+                    </div>
+                    <div class="product-order mt-4">
+                        <div class="total-sec">
+                            <ul>
+                                <li>subtotal <span>{{ orderData?.sub_total | currency:'INR' }}</span></li>
+                                <li>shipping <span>{{ orderData?.shipping_charge | currency:'INR' }}</span></li>
+                                <li>tax(GST) <span>{{ orderData?.tax_amount | currency:'INR' }}</span></li>
+                            </ul>
                         </div>
-                        
-                    </div>
-                </div>
-                <div class="product-order">
-                    <div class="total-sec">
-                        <ul>
-                            <li>subtotal <span>{{ orderData?.sub_total | currency:'INR' }}</span></li>
-                            <li>shipping <span>{{ orderData?.shipping_charge | currency:'INR' }}</span></li>
-                            <li>tax(GST) <span>{{ orderData?.tax_amount | currency:'INR' }}</span></li>
-                        </ul>
-                    </div>
-                    <div class="final-total">
-                        <h3>total <span>{{ orderData?.grand_total | currency:'INR' }}</span></h3>
-                    </div>
-                </div>
+                        <div class="final-total">
+                            <h3>total <span>{{ orderData?.grand_total | currency:'INR' }}</span></h3>
+                        </div>
+                    </div>   
+                </div>                
                 <div class="col-lg-6">
                     <div class="order-success-sec">
                         <div class="row">
@@ -136,7 +135,7 @@
                                     <li>Contact No. {{ orderData?.address?.phone ?? 'NULL' }}</li>
                                 </ul>
                             </div>
-                            <div class="col-sm-12 payment-mode">
+                            <div class="col-sm-12 payment-mode mt-4 mb-4">
                                 <h4>payment method</h4>
                                 <p>
                                     Pay on Delivery (Cash/Card). 
@@ -146,8 +145,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="delivery-sec">
-                                    <h3>expected date of delivery: <span>october 22, 2018</span></h3>
-                                    <a href="order-tracking.php">track order</a>
+                                    <h3>expected date of delivery: <span>{{ deliveryDate | date:'longDate' }}</span></h3>
+                                    <!-- <a href="order-tracking.php">track order</a> -->
+                                    <button class="btn btn-solid mt-4 mb-4" (click)="goToOrder()">Track Order</button>
                                 </div>
                             </div>
                         </div>
