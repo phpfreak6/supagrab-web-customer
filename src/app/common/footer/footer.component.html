@@ -167,7 +167,7 @@
                                 <li><a href="https://www.instagram.com/supagrab/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                                 <li><a href="https://in.pinterest.com/supagrab/"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li> -->
 
-                                <li *ngFor="let siteSettings of siteSettingsData">
+                                <li *ngFor="let siteSettings of siteSettingsData; trackBy:identify">
                                     <a *ngIf="siteSettings.site_setting_key == 'facebook'" href="{{ siteSettings.value }}" target="_blank">
                                         <i class="fa fa-facebook" aria-hidden="true"></i>
                                     </a>

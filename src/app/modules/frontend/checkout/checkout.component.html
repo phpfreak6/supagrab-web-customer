@@ -107,7 +107,7 @@
                                             <!-- <li>Pink Slim Shirt × 1 <span>25.10</span></li>
                                             <li>SLim Fit Jeans × 1 <span>555.00</span></li> -->
 
-                                            <li *ngFor="let item of cartData; index as i">
+                                            <li *ngFor="let item of cartData; index as i; trackBy:identify">
                                                 {{ item?.product_detail?.product_title }} ({{ item?.product_detail.product_price }} x {{ item?.qty }})
                                                 <span>{{ item?.product_value | currency:'INR' }}</span>
                                             </li>

@@ -128,4 +128,8 @@ export class ProductViewComponent implements OnInit {
 
 		this.lastActivatedTabId = indx;
 	}
+
+	identify(index, item){
+		return item?.tab_name; 
+	}
 }

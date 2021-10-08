@@ -30,7 +30,7 @@
                 <div class="col-sm-12">
                     <div class="accordion theme-accordion" [attr.id]="'accordionExample'" *ngIf="faqList?.length; else noFaqListTemp;">
 
-                        <div class="card" *ngFor="let faq of faqList; let i = index">
+                        <div class="card" *ngFor="let faq of faqList; let i = index; trackBy:identify">
                             <div class="card-header" [attr.id]="'heading-' + i">
                                 <h5 class="mb-0">
                                     

@@ -82,4 +82,8 @@ export class OrderPlacedComponent implements OnInit {
 	goToOrder() {
 		this.router.navigate(['/my-orders']);
 	}
+
+	identify(index, item){
+		return item?.product_detail?.product_title; 
+	}
 }

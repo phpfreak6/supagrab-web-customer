@@ -216,4 +216,8 @@ export class ViewCartComponent implements OnInit {
 	addItem() {
 		this.cartCountService.addItemToCart( this.cartData );
 	}
+
+	identify(index, item){
+		return item?.qty; 
+	}
 }

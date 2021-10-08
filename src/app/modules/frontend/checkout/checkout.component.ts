@@ -525,4 +525,8 @@ export class CheckoutComponent implements OnInit {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	identify(index, item){
+		return item.product_detail?.product_title; 
+	}
 }

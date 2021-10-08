@@ -15,7 +15,7 @@
                             <p>Hello, {{ userData?.first_name }} {{ userData?.last_name }} !</p>                            
                         </div>
                         <div class="product-order mt-4" *ngIf="isOrderDetailsSet">
-							<div class="row product-order-detail" *ngFor="let order of orderData">								
+							<div class="row product-order-detail" *ngFor="let order of orderData; trackBy:identify">								
 								<div class="col-5 order_detail">
 									<div>
 										<h5>#{{ order?._id }}</h5>

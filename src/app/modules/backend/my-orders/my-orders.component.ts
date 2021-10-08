@@ -70,4 +70,8 @@ export class MyOrdersComponent implements OnInit {
 			}
 		);
 	}
+
+	identify( index, item ) {
+		return item._id;
+	}
 }

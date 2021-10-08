@@ -149,4 +149,8 @@ export class AddressBookListComponent implements OnInit {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	identify( index, item ) {
+		return item.title;
+	}
 }

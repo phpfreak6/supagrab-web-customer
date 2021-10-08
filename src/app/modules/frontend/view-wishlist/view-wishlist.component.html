@@ -20,19 +20,19 @@
             <div class="row">
                 <div class="col-md-12" *ngIf="wishList.length > 0; else noWishListTemp;">
 
-                    <div class="card_box_main" *ngFor="let wish of wishList; let i = index">
+                    <div class="card_box_main" *ngFor="let wish of wishList; let i = index; trackBy:identify">
                         <div class="row product-card">
                             <div class="col-6 order_detail">
                                 <div>
                                     <h5>
-                                        <a href="product-page(left-image).php">Beautiful Swarovski Stud Earrings</a>
+                                        <a href="javascript:void(0);" routerLink="/product/view/{{wish?.product_detail?.product_slug}}">{{ wish?.product_detail?.product_title }}</a>
                                     </h5>
                                     <p class="stock in-stock">In Stock</p>
                                 </div>
                             </div>
                             <div class="col-3 order_detail">
                                 <div>
-                                    <h5>$63.00</h5>
+                                    <h5>{{ wish?.product_detail?.product_price | currency:'INR' }}</h5>
                                 </div>
                             </div>
                             <div class="col-3 order_detail wish_btn">
