@@ -7,6 +7,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MyWishlistComponent } from './my-wishlist/my-wishlist.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AddressBookListComponent } from "./address-book-list/address-book-list.component";
+import { TrackOrdersComponent } from './track-orders/track-orders.component';
 
 const routes: Routes = [
     {
@@ -40,6 +41,10 @@ const routes: Routes = [
     {
         path: 'my-wishlist',
         component: MyWishlistComponent
+    },
+    {
+        path: 'track-order/:orderId',
+        component: TrackOrdersComponent
     }
 ];
 

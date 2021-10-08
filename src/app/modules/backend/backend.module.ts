@@ -14,6 +14,7 @@ import { AddressBookListComponent } from './address-book-list/address-book-list.
 
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
+import { TrackOrdersComponent } from './track-orders/track-orders.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MyWishlistComponent,
     DashboardNavComponent,
     ProfileComponent,
-    AddressBookListComponent
+    AddressBookListComponent,
+    TrackOrdersComponent
   ],
   imports: [
     CommonModule,

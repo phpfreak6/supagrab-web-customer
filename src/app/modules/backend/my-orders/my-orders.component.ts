@@ -4,6 +4,7 @@ import { OrderService } from "src/app/services/order.service";
 import { ConstantService } from "src/app/services/constant.service";
 import { AuthService } from "src/app/services/auth/auth.service";
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
 	selector: 'app-my-orders',
@@ -26,7 +27,8 @@ export class MyOrdersComponent implements OnInit {
 		private router: Router,
 		private orderService: OrderService,
 		private constantService: ConstantService,
-		private authService: AuthService
+		private authService: AuthService,
+		private ngxSpinnerService: NgxSpinnerService,
 	) { }
 
 	ngOnInit(): void {
@@ -38,6 +40,7 @@ export class MyOrdersComponent implements OnInit {
 
 		this.userData = await this.authService.getLocalUser();
 		console.log('userData', this.userData);
+		this.ngxSpinnerService.show();
 		this.orderService.getOrderByUser( this.userData._id ).subscribe(
 			async (result) => {
 				if( result.success ) {
@@ -61,6 +64,9 @@ export class MyOrdersComponent implements OnInit {
 					msg: ex.toString()
 				};
 				this.constantService.handleResCode(result);
+			},
+			async () => {
+				this.ngxSpinnerService.hide();
 			}
 		);
 	}
