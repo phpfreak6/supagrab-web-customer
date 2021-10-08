@@ -18,23 +18,27 @@
 							<div class="row product-order-detail" *ngFor="let order of orderData">								
 								<div class="col-5 order_detail">
 									<div>
-										<h5>#{{ order._id }}</h5>
+										<h5>#{{ order?._id }}</h5>
 										<!-- <h4><span>(12 Jannuary 2021 at 1:30AM)</span></h4> -->
-										<h4><span>({{ order.created_at | date:'longDate' }} at {{ order.created_at | date:'h:mm a' }})</span></h4>
+										<h4><span>({{ order?.created_at | date:'longDate' }} at {{ order?.created_at | date:'h:mm a' }})</span></h4>
 										<a href="review-dash.php"><i class="fa fa-star" aria-hidden="true"></i> RATE & REVIEW PRODUCT</a>
 									</div>
 								</div>
 								<div class="col-3 order_detail">
 									<div>
-										<h5>$500 <del>$600</del></h5>										
+										<h5>{{ order?.grand_total | currency:'INR' }}
+											<!-- <del>$600</del> -->
+										</h5>
 									</div>
 								</div>
 								<div class="col-4 order_detail">
 									<div>										
 										<!-- <h4>Delivered On Mon, Jannuary 18th 2021</h4> -->
-										<h4>Delivered On {{ deliveryDate | date:'full' }}</h4>
-										<h4><a href="tracking-dash.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Your Order - 1</a></h4>
-										<h4><a href="order-tracking.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Your Order - 2</a></h4>
+										<!-- <h4>Delivered On {{ deliveryDate | date:'full' }}</h4> -->
+										<h4><span>({{ deliveryDate | date:'longDate' }} at {{ deliveryDate | date:'h:mm a' }})</span></h4>
+										<h4><a href="tracking-dash.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Your Order</a></h4>
+										<!-- <h4><a href="tracking-dash.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Your Order - 1</a></h4> -->
+										<!-- <h4><a href="order-tracking.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Track Your Order - 2</a></h4> -->
 									</div>
 								</div>								
 							</div>
