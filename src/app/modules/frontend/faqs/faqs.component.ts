@@ -64,4 +64,8 @@ export class FaqsComponent implements OnInit {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	identify(index, item){
+		return item?.question; 
+	}
 }

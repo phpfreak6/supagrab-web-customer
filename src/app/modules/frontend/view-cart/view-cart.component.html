@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="card_box_main">
                         
-                        <div class="row product-card align-items-center" *ngFor="let cart of cartData; index as i">
+                        <div class="row product-card align-items-center" *ngFor="let cart of cartData; index as i; trackBy:identify">
                             <div class="col-4 order_detail">
                                 <div>
                                     <h5>

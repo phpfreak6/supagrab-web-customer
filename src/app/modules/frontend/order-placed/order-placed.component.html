@@ -72,7 +72,7 @@
         <div class="container">
             <div class="row" *ngIf="isOrderDetailsSet">
                 <div class="col-lg-6">
-                    <div class="product-order mt-4 mb-4" *ngFor="let product of orderData.products">
+                    <div class="product-order mt-4 mb-4" *ngFor="let product of orderData.products; trackBy:identify">
                         <div class="row product-order-detail">
                             <div class="col-3">
                                 <img src="../assets/images/custom/4-min-6.jpg" alt="" class="img-fluid  lazyload">

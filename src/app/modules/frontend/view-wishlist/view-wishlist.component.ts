@@ -157,4 +157,8 @@ export class ViewWishlistComponent implements OnInit {
 		this.cartCommonService.addToCart(productId, productDetails);
 		this.deleteWishListById(wishListId);
 	}
+
+	identify(index, item){
+		return item?.qty; 
+	}
 }

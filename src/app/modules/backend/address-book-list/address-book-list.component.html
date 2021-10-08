@@ -59,7 +59,7 @@
                                         </div>
                                     </div>                                    
                                 </li> -->
-                                <li *ngFor="let addr of addrList; let i = index">
+                                <li *ngFor="let addr of addrList; let i = index; trackBy:identify">
                                     <div class="media">
                                         <img src="../assets/images/avtar.jpg" alt="Generic placeholder image">
                                         <div class="media-body">

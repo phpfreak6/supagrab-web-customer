@@ -190,4 +190,16 @@ export class HeaderComponent implements OnInit {
 			this.grandTotal += product_value;
 		} );
 	}
+
+	identifyDept(index, item) {
+		return item.department_title; 
+	}
+
+	identifyCatg(index, item) {
+		return item.department_title; 
+	}
+
+	identifyCart(index, item) {
+		return item.qty; 
+	}
 }

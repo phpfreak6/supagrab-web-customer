@@ -86,5 +86,7 @@ export class MyWishlistComponent implements OnInit {
 		// this.getAllWishListByUserId();
 	}
 
-	
+	identity( index, item ) {
+		return item?.product_detail?.product_title;
+	}
 }

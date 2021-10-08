@@ -88,4 +88,8 @@ export class ProductByCategoryComponent implements OnInit {
 			},
 		);
 	}
+
+	identify(index, item){
+		return item?.product_title; 
+	}
 }
