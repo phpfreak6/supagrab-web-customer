@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -10,6 +10,7 @@ import { AuthService } from "src/app/services/auth/auth.service";
 
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-address-book',
@@ -19,7 +20,7 @@ import Swal from 'sweetalert2';
 		fadeInAnimation
 	]
 })
-export class AddressBookComponent implements OnInit {
+export class AddressBookComponent implements OnInit, OnDestroy {
 
 	isUserIdProvidedFlag = false;
 	isAddrIdProvidedFlag = false;
@@ -28,6 +29,8 @@ export class AddressBookComponent implements OnInit {
 	userAddrForm: FormGroup;
 	submitted = false;
 	userAddrData: any;
+
+	private userSubscription: Subscription;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -87,7 +90,7 @@ export class AddressBookComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.userService.getAddressByUserIdAddressId( user_id, addr_id ).subscribe(
+			this.userSubscription = this.userService.getAddressByUserIdAddressId( user_id, addr_id ).subscribe(
 				( result ) => {
 					if (result.success) {
 						this.userAddrData = result.data.user_address;
@@ -203,7 +206,7 @@ export class AddressBookComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.userService.insertUserAddress(in_data, this.userId).subscribe( 
+			this.userSubscription = this.userService.insertUserAddress(in_data, this.userId).subscribe( 
 				async (result) => {
 
                     if (result.success) {
@@ -245,7 +248,7 @@ export class AddressBookComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.userService.updateUserAddress( in_data, this.userId, this.addrId ).subscribe( 
+			this.userSubscription = this.userService.updateUserAddress( in_data, this.userId, this.addrId ).subscribe( 
 				async (result) => {
 
                     if (result.success) {
@@ -281,4 +284,11 @@ export class AddressBookComponent implements OnInit {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.userSubscription) {
+            this.userSubscription.unsubscribe();
+        }
+    }
 }

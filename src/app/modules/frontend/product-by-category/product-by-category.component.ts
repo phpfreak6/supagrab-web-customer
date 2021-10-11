@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -13,6 +13,7 @@ import { ProductService } from "src/app/services/product.service";
 import { WishlistCommonService } from "src/app/services/common/wishlist-common.service";
 
 import { CartCountService } from "src/app/services/cart-count.service";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-product-by-category',
@@ -22,12 +23,14 @@ import { CartCountService } from "src/app/services/cart-count.service";
 		fadeInAnimation
 	]
 })
-export class ProductByCategoryComponent implements OnInit {
+export class ProductByCategoryComponent implements OnInit, OnDestroy {
 
 	catgSlug;
   	isCatgSlugProvidedFlag;
 	products;
 	cartCnt = 0;
+
+	private productSubscription: Subscription;
 
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
@@ -65,7 +68,7 @@ export class ProductByCategoryComponent implements OnInit {
 
 	getProductsByCatgSlug() {
 
-		this.productService.getProductsByCatgSlug( this.catgSlug )
+		this.productSubscription = this.productService.getProductsByCatgSlug( this.catgSlug )
 		.subscribe(
 			( result ) => {
 				if (result.success) {
@@ -92,4 +95,11 @@ export class ProductByCategoryComponent implements OnInit {
 	identify(index, item){
 		return item?.product_title; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.productSubscription) {
+            this.productSubscription.unsubscribe();
+        }
+    }
 }

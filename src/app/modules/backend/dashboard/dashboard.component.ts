@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
@@ -12,7 +12,7 @@ import { UserInterface } from "../../../interfaces/user-interface";
 		fadeInAnimation
 	]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
 	loggedinUserId: string;
 	userData: UserInterface;
@@ -33,5 +33,5 @@ export class DashboardComponent implements OnInit {
 		}
 	}
 
-
+	public ngOnDestroy(): void {}
 }

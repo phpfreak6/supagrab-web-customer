@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from 'src/app/common/animations/fadein-animation';
 import { OrderService } from "src/app/services/order.service";
 import { ConstantService } from "src/app/services/constant.service";
 import { AuthService } from "src/app/services/auth/auth.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-track-orders',
@@ -14,7 +15,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 		fadeInAnimation
 	]
 })
-export class TrackOrdersComponent implements OnInit {
+export class TrackOrdersComponent implements OnInit, OnDestroy {
 
 	orderId;
 	isOrderIdSetFlag = false;
@@ -22,6 +23,8 @@ export class TrackOrdersComponent implements OnInit {
 	orderData: any;
 	deliveryDate: Date;
 	userData: any;
+
+	private orderSubscription: Subscription;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -49,7 +52,7 @@ export class TrackOrdersComponent implements OnInit {
 	async getOrderById() {
 		
 		this.userData = await this.authService.getLocalUser();
-		this.orderService.getOrderById( this.userData._id, this.orderId ).subscribe(
+		this.orderSubscription = this.orderService.getOrderById( this.userData._id, this.orderId ).subscribe(
 			async (result) => {
 				if( result.success ) {
 					
@@ -75,4 +78,11 @@ export class TrackOrdersComponent implements OnInit {
 			}
 		);
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.orderSubscription) {
+            this.orderSubscription.unsubscribe();
+        }
+    }
 }

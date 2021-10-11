@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -7,6 +7,7 @@ import { ConstantService } from "src/app/services/constant.service";
 import { CmsService } from "src/app/services/cms.service";
 
 import { PageInterface } from "../../../interfaces/PageInterface";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-terms-and-conditions',
@@ -16,12 +17,14 @@ import { PageInterface } from "../../../interfaces/PageInterface";
 		fadeInAnimation
 	]
 })
-export class TermsAndConditionsComponent implements OnInit {
+export class TermsAndConditionsComponent implements OnInit, OnDestroy {
 
 	isCmsKeyProvidedFlag = false;
 	cmsKey: any;
 	submitted = false;
 	cmsData: PageInterface;
+
+	private cmsSubscription: Subscription;
 
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
@@ -43,7 +46,7 @@ export class TermsAndConditionsComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.cmsService.getCmsByKey(cmsKey).subscribe(
+			this.cmsSubscription = this.cmsService.getCmsByKey(cmsKey).subscribe(
 				(result) => {
 					if (result.success) {
 						this.cmsData = result.data.cms;
@@ -75,4 +78,10 @@ export class TermsAndConditionsComponent implements OnInit {
 		}
 	}
 
+	public ngOnDestroy(): void {
+        
+        if (this.cmsSubscription) {
+            this.cmsSubscription.unsubscribe();
+        }
+    }
 }

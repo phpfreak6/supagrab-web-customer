@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
@@ -10,7 +10,7 @@ import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
     fadeInAnimation
   ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   addActiveClassToCosmetics : any = 'active default add-display-block';
   addActiveClassToBracelets : any = '';
@@ -46,4 +46,6 @@ export class HomeComponent implements OnInit {
 
     }
   }
+
+  public ngOnDestroy(): void {}
 }

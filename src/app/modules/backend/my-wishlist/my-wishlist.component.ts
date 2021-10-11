@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -8,6 +8,7 @@ import { ConstantService } from "src/app/services/constant.service";
 import { WishlistCommonService } from "src/app/services/common/wishlist-common.service";
 
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-my-wishlist',
@@ -17,10 +18,11 @@ import Swal from 'sweetalert2';
 		fadeInAnimation
 	]
 })
-export class MyWishlistComponent implements OnInit {
+export class MyWishlistComponent implements OnInit, OnDestroy {
 
 	public wishList: any[];
 	public userId: any;
+	private wishlistSubscription: Subscription;
 
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
@@ -43,7 +45,7 @@ export class MyWishlistComponent implements OnInit {
 
 			this.wishList = [];
 			this.ngxSpinnerService.show();
-			this.wishlistService.getAllWishListByUserId(this.userId).subscribe(
+			this.wishlistSubscription = this.wishlistService.getAllWishListByUserId(this.userId).subscribe(
 				async (result) => {
 
                     if (result.success && parseInt(result.data?.wishlist_items.length) > 0 ) {
@@ -89,4 +91,11 @@ export class MyWishlistComponent implements OnInit {
 	identity( index, item ) {
 		return item?.product_detail?.product_title;
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.wishlistSubscription) {
+            this.wishlistSubscription.unsubscribe();
+        }
+    }
 }

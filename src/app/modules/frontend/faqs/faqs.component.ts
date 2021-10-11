@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
 
 import { FaqService } from "src/app/services/faq.service";
 import { ConstantService } from "src/app/services/constant.service";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-faqs',
@@ -14,9 +15,11 @@ import { ConstantService } from "src/app/services/constant.service";
 		fadeInAnimation
 	]
 })
-export class FaqsComponent implements OnInit {
+export class FaqsComponent implements OnInit, OnDestroy {
 
 	faqList: any[];
+	private faqSubscription: Subscription;
+
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
@@ -32,7 +35,7 @@ export class FaqsComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.faqService.getAllFaqs().subscribe(
+			this.faqSubscription = this.faqService.getAllFaqs().subscribe(
 				async (result) => {
 
                     if (result.success) {
@@ -68,4 +71,11 @@ export class FaqsComponent implements OnInit {
 	identify(index, item){
 		return item?.question; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.faqSubscription) {
+            this.faqSubscription.unsubscribe();
+        }
+    }
 }

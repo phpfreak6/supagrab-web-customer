@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -7,12 +7,15 @@ import { ConstantService } from "src/app/services/constant.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
 import { CartCountService } from "src/app/services/cart-count.service";
+import { Subscription } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class CartCommonService {
+export class CartCommonService implements OnDestroy {
 
+	private cartSubscription: Subscription;
+	
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
@@ -40,7 +43,7 @@ export class CartCommonService {
 			let userId = user._id;
 
 			this.ngxSpinnerService.show();
-			this.cartService.addToCart(userId, productId).subscribe(
+			this.cartSubscription = this.cartService.addToCart(userId, productId).subscribe(
 				async (result) => {
 
 					if (result.success) {
@@ -71,6 +74,13 @@ export class CartCommonService {
 				msg: ex.toString(),
 			};
 			this.constantService.handleResCode(obj);
+		}
+	}
+
+	ngOnDestroy(): void {
+		
+		if( this.cartSubscription ) {
+			this.cartSubscription.unsubscribe();
 		}
 	}
 }

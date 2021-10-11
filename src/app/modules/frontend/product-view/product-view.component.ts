@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConstantService } from 'src/app/services/constant.service';
@@ -12,6 +12,7 @@ import { WishlistService } from "src/app/services/wishlist.service";
 
 import { WishlistCommonService } from "src/app/services/common/wishlist-common.service";
 import { CartCommonService } from "src/app/services/common/cart-common.service";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-product-view',
@@ -21,13 +22,16 @@ import { CartCommonService } from "src/app/services/common/cart-common.service";
 		fadeInAnimation
 	]
 })
-export class ProductViewComponent implements OnInit {
+
+export class ProductViewComponent implements OnInit, OnDestroy {
 
 	productData: any;
 	productSlug: string;
 	isProductSlugFlag = false;
 	productImageLink: any;
 	lastActivatedTabId = 0;
+
+	private productSubscription: Subscription;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -70,7 +74,7 @@ export class ProductViewComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.productService.getProductBySlug(productSlug).subscribe(
+			this.productSubscription = this.productService.getProductBySlug(productSlug).subscribe(
 				async (result) => {
 
 					if (result.success) {
@@ -132,4 +136,11 @@ export class ProductViewComponent implements OnInit {
 	identify(index, item){
 		return item?.tab_name; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.productSubscription) {
+            this.productSubscription.unsubscribe();
+        }
+    }
 }

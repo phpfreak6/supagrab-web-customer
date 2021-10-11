@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 import { OrderService } from "src/app/services/order.service";
 import { ConstantService } from "src/app/services/constant.service";
 import { AuthService } from "src/app/services/auth/auth.service";
 import { OrderInterface } from 'src/app/interfaces/order-interface';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-order-placed',
@@ -14,13 +15,15 @@ import { OrderInterface } from 'src/app/interfaces/order-interface';
 		fadeInAnimation
 	]
 })
-export class OrderPlacedComponent implements OnInit {
+export class OrderPlacedComponent implements OnInit, OnDestroy {
 
 	orderId;
 	isOrderIdProvidedFlag = false;
 	orderData;
 	isOrderDetailsSet = false;
 	deliveryDate;
+
+	private orderSubscription: Subscription;
 
 	constructor(
 		private activatedRoute: ActivatedRoute, 
@@ -53,7 +56,7 @@ export class OrderPlacedComponent implements OnInit {
 	async getOrderDetails() {
 
 		let user = await this.authService.getLocalUser();
-		this.orderService.getOrderById( user._id, this.orderId ).subscribe(
+		this.orderSubscription = this.orderService.getOrderById( user._id, this.orderId ).subscribe(
 			async (result) => {
 				if( result.success ) {
 
@@ -86,4 +89,11 @@ export class OrderPlacedComponent implements OnInit {
 	identify(index, item){
 		return item?.product_detail?.product_title; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.orderSubscription) {
+            this.orderSubscription.unsubscribe();
+        }
+    }
 }

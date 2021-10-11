@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { CartService } from "src/app/services/cart.service";
@@ -10,6 +10,7 @@ import { ConstantService } from "src/app/services/constant.service";
 import { CartCountService } from "src/app/services/cart-count.service";
 
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-view-cart',
@@ -19,13 +20,15 @@ import Swal from 'sweetalert2';
 		fadeInAnimation
 	]
 })
-export class ViewCartComponent implements OnInit {
+export class ViewCartComponent implements OnInit, OnDestroy {
 
 	cartData: Array<any>;
 	grandTotal = 0;
 	userId;
 	disabled: boolean = false;
 	cartCnt = 0;
+
+	private cartSubscription: Subscription;
 
 	constructor(
 		private cartService: CartService,
@@ -61,7 +64,7 @@ export class ViewCartComponent implements OnInit {
 			this.userId = user._id;
 
 			this.ngxSpinnerService.show();
-			this.cartService.getCartByUserId(this.userId).subscribe(
+			this.cartSubscription = this.cartService.getCartByUserId(this.userId).subscribe(
 				async (result) => {
 
 					if (result.success) {
@@ -129,7 +132,7 @@ export class ViewCartComponent implements OnInit {
 		try {
 			
 			this.ngxSpinnerService.show();
-			this.cartService.delCartByCartId( userId, cartId ).subscribe(
+			this.cartSubscription = this.cartService.delCartByCartId( userId, cartId ).subscribe(
 				async (result) => {
 
 					if (result.success) {
@@ -170,7 +173,7 @@ export class ViewCartComponent implements OnInit {
 		this.cartData[indx]['qty']  = qty;
 		this.calculate();
 
-		this.cartService.updateCartQty( this.userId, this.cartData[indx]['_id'], qty )
+		this.cartSubscription = this.cartService.updateCartQty( this.userId, this.cartData[indx]['_id'], qty )
 		.subscribe(
 			async (result) => {
 
@@ -220,4 +223,11 @@ export class ViewCartComponent implements OnInit {
 	identify(index, item){
 		return item?.qty; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.cartSubscription) {
+            this.cartSubscription.unsubscribe();
+        }
+    }
 }
