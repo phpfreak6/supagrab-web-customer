@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -7,6 +7,7 @@ import { ConstantService } from "src/app/services/constant.service";
 import { CmsService } from "src/app/services/cms.service";
 
 import { PageInterface } from "../../../interfaces/PageInterface";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-about-us',
@@ -16,12 +17,13 @@ import { PageInterface } from "../../../interfaces/PageInterface";
 		fadeInAnimation
 	]
 })
-export class AboutUsComponent implements OnInit {
+export class AboutUsComponent implements OnInit, OnDestroy {
 
 	isCmsKeyProvidedFlag = false;
 	cmsKey: any;
 	submitted = false;
 	cmsData: PageInterface;
+	private subscription: Subscription;
 
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
@@ -43,7 +45,7 @@ export class AboutUsComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.cmsService.getCmsByKey( cmsKey ).subscribe(
+			this.subscription = this.cmsService.getCmsByKey( cmsKey ).subscribe(
 				( result ) => {
 					if (result.success) {
 						this.cmsData = result.data.cms;
@@ -72,6 +74,13 @@ export class AboutUsComponent implements OnInit {
 				msg: ex.toString(),
 			};
 			this.constantService.handleResCode(obj);
+		}
+	}
+
+	public ngOnDestroy(): void {
+		
+		if (this.subscription) {
+		  	this.subscription.unsubscribe();
 		}
 	}
 }

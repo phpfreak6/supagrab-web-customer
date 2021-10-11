@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Subscription } from 'rxjs';
 
 import { ConstantService } from "src/app/services/constant.service";
 import { NewsletterService } from "src/app/services/newsletter.service";
@@ -11,7 +12,7 @@ import { SiteSettingsService } from "src/app/services/site-settings.service";
 	templateUrl: './footer.component.html',
 	styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
 
 	classToggleFooter: any = '';
 	classToggleHeaderHighlighted: any = '';
@@ -22,6 +23,9 @@ export class FooterComponent implements OnInit {
 	submitted = false;
 	siteSettingsData: any;
 	getSiteSettingsFlag = false;
+
+	private newsletterSubscription: Subscription;
+	private siteSettingsSubscription: Subscription;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -79,7 +83,7 @@ export class FooterComponent implements OnInit {
 			in_data.email = in_data.email.toLowerCase();
 
 			this.ngxSpinnerService.show();
-			this.newsletterService.subscribedToNewsLetter(in_data).subscribe( 
+			this.newsletterSubscription = this.newsletterService.subscribedToNewsLetter(in_data).subscribe( 
 				async (result) => {
 
 					if (result.success) {
@@ -119,7 +123,7 @@ export class FooterComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.siteSettingsService.getAllSiteSettings().subscribe(
+			this.siteSettingsSubscription = this.siteSettingsService.getAllSiteSettings().subscribe(
 				( result ) => {
 					if (result.success) {
 						this.siteSettingsData = result.data.site_settings;
@@ -156,4 +160,15 @@ export class FooterComponent implements OnInit {
 	identify(index, item){
 		return item.value; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.newsletterSubscription) {
+            this.newsletterSubscription.unsubscribe();
+        }
+
+		if (this.siteSettingsSubscription) {
+            this.siteSettingsSubscription.unsubscribe();
+        }		
+    }
 }

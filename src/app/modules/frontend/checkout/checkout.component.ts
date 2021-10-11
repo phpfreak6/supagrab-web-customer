@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 import { AuthService } from "src/app/services/auth/auth.service";
@@ -12,6 +12,7 @@ import { OrderService } from "src/app/services/order.service";
 import Swal from 'sweetalert2';
 import { RazorpayService } from "src/app/services/razorpay/razorpay.service";
 import { WindowRefService } from 'src/app/services/razorpay/window-ref.service';
+import { Subscription } from 'rxjs';
 
 let $this;
 
@@ -23,7 +24,7 @@ let $this;
 		fadeInAnimation
 	]
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
 
 	userForm: FormGroup;
 	submitted = false;
@@ -41,6 +42,10 @@ export class CheckoutComponent implements OnInit {
 	discountAmount: number= 0;
 	discountAmt: number= 0;
 	subTotal: number = 0;
+
+	private cartSubscription: Subscription;
+	private orderSubscription: Subscription;
+	private razorpaySubscription: Subscription;
 
 	// razor pay properties starts
 	order_id: any;
@@ -126,7 +131,7 @@ export class CheckoutComponent implements OnInit {
 			}
 
 			this.ngxSpinnerService.show();
-			this.cartService.getCartByUserId(this.userId).subscribe(
+			this.cartSubscription = this.cartService.getCartByUserId(this.userId).subscribe(
 				async (result) => {
 
 					if (result.success) {
@@ -264,7 +269,7 @@ export class CheckoutComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.couponService.getByCouponCode( this.couponCode )
+			this.cartSubscription = this.couponService.getByCouponCode( this.couponCode )
 			.subscribe( async (result) => {
 				if (result.success) {
 
@@ -348,7 +353,7 @@ export class CheckoutComponent implements OnInit {
 
 		try {
 			this.ngxSpinnerService.show();
-			this.orderService.orderPlaced( this.userId, in_data )
+			this.orderSubscription = this.orderSubscription = this.orderService.orderPlaced( this.userId, in_data )
 			.subscribe( async (result) => {
 				
 				if (result.success) {
@@ -481,7 +486,7 @@ export class CheckoutComponent implements OnInit {
 	isPaymentSuccessfull() {
 
 		this.transaction_detail['order_id'] = $this.order_id;
-		this.razorpayService.isPaymentSuccessfull( this.userId, this.transaction_detail ).subscribe(
+		this.razorpaySubscription = this.razorpayService.isPaymentSuccessfull( this.userId, this.transaction_detail ).subscribe(
 			async (result) => {
 				this.router.navigate(['/order-placed/', $this.order_id]).then(() => { window.location.reload(); });
 			},
@@ -495,7 +500,7 @@ export class CheckoutComponent implements OnInit {
 
 		try {
 			this.ngxSpinnerService.show();
-			this.orderService.updateOrderStatus( this.userId, this.order_id )
+			this.orderSubscription = this.orderSubscription = this.orderService.updateOrderStatus( this.userId, this.order_id )
 			.subscribe( async (result) => {
 				
 				if (result.success) {
@@ -528,5 +533,20 @@ export class CheckoutComponent implements OnInit {
 
 	identify(index, item){
 		return item.product_detail?.product_title; 
+	}
+
+	ngOnDestroy(): void {
+
+		if (this.cartSubscription) {
+            this.cartSubscription.unsubscribe();
+        }
+
+		if (this.orderSubscription) {
+            this.orderSubscription.unsubscribe();
+        }
+
+		if (this.razorpaySubscription) {
+            this.razorpaySubscription.unsubscribe();
+        }
 	}
 }

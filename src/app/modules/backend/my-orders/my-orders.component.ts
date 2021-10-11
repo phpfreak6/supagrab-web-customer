@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 import { OrderService } from "src/app/services/order.service";
 import { ConstantService } from "src/app/services/constant.service";
 import { AuthService } from "src/app/services/auth/auth.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-my-orders',
@@ -14,13 +15,15 @@ import { NgxSpinnerService } from "ngx-spinner";
 		fadeInAnimation
 	]
 })
-export class MyOrdersComponent implements OnInit {
+export class MyOrdersComponent implements OnInit, OnDestroy {
 
 	userData;
 	userId;
 	isOrderDetailsSet = false;
 	orderData;
 	deliveryDate;
+
+	private orderSubscription: Subscription;
 
 	constructor(
 		private activatedRoute: ActivatedRoute, 
@@ -40,7 +43,7 @@ export class MyOrdersComponent implements OnInit {
 
 		this.userData = await this.authService.getLocalUser();
 		this.ngxSpinnerService.show();
-		this.orderService.getOrderByUser( this.userData._id ).subscribe(
+		this.orderSubscription = this.orderService.getOrderByUser( this.userData._id ).subscribe(
 			async (result) => {
 				if( result.success ) {
 
@@ -73,4 +76,11 @@ export class MyOrdersComponent implements OnInit {
 	identify( index, item ) {
 		return item._id;
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.orderSubscription) {
+            this.orderSubscription.unsubscribe();
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -9,6 +9,7 @@ import { ConstantService } from "src/app/services/constant.service";
 
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-profile',
@@ -18,13 +19,15 @@ import Swal from 'sweetalert2';
 		fadeInAnimation
 	]
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
 	isUserIdProvidedFlag = false;
 	userId: any;
 	userForm: FormGroup;
   	submitted = false;
 	userData: any;
+
+	private userSubscription: Subscription;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -75,7 +78,7 @@ export class ProfileComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.userService.getUserById( userId ).subscribe(
+			this.userSubscription = this.userService.getUserById( userId ).subscribe(
 				async (result) => {
 
 					if (result.success) {
@@ -153,7 +156,7 @@ export class ProfileComponent implements OnInit {
 
 			console.log('in_data',in_data);
 			
-			this.userService.updateUser(in_data, this.userId).subscribe( 
+			this.userSubscription = this.userService.updateUser(in_data, this.userId).subscribe( 
 				async (result) => {
 
                     if (result.success) {
@@ -185,4 +188,11 @@ export class ProfileComponent implements OnInit {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.userSubscription) {
+            this.userSubscription.unsubscribe();
+        }
+    }
 }

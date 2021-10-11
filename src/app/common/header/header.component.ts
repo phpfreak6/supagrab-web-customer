@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DepartmentService } from "src/app/services/department.service";
 import { ConstantService } from "src/app/services/constant.service";
@@ -6,13 +6,14 @@ import { CartCountService } from "src/app/services/cart-count.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
 import { CartService } from "src/app/services/cart.service";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-header',
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
 	classToggleHeader: any = '';
 	classToggleHeaderHighlighted: any = '';
@@ -28,6 +29,9 @@ export class HeaderComponent implements OnInit {
 	cartData: any;
 	cartDataSet: boolean = false;
 	grandTotal: number = 0;
+
+	private departmentSubscription: Subscription;
+	private cartSubscription: Subscription;
 
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
@@ -86,7 +90,7 @@ export class HeaderComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.departmentService.getAllDepartments().subscribe(
+			this. departmentSubscription = this.departmentService.getAllDepartments().subscribe(
 				( result ) => {
 					if (result.success) {
 						this.deptData = result.data.departments;
@@ -138,7 +142,7 @@ export class HeaderComponent implements OnInit {
 			this.userId = user._id;
 
 			this.ngxSpinnerService.show();
-			this.cartService.getCartByUserId(this.userId).subscribe(
+			this.cartSubscription = this.cartService.getCartByUserId(this.userId).subscribe(
 				async (result) => {
 
 					if (result.success) {
@@ -202,4 +206,15 @@ export class HeaderComponent implements OnInit {
 	identifyCart(index, item) {
 		return item.qty; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.departmentSubscription) {
+            this.departmentSubscription.unsubscribe();
+        }
+
+		if (this.cartSubscription) {
+            this.cartSubscription.unsubscribe();
+        }
+    }
 }

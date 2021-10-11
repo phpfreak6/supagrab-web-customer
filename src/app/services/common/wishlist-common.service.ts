@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -8,12 +8,15 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { TosterService } from 'src/app/services/toster.service';
 
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class WishlistCommonService {
+export class WishlistCommonService implements OnDestroy {
 
+	private wishlistSubscription: Subscription;
+	
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
@@ -42,7 +45,7 @@ export class WishlistCommonService {
 		};
 
 		this.ngxSpinnerService.show();
-		this.wishlistService.addToWishList(in_data, userId).subscribe(
+		this.wishlistSubscription = this.wishlistService.addToWishList(in_data, userId).subscribe(
 			async (result) => {
 
 				if (result.success) {
@@ -99,7 +102,7 @@ export class WishlistCommonService {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.wishlistService.delWishListByWishListId( userId, wishListId ).subscribe(
+			this.wishlistSubscription = this.wishlistService.delWishListByWishListId( userId, wishListId ).subscribe(
 				async (result) => {
 
                     if (result.success) {
@@ -131,4 +134,11 @@ export class WishlistCommonService {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.wishlistSubscription) {
+            this.wishlistSubscription.unsubscribe();
+        }
+    }
 }

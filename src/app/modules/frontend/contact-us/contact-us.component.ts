@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -7,6 +7,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ConstantService } from "src/app/services/constant.service";
 import { ContactUsService } from "src/app/services/contact-us.service";
 import { TosterService } from 'src/app/services/toster.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-contact-us',
@@ -16,11 +17,13 @@ import { TosterService } from 'src/app/services/toster.service';
 		fadeInAnimation
 	]
 })
-export class ContactUsComponent implements OnInit {
+export class ContactUsComponent implements OnInit, OnDestroy {
 
 	contactUsForm: FormGroup;
 	submitted = false;
 	disableBtn = false;
+
+	private contactUsSubscription: Subscription;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -61,7 +64,7 @@ export class ContactUsComponent implements OnInit {
 			in_data.email = in_data.email.toLowerCase();
 
 			this.ngxSpinnerService.show();
-			this.contactUsService.contactUs( in_data ).subscribe( 
+			this.contactUsSubscription = this.contactUsService.contactUs( in_data ).subscribe( 
 				async (result) => {
 
 					if (result.success) {
@@ -104,4 +107,11 @@ export class ContactUsComponent implements OnInit {
 			this.constantService.handleResCode(obj);
 		}
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.contactUsSubscription) {
+            this.contactUsSubscription.unsubscribe();
+        }
+    }
 }

@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 import Swal from 'sweetalert2';
 import { ConstantService } from "src/app/services/constant.service";
 import { SocialAuthService } from "angularx-social-login";
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-dashboard-nav',
 	templateUrl: './dashboard-nav.component.html',
 	styleUrls: ['./dashboard-nav.component.css']
 })
-export class DashboardNavComponent implements OnInit {
+export class DashboardNavComponent implements OnInit, OnDestroy {
 
 	public openSideBarClass = '';
 	public dashboardNav: string = 'active';
 	public addressBookListNav: string = '';
 	public myOrdersNav: string = '';
 	public myWishlist: string = '';
+	// private subscription: Subscription;
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -99,5 +101,12 @@ export class DashboardNavComponent implements OnInit {
 			msg: 'Logout Successfully!'
 		};
 		this.constantService.handleResCode(obj);
+	}
+
+	public ngOnDestroy(): void {
+
+		// if (this.subscription) {
+		//   	this.subscription.unsubscribe();
+		// }
 	}
 }

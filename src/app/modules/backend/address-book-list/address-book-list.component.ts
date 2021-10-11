@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from 'src/app/common/animations/fadein-animation';
 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 		fadeInAnimation
 	]
 })
-export class AddressBookListComponent implements OnInit {
+export class AddressBookListComponent implements OnInit, OnDestroy {
 
 	public loggedinUserId = '';
 	public addrList = [];
@@ -153,4 +153,6 @@ export class AddressBookListComponent implements OnInit {
 	identify( index, item ) {
 		return item.title;
 	}
+
+	public ngOnDestroy(): void {}
 }

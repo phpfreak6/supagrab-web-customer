@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { SocialAuthService } from "angularx-social-login";
@@ -13,6 +13,7 @@ import { TosterService } from "src/app/services/toster.service";
 
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-login',
@@ -23,9 +24,12 @@ import Swal from 'sweetalert2';
 	]
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
 	public user: SocialUser = new SocialUser;
+
+	private authSubscription: Subscription;
+	private userSubscription: Subscription;
 
 	constructor(
 		private router: Router,
@@ -38,7 +42,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		this.authService.authState.subscribe(user => {
+		this.authSubscription = this.authService.authState.subscribe(user => {
 			this.user = user;
 			console.log(user);
 
@@ -83,7 +87,7 @@ export class LoginComponent implements OnInit {
 
 		try {
 			
-			this.userService.signInWithGoogle(in_data).subscribe( 
+			this.userSubscription = this.userService.signInWithGoogle(in_data).subscribe( 
 				async (result) => {
 
 					console.log('result', result);
@@ -144,4 +148,14 @@ export class LoginComponent implements OnInit {
 		this.authService.signOut();
 	}
 
+	public ngOnDestroy(): void {
+        
+        if (this.authSubscription) {
+            this.authSubscription.unsubscribe();
+        }
+
+		if (this.userSubscription) {
+            this.userSubscription.unsubscribe();
+        }
+    }
 }

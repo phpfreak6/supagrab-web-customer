@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fadeInAnimation } from "src/app/common/animations/fadein-animation";
 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -9,6 +9,7 @@ import { ConstantService } from "src/app/services/constant.service";
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartCommonService } from 'src/app/services/common/cart-common.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-view-wishlist',
@@ -18,10 +19,13 @@ import { CartCommonService } from 'src/app/services/common/cart-common.service';
 		fadeInAnimation
 	]
 })
-export class ViewWishlistComponent implements OnInit {
+export class ViewWishlistComponent implements OnInit, OnDestroy {
 
 	wishList: any[];
 	userId: any;
+
+	private wishSubscription: Subscription;
+
 	constructor(
 		private ngxSpinnerService: NgxSpinnerService,
 		private constantService: ConstantService,
@@ -50,7 +54,7 @@ export class ViewWishlistComponent implements OnInit {
 
 			this.wishList = [];
 			this.ngxSpinnerService.show();
-			this.wishlistService.getAllWishListByUserId(this.userId).subscribe(
+			this.wishSubscription = this.wishlistService.getAllWishListByUserId(this.userId).subscribe(
 				async (result) => {
 
                     if (result.success && parseInt(result.data?.wishlist_items.length) > 0 ) {
@@ -119,7 +123,7 @@ export class ViewWishlistComponent implements OnInit {
 		try {
 
 			this.ngxSpinnerService.show();
-			this.wishlistService.delWishListByWishListId( this.userId, wishListId ).subscribe(
+			this.wishSubscription = this.wishlistService.delWishListByWishListId( this.userId, wishListId ).subscribe(
 				async (result) => {
 
                     if (result.success) {
@@ -161,4 +165,11 @@ export class ViewWishlistComponent implements OnInit {
 	identify(index, item){
 		return item?.qty; 
 	}
+
+	public ngOnDestroy(): void {
+        
+        if (this.wishSubscription) {
+            this.wishSubscription.unsubscribe();
+        }
+    }
 }

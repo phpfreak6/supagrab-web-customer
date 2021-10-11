@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
   templateUrl: './err404.component.html',
   styleUrls: ['./err404.component.css']
 })
-export class Err404Component implements OnInit {
+export class Err404Component implements OnInit, OnDestroy {
 
   constructor(
     private router: Router
@@ -14,5 +14,6 @@ export class Err404Component implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
+  public ngOnDestroy(): void {}
 }
