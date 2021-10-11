@@ -33,7 +33,7 @@ export class OrderPlacedComponent implements OnInit {
 	ngOnInit(): void {
 
 		// orderId
-		this.activatedRoute.params.subscribe( params => {      
+		this.activatedRoute.params.subscribe( params => {
 		this.orderId = params.orderId;
 		this.isOrderIdProvidedFlag = this.orderId ? true : false;
 	

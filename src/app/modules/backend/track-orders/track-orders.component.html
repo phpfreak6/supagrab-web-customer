@@ -13,10 +13,11 @@
                             <h2>Track Your Order <span class="add_link"><a href="javascript:void(0);" routerLink="/my-orders" class="btn btn-solid">Back</a></span></h2>
                         </div>
                         <div class="welcome-msg">
-                            <p>Hello, MARK JECNO !</p>                            
+                            <p>Hello, {{ userData?.first_name }} {{ userData?.last_name }} !</p>
                         </div>
                         <div class="tracking-section">
                             <h4 class="mt-4 pb-2">status for order no: 54151548</h4>
+                            
                             <div class="row border-part">
                                 <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
                                     <div class="product-detail">
@@ -93,6 +94,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="wrapper">
                                 <div class="arrow-steps clearfix">
                                     <div class="step done"> <span> order placed</span> </div>

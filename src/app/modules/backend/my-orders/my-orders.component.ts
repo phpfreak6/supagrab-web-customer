@@ -39,7 +39,6 @@ export class MyOrdersComponent implements OnInit {
 	async getOrderByUser() {
 
 		this.userData = await this.authService.getLocalUser();
-		console.log('userData', this.userData);
 		this.ngxSpinnerService.show();
 		this.orderService.getOrderByUser( this.userData._id ).subscribe(
 			async (result) => {
