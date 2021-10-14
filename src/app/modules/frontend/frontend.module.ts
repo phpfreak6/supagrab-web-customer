@@ -19,6 +19,7 @@ import { CancellationPolicyComponent } from './cancellation-policy/cancellation-
 import { FaqsComponent } from './faqs/faqs.component';
 
 import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     FrontendRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    CountdownModule
   ]
 })
 export class FrontendModule { }
