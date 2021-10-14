@@ -24,6 +24,8 @@ import { GoogleLoginProvider } from "angularx-social-login";
 import { NgxSpinnerModule } from "ngx-spinner";
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 
+import { CountdownModule } from 'ngx-countdown';
+
 const CLIENT_ID = '437214085485-j1ho294f1m9sedlq624omgu8nlt9rjte.apps.googleusercontent.com';
 
 const googleLoginOptions = {
@@ -55,7 +57,8 @@ const googleLoginOptions = {
     SocialLoginModule,
     NgxSpinnerModule,
     HttpClientModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    CountdownModule
   ],
   providers: [
     {

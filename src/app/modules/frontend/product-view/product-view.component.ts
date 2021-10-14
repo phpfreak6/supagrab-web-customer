@@ -25,6 +25,8 @@ import { Subscription } from 'rxjs';
 
 export class ProductViewComponent implements OnInit, OnDestroy {
 
+	date = new Date('2019-01-26T00:00:00');
+	
 	productData: any;
 	productSlug: string;
 	isProductSlugFlag = false;
