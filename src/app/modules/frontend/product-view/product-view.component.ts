@@ -30,6 +30,12 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 	isProductSlugFlag = false;
 	productImageLink: any;
 	lastActivatedTabId = 0;
+	productImages: Array<object> = [
+		{ path: '../assets/images/custom/20210414_201442-min.jpg' },
+		{ path: '../assets/images/custom/20210414_174357-min-1.jpg' },
+		{ path: '../assets/images/custom/20210424_125241-min.jpg' },
+		{ path: '../assets/images/custom/20210424_125511-min.jpg' }
+	];
 
 	private productSubscription: Subscription;
 

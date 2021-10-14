@@ -1067,3 +1067,7 @@ a.btn,.btn-solid,.btn-xs,.tap-top.top-cls, span.cart_qty_cls  {
 }
 
 /**================================ RESPONSIVE CSS END HERE ============================**/
+
+carousel.carousel {
+    z-index: 9;
+}

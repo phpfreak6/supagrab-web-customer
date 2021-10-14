@@ -8,28 +8,49 @@
                         <div class="row">
                             <div class="col-12 p-0">
                                 <div class="slider-right-nav">
-                                    <div><img src="../assets/images/custom/20210414_201442-min.jpg" alt=""
+
+                                    <!-- <div><img src="../assets/images/custom/20210414_201442-min.jpg" alt=""
                                             class="img-fluid  "></div>
                                     <div><img src="../assets/images/custom/20210414_174357-min-1.jpg" alt=""
                                             class="img-fluid  "></div>
                                     <div><img src="../assets/images/custom/20210424_125241-min.jpg" alt=""
                                             class="img-fluid  "></div>
                                     <div><img src="../assets/images/custom/20210424_125511-min.jpg" alt=""
-                                            class="img-fluid  "></div>
+                                            class="img-fluid  "></div> -->
+
+                                    <carousel
+                                        [arrows]="false"
+                                        [height]=100
+                                        [images]="productImages" 
+                                        [autoplay]="true"
+                                        [autoplayInterval]="3000"
+                                        [counter]="false"
+                                        [cellsToShow]="1">
+                                    </carousel>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-sm-10 col-xs-12 order-up">
                         <div class="product-right-slick">
-                            <div><img src="../assets/images/custom/20210414_201442-min.jpg" alt=""
+                            <!-- <div><img src="../assets/images/custom/20210414_201442-min.jpg" alt=""
                                     class="img-fluid   image_zoom_cls-0"></div>
                             <div><img src="../assets/images/custom/20210414_174357-min-1.jpg" alt=""
                                     class="img-fluid   image_zoom_cls-1"></div>
                             <div><img src="../assets/images/custom/20210424_125241-min.jpg" alt=""
                                     class="img-fluid   image_zoom_cls-2"></div>
                             <div><img src="../assets/images/custom/20210424_125511-min.jpg" alt=""
-                                    class="img-fluid   image_zoom_cls-3"></div>
+                                    class="img-fluid   image_zoom_cls-3"></div> -->
+
+                            <carousel 
+                                [height]=500
+                                [images]="productImages" 
+                                [autoplay]="true"
+                                [autoplayInterval]="3000"
+                                [counter]="true"
+                                [cellsToShow]="1">
+                            </carousel>
                         </div>
                     </div>
                     <div class="col-lg-6 rtl-text">
