@@ -18,6 +18,7 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
 import { CancellationPolicyComponent } from './cancellation-policy/cancellation-policy.component';
 import { FaqsComponent } from './faqs/faqs.component';
 
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FaqsComponent } from './faqs/faqs.component';
     CommonModule,
     FrontendRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IvyCarouselModule
   ]
 })
 export class FrontendModule { }

@@ -22,6 +22,7 @@ import { GoogleLoginProvider } from "angularx-social-login";
 
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 const CLIENT_ID = '437214085485-j1ho294f1m9sedlq624omgu8nlt9rjte.apps.googleusercontent.com';
 
@@ -53,7 +54,8 @@ const googleLoginOptions = {
     ReactiveFormsModule,
     SocialLoginModule,
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    IvyCarouselModule
   ],
   providers: [
     {
