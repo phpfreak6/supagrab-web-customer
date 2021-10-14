@@ -14,6 +14,8 @@ import { WishlistCommonService } from "src/app/services/common/wishlist-common.s
 import { CartCommonService } from "src/app/services/common/cart-common.service";
 import { Subscription } from 'rxjs';
 
+let $this;
+
 @Component({
 	selector: 'app-product-view',
 	templateUrl: './product-view.component.html',
@@ -22,11 +24,10 @@ import { Subscription } from 'rxjs';
 		fadeInAnimation
 	]
 })
-
 export class ProductViewComponent implements OnInit, OnDestroy {
-
-	date = new Date('2019-01-26T00:00:00');
 	
+	countdownConfig = {};
+
 	productData: any;
 	productSlug: string;
 	isProductSlugFlag = false;
@@ -53,7 +54,9 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 		@Inject(DOCUMENT) private document: Document,
 		private cartCommonService: CartCommonService,
 		private wishlistCommonService: WishlistCommonService
-	) { }
+	) {
+		$this = this;
+	}
 
 	ngOnInit(): void {
 		this.setProductSlug();
@@ -90,6 +93,11 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 						this.productData = result.data.product;
 						console.log('this.productData', this.productData);
 						this.productImageLink = result.data.PRODUCT_IMAGE_PATH;
+						
+						$this.countdownConfig = {
+							leftTime: 60, // in seconds
+							format: 'mm:ss'
+						};					
 					} else {
 						this.constantService.handleResCode(result);
 					}
