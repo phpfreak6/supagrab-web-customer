@@ -20,6 +20,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { CountdownModule } from 'ngx-countdown';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CountdownModule } from 'ngx-countdown';
     FormsModule,
     ReactiveFormsModule,
     IvyCarouselModule,
-    CountdownModule
+    CountdownModule,
+    RatingModule
   ]
 })
 export class FrontendModule { }

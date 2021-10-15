@@ -1,4 +1,4 @@
-<div @fadeInAnimation>
+<div @fadeInAnimation *ngIf="isDataFound">
 
     <section class="single_prod_pg">
         <div class="collection-wrapper">
@@ -56,14 +56,26 @@
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
                             <h2>{{ productData?.product_title }}</h2>
+                            <h6>{{ productData?.ratings_cnt }} ratings</h6>
                             <div class="rating-section">
-                                <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                <!-- <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                </div> -->
+                                <!-- <h6>120 ratings</h6> -->
+                                <div style="text-align:center;">
+                                    <star-rating 
+                                        [value]="ratings.value" 
+                                        [totalstars]="ratings.totalstars" 
+                                        [checkedcolor]="ratings.checkedcolor" 
+                                        [uncheckedcolor]="ratings.uncheckedcolor" 
+                                        [size]="ratings.size" 
+                                        [readonly]="ratings.readonly" 
+                                    ></star-rating>
+                                    <!-- (rate)="onRate($event)" -->
                                 </div>
-                                <h6>120 ratings</h6>
                             </div>
-                            <h3 class="price-detail">${{ productData?.product_price }} <del>$459.00</del><span>55% off</span></h3>
-                            <ul class="color-variant">
+                            <h3 class="price-detail">{{ productData?.product_price | currency:'INR' }} <del>{{ ((productData?.product_price)/2) | currency:'INR' }}</del><span>50% off</span></h3>
+                            <!-- <ul class="color-variant">
                                 <li class="bg-light0 active"></li>
                                 <li class="bg-light1"></li>
                                 <li class="bg-light2"></li>
@@ -92,7 +104,7 @@
                                 <div class="stock_sec">
                                     <p class="stock in-stock">In Stock</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="product-buttons">
                                 <a href="javascript:void(0)" (click)="addToCart( productData?._id, productData )"
                                     id="cartEffect" class="btn btn-solid hover-solid btn-animation">
@@ -164,19 +176,23 @@
                     <h2>related products</h2>
                 </div>
             </div>
-            <div class="row search-product">
-                <div class="col-xl-3 col-md-3 col-6">
+            <div class="row search-product" *ngIf="isProductsFound">
+                <div class="col-xl-3 col-md-3 col-6" *ngFor="let product of productsArrData" >
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
                                 <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(right-image)']"><img
-                                        src="../assets/images/custom/2-min-5.jpg" class="img-fluid   bg-img" alt=""></a>
+                                    [routerLink]="['/product/view/{{ product?.product_slug }}']"><img src="../assets/images/custom/2-min-5.jpg" class="img-fluid   bg-img" alt=""></a>
                             </div>
                             <div class="back">
-                                <a href="javascript:void(0);"
-                                    [routerLink]="['/product/view/product-page(right-image)']"><img
-                                        src="../assets/images/custom/4-min-6.jpg" class="img-fluid   bg-img" alt=""></a>
+                                <a 
+                                    href="javascript:void(0);"
+                                    routerLink="/product/view/{{ product?.product_slug }}">
+                                    <img
+                                        src="../assets/images/custom/1-min-12.jpg" 
+                                        class="img-fluid bg-img"
+                                        alt="{{ product?.product_title }}">
+                                </a>
                             </div>
                             <div class="cart-info cart-wrap">
                                 <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i
@@ -186,18 +202,19 @@
                         </div>
                         <div class="product-detail">
                             <a href="javascript:void(0);" [routerLink]="['/product/view/product-page(right-image)']">
-                                <h6>Slim Fit Cotton Shirt</h6>
+                                <h6>{{ product?.product_title }}</h6>
                             </a>
-                            <h4>$500.00 <del>$600.00</del></h4>
-                            <ul class="color-variant">
+                            <h4>{{ product?.product_price | currency:'INR' }} <del>{{ ((product?.product_price)/2) | currency:'INR' }}</del></h4>
+                            <!-- <ul class="color-variant">
                                 <li class="bg-light0"></li>
                                 <li class="bg-light1"></li>
                                 <li class="bg-light2"></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-3 col-6">
+
+                <!-- <div class="col-xl-3 col-md-3 col-6">
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
@@ -297,7 +314,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

@@ -42,4 +42,15 @@ export class ProductService {
 				catchError((e: Response) => throwError(e))
 		);
 	}
+
+	getProducts() : Observable<any> {
+
+		let url = `${this.apiEndPoint}`;
+		return this.httpClient
+			.get(url, this.constantService.getHttpJsonOptionsNoAuth())
+			.pipe(
+				map((e: any) => e),
+				catchError((e: Response) => throwError(e))
+		);
+	}
 }
