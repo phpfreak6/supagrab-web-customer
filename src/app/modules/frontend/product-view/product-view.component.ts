@@ -13,6 +13,8 @@ import { WishlistService } from "src/app/services/wishlist.service";
 import { WishlistCommonService } from "src/app/services/common/wishlist-common.service";
 import { CartCommonService } from "src/app/services/common/cart-common.service";
 import { Subscription } from 'rxjs';
+import { StarRatingComponent } from 'ng-starrating';
+import { RatingStars } from "src/app/interfaces/rating-stars";
 
 let $this;
 
@@ -28,11 +30,16 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 	
 	countdownConfig = {};
 
+	ratings: RatingStars;
+
+	productsArrData: any;
 	productData: any;
 	productSlug: string;
 	isProductSlugFlag = false;
 	productImageLink: any;
 	lastActivatedTabId = 0;
+	isDataFound: boolean = false;
+	isProductsFound: boolean = false;
 	productImages: Array<object> = [
 		{ path: '../assets/images/custom/20210414_201442-min.jpg' },
 		{ path: '../assets/images/custom/20210414_174357-min-1.jpg' },
@@ -60,6 +67,7 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.setProductSlug();
+		this.getProducts();	
 	}
 
 	setProductSlug() {
@@ -97,7 +105,18 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 						$this.countdownConfig = {
 							leftTime: 60, // in seconds
 							format: 'mm:ss'
-						};					
+						};
+
+						this.ratings = {
+							checkedcolor: "gold", 
+							uncheckedcolor: "gray", 
+							size: "24px", 
+							value: parseFloat( this.productData?.ratings_avg ),
+							readonly: true,
+							totalstars: parseFloat('5')
+						};
+
+						this.isDataFound = true;
 					} else {
 						this.constantService.handleResCode(result);
 					}
@@ -116,6 +135,50 @@ export class ProductViewComponent implements OnInit, OnDestroy {
 
 					// inside complete
 					this.ngxSpinnerService.hide();
+				}
+			);
+		} catch (ex) {
+
+			this.ngxSpinnerService.hide();
+			let obj = {
+				resCode: 400,
+				msg: ex.toString(),
+			};
+			this.constantService.handleResCode(obj);
+			this.router.navigate(['/dashboard']);
+		}
+	}
+
+	getProducts() {
+
+		try {
+
+			// this.ngxSpinnerService.show();
+			this.productSubscription = this.productService.getProducts().subscribe(
+				async (result) => {
+
+					if (result.success) {
+
+						this.productsArrData = result.data.product;
+						this.isProductsFound = true;
+					} else {
+						this.constantService.handleResCode(result);
+					}
+				},
+				async (error) => {
+
+					this.ngxSpinnerService.hide();
+					console.log(error.message);
+					let obj = {
+						resCode: 400,
+						msg: error.message.toString(),
+					};
+					this.constantService.handleResCode(obj);
+				},
+				() => {
+
+					// inside complete
+					// this.ngxSpinnerService.hide();
 				}
 			);
 		} catch (ex) {
