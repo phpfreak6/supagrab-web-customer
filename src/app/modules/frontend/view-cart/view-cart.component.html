@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-2 order_detail justify-content-center">
                                 <div>
-                                    <h5>${{ cart?.product_detail?.product_price }}</h5>
+                                    <h5>{{ cart?.product_detail?.product_price | currency:'INR' }}</h5>
                                 </div>
                             </div>
                             <div class="col-1 order_detail justify-content-center">
@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-2 order_detail justify-content-center">
                                 <div>
-                                    <h5>${{ cart?.product_value }}</h5>
+                                    <h5>{{ cart?.product_value | currency:'INR' }}</h5>
                                 </div>
                             </div>
                             <div class="col-1 order_detail wish_btn">
@@ -204,7 +204,7 @@
                 <div class="col-sm-12">
                     <div class="cart-total-price">
                         <h4>Total Price :</h4>
-                        <p>${{grandTotal}}</p>
+                        <p>{{ grandTotal | currency:'INR' }}</p>
                     </div>
                 </div>
             </div>

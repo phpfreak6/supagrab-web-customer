@@ -163,7 +163,7 @@
                                                         <a href="javascript:void(0);" [routerLink]="['/product/view/', cart?.product_detail?.product_slug]">
                                                             <h4>{{ cart?.product_detail?.product_title }}</h4>
                                                         </a>
-                                                        <h4><span>{{ cart?.qty }} x $ {{ cart?.product_detail?.product_price }}</span></h4>
+                                                        <h4><span>{{ cart?.qty }} x {{ cart?.product_detail?.product_price | currency:'INR' }}</span></h4>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="close-circle"><a href="javascript:void(0);"><i class="fa fa-times" aria-hidden="true"></i></a></div> -->
@@ -171,7 +171,7 @@
 
                                             <li>
                                                 <div class="total">
-                                                    <h5>subtotal : <span>$ {{grandTotal}}</span></h5>
+                                                    <h5>subtotal : <span> {{grandTotal | currency:'INR' }}</span></h5>
                                                 </div>
                                             </li>
                                             <li>
